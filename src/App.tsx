@@ -1,6 +1,5 @@
 import React from "react";
 import UserNav from "./components/UserNav/index";
-import logo from "./logo.svg";
 import "./App.css";
 
 function App(): JSX.Element {
