@@ -5,11 +5,12 @@ import Meet from "./components/Meet";
 function App(): JSX.Element {
   return (
     <Meet
-      name="room"
-      displayName="ammmaq"
-      subject="ammmaq"
       parentNode="jitsi-container"
-      domain="localhost"
+      roomName="ammaq"
+      displayName="ammaq"
+      subject="jitsi"
+      width={window.innerWidth}
+      height={window.innerHeight}
     />
   );
   // return (
