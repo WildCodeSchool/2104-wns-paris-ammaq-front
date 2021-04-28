@@ -1,13 +1,13 @@
 import React from "react";
 import UserNav from "./components/UserNav/index";
 import "./App.css";
+import ChannelNav from "./components/ChannelNav";
 
-function App(): JSX.Element {
+export default function App(): JSX.Element {
   return (
     <div className="App">
+      <ChannelNav />
       <UserNav />
     </div>
   );
 }
-
-export default App;
