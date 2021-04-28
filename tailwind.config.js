@@ -18,7 +18,7 @@ module.exports = {
         pictures:
           "-26px 26px 52px rgba(39, 39, 39, 0.2), 26px -26px 52px rgba(39, 39, 39, 0.2), -26px -26px 52px rgba(51, 51, 51, 0.9), 26px 26px 65px rgba(39, 39, 39, 0.9), inset 1px 1px 2px rgba(51, 51, 51, 0.3), inset -1px -1px 2px rgba(39, 39, 39, 0.5);",
       },
-      background: {
+      backgroundImage: {
         mainnav: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",
         circle: "linear-gradient(135deg, #2B2B2B 0%, #2F2F2F 100%);",
         usersnav: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",
