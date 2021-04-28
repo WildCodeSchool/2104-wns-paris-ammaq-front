@@ -14,4 +14,4 @@ const MainNav = (): JSX.Element => {
   );
 };
 
-export default MainNav();
+export default MainNav;
