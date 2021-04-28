@@ -5,6 +5,7 @@ import { Users, ChevronLeft, ChevronRight } from "react-feather";
 const UserNav = (): JSX.Element => {
   const tooSmall = !(window.innerWidth > 1024);
   const [close, setClose] = useState(true);
+  const [online, setOnline] = useState(true);
   const handleClick = () => {
     setClose(!close && !tooSmall);
   };
@@ -40,7 +41,9 @@ const UserNav = (): JSX.Element => {
 
       <div className={`mt-5 ml-3 grid grid-flow-col ${close ? "pt-2" : "p-2"}`}>
         <img
-          className="user-nav-img rounded-full object-cover z-10"
+          className={`user-nav-img rounded-full object-cover z-10 ${
+            online ? "" : "opacity-60"
+          }`}
           src="https://cqfd.univ-lyon1.fr/files/2020/04/3-pieuvre-gif.gif"
           alt=""
         />
@@ -55,7 +58,9 @@ const UserNav = (): JSX.Element => {
 
       <div className={`mt-5 ml-3 grid grid-flow-col ${close ? "pt-2" : "p-2"}`}>
         <img
-          className="user-nav-img rounded-full object-cover z-10"
+          className={`user-nav-img rounded-full object-cover z-10 ${
+            online ? "" : "opacity-60"
+          }`}
           src="https://www.lebernard.ca/wp-content/uploads/2015/09/Chien-chinois-a-crete.jpg"
           alt=""
         />
