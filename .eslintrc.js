@@ -27,6 +27,9 @@ module.exports = {
     project: './tsconfig.json',
   },
   rules: {
+    "react/require-default-props": "off",
+    "react/prop-types": "off",
+    "react/destructuring-assignment": "off",
     '@typescript-eslint/camelcase': "off",
     'linebreak-style': 'off',
     'prettier/prettier': [
