@@ -1,0 +1,17 @@
+  .user-nav-btn{
+    text-align: left;
+    padding-left: 8px;
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    top: 50px;
+    left: -17.5px;
+    border-radius: 50%;
+    background-color: #2F2F2F;
+    box-shadow: -7px 0px 8px rgb(26 26 26 / 90%);
+  }
+  
+  .user-nav-img{
+    width:30px;
+    height: 30px;
+  }
