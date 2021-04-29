@@ -38,13 +38,15 @@ const UserNav = (): JSX.Element => {
         {close ? <ChevronLeft /> : <ChevronRight />}
       </button>
 
-      {data.users.map((user: User) => (
-        <UserSmallCard
-          close={close}
-          firstname={user.firstname}
-          lastname={user.lastname}
-        />
-      ))}
+      {data
+        ? data.users.map((user: User) => (
+            <UserSmallCard
+              close={close}
+              firstname={user.firstname}
+              lastname={user.lastname}
+            />
+          ))
+        : null}
     </div>
   );
 };
