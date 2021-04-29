@@ -6,10 +6,17 @@ export type User = {
   lastname: string;
   email: string;
 };
-const UserSmallCard = (
-  close: boolean,
-  { firstname, lastname }: User
-): JSX.Element => {
+
+interface IUserProps {
+  close: boolean;
+  firstname: string;
+  lastname: string;
+}
+const UserSmallCard = ({
+  close,
+  firstname,
+  lastname,
+}: IUserProps): JSX.Element => {
   return (
     <div className={`mt-5 ml-3 grid grid-flow-col ${close ? "pt-2" : "p-2"}`}>
       <img
