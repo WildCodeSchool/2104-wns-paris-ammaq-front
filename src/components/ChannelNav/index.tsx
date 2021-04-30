@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Edit2, Video } from "react-feather";
 import classNames from "classnames";
 
+import Header from "./Header";
+
 const channelsData = [
   {
     name: "openspace",
@@ -53,6 +55,7 @@ const ChannelNav = (): JSX.Element => {
 
   return (
     <div className="w-2/12 min-h-screen bg-main-darkgrey p-2 text-xs">
+      <Header />
       <ul>
         {channels.map((element, index) => {
           const isActive = activeIndex === index;

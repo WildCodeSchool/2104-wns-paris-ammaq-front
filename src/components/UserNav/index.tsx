@@ -22,7 +22,11 @@ const UserNav = (): JSX.Element => {
       {
         // title
       }
-      <div className={`${close ? "flex text-center flex-col-reverse" : ""}`}>
+      <div
+        className={`${
+          close ? "flex text-center flex-col-reverse" : "text-center"
+        }`}
+      >
         <p className="mx-auto text-sm text-gray-300">5 </p>
         <span className="text-sm text-gray-300">
           {close ? <Users className="inline-block" /> : "Participants"}
@@ -44,6 +48,7 @@ const UserNav = (): JSX.Element => {
               close={close}
               firstname={user.firstname}
               lastname={user.lastname}
+              key={user.firstname}
             />
           ))
         : null}
