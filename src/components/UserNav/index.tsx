@@ -15,14 +15,18 @@ const UserNav = (): JSX.Element => {
   return (
     <div
       id="user-nav"
-      className={`rounded mt-2 mr-3 flex flex-col flex-shrink-0 bg-usersnav absolute inset-y-0 right-0 shadow-usersnav ${
+      className={`rounded mt-3 mr-3 flex flex-col flex-shrink-0 bg-usersnav absolute inset-y-0 right-0 shadow-usersnav ${
         close ? "p-4" : "w-1/12"
       }`}
     >
       {
         // title
       }
-      <div className={`${close ? "flex flex-col-reverse" : ""}`}>
+      <div
+        className={`${
+          close ? "flex text-center flex-col-reverse" : "text-center"
+        }`}
+      >
         <p className="mx-auto text-sm text-gray-300">5 </p>
         <span className="text-sm text-gray-300">
           {close ? <Users className="inline-block" /> : "Participants"}
@@ -44,6 +48,7 @@ const UserNav = (): JSX.Element => {
               close={close}
               firstname={user.firstname}
               lastname={user.lastname}
+              key={user.id}
             />
           ))
         : null}
