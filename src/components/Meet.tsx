@@ -10,7 +10,7 @@ import { useJitsi } from "react-jutsu";
   Useful link: https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe
 */
 interface Room {
-  parentNode?: string;
+  parentNode: string;
   domain?: string;
   roomName: string;
   displayName: string;

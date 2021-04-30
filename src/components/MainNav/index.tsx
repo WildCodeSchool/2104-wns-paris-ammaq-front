@@ -42,7 +42,7 @@ const MainNav = (): JSX.Element => {
 
   return (
     <div
-      className={`m-1 h-screen rounded-md bg-mainnav shadow-mainnav ${
+      className={`m-1 rounded-md bg-mainnav shadow-mainnav ${
         nav ? "w-72" : "w-24"
       }`}
     >
