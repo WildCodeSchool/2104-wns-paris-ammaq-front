@@ -15,7 +15,7 @@ const UserNav = (): JSX.Element => {
   return (
     <div
       id="user-nav"
-      className={`rounded mt-2 mr-3 flex flex-col flex-shrink-0 bg-usersnav absolute inset-y-0 right-0 shadow-usersnav ${
+      className={`rounded mt-3 mr-3 flex flex-col flex-shrink-0 bg-usersnav absolute inset-y-0 right-0 shadow-usersnav ${
         close ? "p-4" : "w-1/12"
       }`}
     >
@@ -48,7 +48,7 @@ const UserNav = (): JSX.Element => {
               close={close}
               firstname={user.firstname}
               lastname={user.lastname}
-              key={user.firstname}
+              key={user.id}
             />
           ))
         : null}
