@@ -41,19 +41,37 @@ const MainNav = (): JSX.Element => {
   };
 
   return (
-    <div className="m-1 w-72 h-screen rounded-md bg-mainnav shadow-mainnav">
+    <div
+      className={`m-1 h-screen rounded-md bg-mainnav shadow-mainnav ${
+        nav ? "w-72" : "w-24"
+      }`}
+    >
       <div className="pt-4">
-        <div className="w-36 h-36 rounded-full grid place-items-center bg-circle m-auto shadow-profile">
-          <div className="w-32 h-32 m-auto grid place-items-center rounded-full bg-workit">
+        <div
+          className={`rounded-full grid place-items-center bg-circle m-auto shadow-profile ${
+            nav ? "w-36 h-36" : "w-20 h-20"
+          }`}
+        >
+          <div
+            className={`m-auto grid place-items-center rounded-full bg-workit ${
+              nav ? "w-32 h-32" : "w-16 h-16"
+            }`}
+          >
             <img
               src="/dumbo.jpeg"
               alt="profile pic"
-              className="w-28 h-28 m-auto rounded-full"
+              className={`m-auto rounded-full ${
+                nav ? "w-28 h-28" : "w-14 h-14"
+              }`}
             />
           </div>
         </div>
-        <h3 className="text-main-white text-xl">
-          <span className="text-transparent bg-workit bg-clip-text font-bold text-3xl">
+        <h3 className={`text-main-white ${nav ? "text-xl" : "text-xs"}`}>
+          <span
+            className={`text-transparent bg-workit bg-clip-text font-bold ${
+              nav ? "text-3xl" : "text-xl"
+            }`}
+          >
             M
           </span>
           ohamed
@@ -63,7 +81,9 @@ const MainNav = (): JSX.Element => {
       <button
         type="button"
         onClick={handleNav}
-        className="w-10 h-10 bg-main-darkgrey rounded-full focus:outline-none shadow-mainnav absolute nav-button"
+        className={`w-10 h-10 bg-main-darkgrey rounded-full focus:outline-none shadow-mainnav absolute ${
+          nav ? "nav-open" : "nav-closed"
+        }`}
       >
         {nav ? (
           <ChevronLeft className="inline-block text-main-white" />
@@ -72,19 +92,22 @@ const MainNav = (): JSX.Element => {
         )}
       </button>
 
-      {/*
-          Mettre une condition sur la div du li
-          Conditionner la div principale
-          ON VA S'EN SORTIR MANON T'INQUIÈTES PAS
-          TOUT VA BIEN
-      */}
-
       <nav className="grid place-items-center mt-6">
         <ul className="text-main-white text-2xl">
           {tabs.map((tab) => (
-            <div className="rounded-md shadow-channels my-4 w-64 h-16 flex justify-between cursor-pointer">
+            <div
+              className={`${
+                nav
+                  ? "rounded-md shadow-channels my-4 w-64 h-16 flex justify-between cursor-pointer"
+                  : ""
+              }`}
+            >
               <div className="grid place-content-center">
-                <div className="rounded-full w-14 h-14 ml-1 shadow-circle grid place-items-center self-start">
+                <div
+                  className={`rounded-full w-14 h-14 ml-1 shadow-circle grid place-items-center self-start ${
+                    nav ? "ml-1" : "my-2"
+                  }`}
+                >
                   <div
                     className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer bg-${tab.color}`}
                   >
@@ -92,7 +115,7 @@ const MainNav = (): JSX.Element => {
                   </div>
                 </div>
               </div>
-              <div className="grid place-items-center">
+              <div className={`${nav ? "grid place-items-center" : "hidden"}`}>
                 <li className="pr-4">
                   <h2>{tab.name}</h2>
                 </li>
