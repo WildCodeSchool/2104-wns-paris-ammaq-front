@@ -66,7 +66,11 @@ const MainNav = (): JSX.Element => {
             />
           </div>
         </div>
-        <h3 className={`text-main-white ${nav ? "text-xl" : "text-xs"}`}>
+        <h3
+          className={`text-main-white text-center ${
+            nav ? "text-xl" : "text-xs"
+          }`}
+        >
           <span
             className={`text-transparent bg-workit bg-clip-text font-bold ${
               nav ? "text-3xl" : "text-xl"
