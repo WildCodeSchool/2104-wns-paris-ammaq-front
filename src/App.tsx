@@ -8,6 +8,7 @@ export default function App(): JSX.Element {
     <div className="App">
       <ChannelNav />
       <UserNav />
+      <MainNav />
     </div>
   );
 }
