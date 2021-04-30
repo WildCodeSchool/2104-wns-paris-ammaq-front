@@ -1,14 +1,15 @@
 import React from "react";
-import UserNav from "./components/UserNav/index";
+
+import MainNav from "./components/MainNav";
 import "./App.css";
-import ChannelNav from "./components/ChannelNav";
+import Community from "./components/Community";
 
 export default function App(): JSX.Element {
   return (
-    <div className="App bg-main-darkgrey">
+    <div className="App bg-main-darkgrey grid">
       <ChannelNav />
-      <UserNav />
       <MainNav />
+      <Community />
     </div>
   );
 }

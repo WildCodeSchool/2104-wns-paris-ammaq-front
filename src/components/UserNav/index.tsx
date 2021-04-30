@@ -22,7 +22,7 @@ const UserNav = (): JSX.Element => {
       {
         // title
       }
-      <div className={`${close ? "flex flex-col-reverse" : ""}`}>
+      <div className={`${close ? "flex text-center flex-col-reverse" : ""}`}>
         <p className="mx-auto text-sm text-gray-300">5 </p>
         <span className="text-sm text-gray-300">
           {close ? <Users className="inline-block" /> : "Participants"}
