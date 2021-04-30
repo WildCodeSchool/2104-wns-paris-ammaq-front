@@ -7,6 +7,8 @@ module.exports = {
       boxShadow: {
         mainnav:
           "-2px 2px 4px rgba(40, 40, 40, 0.2), 2px -2px 4px rgba(40, 40, 40, 0.2), -2px -2px 4px rgba(54, 54, 54, 0.9), 2px 2px 5px rgba(40, 40, 40, 0.9), inset 1px 1px 2px rgba(54, 54, 54, 0.3), inset -1px -1px 2px rgba(40, 40, 40, 0.5);",
+        profile:
+          "-54px -54px 108px rgba(23, 23, 23, 0.2), 54px 54px 108px rgba(23, 23, 23, 0.2), -54px 54px 108px rgba(67, 67, 67, 0.9), 54px -54px 135px rgba(23, 23, 23, 0.9), inset 2px -2px 2px rgba(67, 67, 67, 0.3), inset -2px 2px 2px rgba(23, 23, 23, 0.5);",
         channels:
           "-1px 1px 2px rgba(39, 39, 39, 0.2), 1px -1px 2px rgba(39, 39, 39, 0.2), -1px -1px 2px rgba(51, 51, 51, 0.9), 1px 1px 3px rgba(39, 39, 39, 0.9), inset 1px 1px 2px rgba(51, 51, 51, 0.3), inset -1px -1px 2px rgba(39, 39, 39, 0.5);",
         pressed:
@@ -22,6 +24,11 @@ module.exports = {
         mainnav: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",
         circle: "linear-gradient(135deg, #2B2B2B 0%, #2F2F2F 100%);",
         usersnav: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",
+        workit: "linear-gradient(180deg, #FF8B03 0%, #EF5469 100%);",
+        community: "linear-gradient(125.2deg, #4ADE80 -4.15%, #097972 85.68%);",
+        library: "linear-gradient(125.5deg, #6BD2FF 7.91%, #5356E1 67.04%);",
+        agenda: "linear-gradient(125.5deg, #FACC15 -5.2%, #F97316 74.78%);",
+        quizz: "linear-gradient(125.5deg, #FB77B8 9.42%, #EF2A4C 105.75%);",
       },
 
       // Colors
