@@ -102,9 +102,10 @@ const MainNav = (): JSX.Element => {
             <div
               className={`${
                 nav
-                  ? "rounded-md shadow-channels my-4 w-64 h-16 flex justify-between cursor-pointer"
+                  ? "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
                   : ""
               }`}
+              key={tab.name}
             >
               <div
                 className={`grid place-content-center ${!nav ? "pt-4" : ""}`}

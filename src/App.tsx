@@ -6,7 +6,7 @@ import Community from "./components/Community";
 
 export default function App(): JSX.Element {
   return (
-    <div className="App bg-main-darkgrey grid">
+    <div className="App bg-main-darkgrey flex">
       <ChannelNav />
       <MainNav />
       <Community />
