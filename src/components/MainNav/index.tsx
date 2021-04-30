@@ -1,5 +1,14 @@
-import React from "react";
-import { Users, Book, Calendar, HelpCircle } from "react-feather";
+import React, { useState } from "react";
+import {
+  Users,
+  Book,
+  Calendar,
+  HelpCircle,
+  ChevronLeft,
+  ChevronRight,
+} from "react-feather";
+
+import "./mainNav.css";
 
 const tabs = [
   {
@@ -25,6 +34,12 @@ const tabs = [
 ];
 
 const MainNav = (): JSX.Element => {
+  const [nav, setNav] = useState(true);
+
+  const handleNav = () => {
+    setNav(!nav);
+  };
+
   return (
     <div className="m-1 w-72 h-screen rounded-md bg-mainnav shadow-mainnav">
       <div className="pt-4">
@@ -44,6 +59,25 @@ const MainNav = (): JSX.Element => {
           ohamed
         </h3>
       </div>
+
+      <button
+        type="button"
+        onClick={handleNav}
+        className="w-10 h-10 bg-main-darkgrey rounded-full focus:outline-none shadow-mainnav absolute nav-button"
+      >
+        {nav ? (
+          <ChevronLeft className="inline-block text-main-white" />
+        ) : (
+          <ChevronRight className="inline-block text-main-white" />
+        )}
+      </button>
+
+      {/*
+          Mettre une condition sur la div du li
+          Conditionner la div principale
+          ON VA S'EN SORTIR MANON T'INQUIÈTES PAS
+          TOUT VA BIEN
+      */}
 
       <nav className="grid place-items-center mt-6">
         <ul className="text-main-white text-2xl">
