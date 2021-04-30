@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useQuery } from "@apollo/client";
 import "./userNav.css";
 import { Users, ChevronLeft, ChevronRight } from "react-feather";
+import UserSmallCard, { User } from "../Base/UserSmallCard";
+import { UsersQuery } from "../../graphql/queries/user";
 
 const UserNav = (): JSX.Element => {
+  const { loading, error, data } = useQuery(UsersQuery);
   const tooSmall = !(window.innerWidth > 1024);
   const [close, setClose] = useState(true);
   const handleClick = () => {
@@ -34,39 +38,15 @@ const UserNav = (): JSX.Element => {
         {close ? <ChevronLeft /> : <ChevronRight />}
       </button>
 
-      {
-        // users
-      }
-
-      <div className={`mt-5 ml-3 grid grid-flow-col ${close ? "pt-2" : "p-2"}`}>
-        <img
-          className="user-nav-img rounded-full object-cover z-10"
-          src="https://cqfd.univ-lyon1.fr/files/2020/04/3-pieuvre-gif.gif"
-          alt=""
-        />
-        <p
-          className={`uppercase text-xs text-gray-300 items-end truncate ml-3 self-center ${
-            close ? " hidden" : ""
-          }`}
-        >
-          Mohammed
-        </p>
-      </div>
-
-      <div className={`mt-5 ml-3 grid grid-flow-col ${close ? "pt-2" : "p-2"}`}>
-        <img
-          className="user-nav-img rounded-full object-cover z-10"
-          src="https://www.lebernard.ca/wp-content/uploads/2015/09/Chien-chinois-a-crete.jpg"
-          alt=""
-        />
-        <p
-          className={`uppercase text-xs text-gray-300 items-end truncate ml-3 self-center ${
-            close ? "hidden" : ""
-          }`}
-        >
-          Chien Chinois à Crête
-        </p>
-      </div>
+      {data
+        ? data.users.map((user: User) => (
+            <UserSmallCard
+              close={close}
+              firstname={user.firstname}
+              lastname={user.lastname}
+            />
+          ))
+        : null}
     </div>
   );
 };

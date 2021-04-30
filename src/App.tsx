@@ -1,9 +1,11 @@
 import React from "react";
+
 import UserNav from "./components/UserNav/index";
 import MainNav from "./components/MainNav";
 import "./App.css";
+import ChannelNav from "./components/ChannelNav";
 
-function App(): JSX.Element {
+export default function App(): JSX.Element {
   return (
     <div className="App bg-main-darkgrey">
       <UserNav />
@@ -11,5 +13,3 @@ function App(): JSX.Element {
     </div>
   );
 }
-
-export default App;
