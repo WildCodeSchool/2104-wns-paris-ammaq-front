@@ -66,7 +66,11 @@ const MainNav = (): JSX.Element => {
             />
           </div>
         </div>
-        <h3 className={`text-main-white ${nav ? "text-xl" : "text-xs"}`}>
+        <h3
+          className={`text-main-white text-center ${
+            nav ? "text-xl" : "text-xs"
+          }`}
+        >
           <span
             className={`text-transparent bg-workit bg-clip-text font-bold ${
               nav ? "text-3xl" : "text-xl"
@@ -98,9 +102,10 @@ const MainNav = (): JSX.Element => {
             <div
               className={`${
                 nav
-                  ? "rounded-md shadow-channels my-4 w-64 h-16 flex justify-between cursor-pointer"
+                  ? "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
                   : ""
               }`}
+              key={tab.name}
             >
               <div
                 className={`grid place-content-center ${!nav ? "pt-4" : ""}`}
