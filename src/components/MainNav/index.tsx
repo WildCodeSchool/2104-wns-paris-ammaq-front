@@ -102,7 +102,9 @@ const MainNav = (): JSX.Element => {
                   : ""
               }`}
             >
-              <div className="grid place-content-center">
+              <div
+                className={`grid place-content-center ${!nav ? "pt-4" : ""}`}
+              >
                 <div
                   className={`rounded-full w-14 h-14 ml-1 shadow-circle grid place-items-center self-start ${
                     nav ? "ml-1" : "my-2"
