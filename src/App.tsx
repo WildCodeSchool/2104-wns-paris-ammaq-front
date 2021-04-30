@@ -11,7 +11,6 @@ export default function App(): JSX.Element {
       <ChannelNav />
       <UserNav />
       <MainNav />
-
     </div>
   );
 }
