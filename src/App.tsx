@@ -1,8 +1,8 @@
 import React from "react";
 
 import MainNav from "./components/MainNav";
-import "./App.css";
 import Community from "./components/Community";
+import "./App.css";
 
 export default function App(): JSX.Element {
   return (
