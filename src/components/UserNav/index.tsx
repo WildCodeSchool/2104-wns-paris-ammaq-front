@@ -15,8 +15,8 @@ const UserNav = (): JSX.Element => {
   return (
     <div
       id="user-nav"
-      className={`rounded mt-3 mr-3 flex flex-col flex-shrink-0 bg-usersnav absolute inset-y-0 right-0 shadow-usersnav ${
-        close ? "p-4" : "w-1/12"
+      className={`rounded mt-3 mr-3 flex flex-col flex-shrink-0 bg-usersnav relative inset-y-0 right-0 shadow-usersnav ${
+        close ? "p-4" : "w-p10"
       }`}
     >
       {

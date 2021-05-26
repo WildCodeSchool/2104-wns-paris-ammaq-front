@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      width: {
+        p10:"10%",
+      },
       // Neumorphism rules
       boxShadow: {
         mainnav:
