@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+
 import {
   Users,
   Book,
@@ -98,6 +100,22 @@ const MainNav = (): JSX.Element => {
 
       <nav className="grid place-items-center mt-6">
         <ul className="text-main-white text-2xl">
+          {/* <li>
+            <NavLink to="/community">
+              <h2>Communautey</h2>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/agenda">
+              <h2>Agenday</h2>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/quizz">
+              <h2>Squeezy</h2>
+            </NavLink>
+          </li> */}
+
           {tabs.map((tab) => (
             <div
               className={`${
@@ -115,17 +133,21 @@ const MainNav = (): JSX.Element => {
                     nav ? "ml-1" : "my-2"
                   }`}
                 >
-                  <div
-                    className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer bg-${tab.color}`}
-                  >
-                    {tab.icon}
-                  </div>
+                  <NavLink to={`/${tab.color}`} exact>
+                    <div
+                      className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer bg-${tab.color}`}
+                    >
+                      {tab.icon}
+                    </div>
+                  </NavLink>
                 </div>
               </div>
               <div className={`${nav ? "grid place-items-center" : "hidden"}`}>
-                <li className="pr-4">
-                  <h2>{tab.name}</h2>
-                </li>
+                <NavLink to={`/${tab.color}`} exact>
+                  <li className="pr-4">
+                    <h2>{tab.name}</h2>
+                  </li>
+                </NavLink>
               </div>
             </div>
           ))}
