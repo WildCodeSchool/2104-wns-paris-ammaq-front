@@ -39,16 +39,17 @@ const channels: ChannelType[] = [
 
 export default function Community(): JSX.Element {
   return (
-    <div className="w-screen flex">
+    <div className=" flex w-screen">
       <ChannelNav channels={channels} />
-      <Meet
-        parentNode="jitsy-container"
-        roomName="WORKIT-cours-karim"
-        displayName="Quentin"
-        subject="cours-karim"
-        width={1400}
-        height={window.innerHeight}
-      />
+      <div className="flex-1">
+        <Meet
+          parentNode="jitsy-container"
+          roomName="WORKIT-cours-karim"
+          displayName="Quentin"
+          subject="cours-karim"
+          height={window.innerHeight}
+        />
+      </div>
       <UserNav />
     </div>
   );
