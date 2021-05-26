@@ -1,52 +1,15 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from "react";
-import { Edit2, Video } from "react-feather";
-import classNames from "classnames";
-
 import Header from "./Header";
+import Channel from "./Channel";
+import ChannelType from "../../types/Channel";
 
-const channelsData = [
-  {
-    name: "openspace",
-    id: 1,
-    active: true,
-    vocal: true,
-  },
-  {
-    name: "cafeteria",
-    id: 2,
-    active: false,
-    vocal: true,
-  },
-  {
-    name: "cours-react",
-    id: 3,
-    active: false,
-    vocal: true,
-  },
-  {
-    name: "cours-karim",
-    id: 4,
-    active: false,
-    vocal: false,
-  },
-  {
-    name: "cours-nicolas",
-    id: 5,
-    active: false,
-    vocal: false,
-  },
-  {
-    name: "ammaq-beach",
-    id: 6,
-    active: false,
-    vocal: false,
-  },
-];
+type ChannelNavProps = {
+  channels: ChannelType[];
+};
 
-const ChannelNav = (): JSX.Element => {
-  const [channels, setChannels] = useState(channelsData);
+const ChannelNav = ({ channels }: ChannelNavProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleClick = (index: number) => {
@@ -57,36 +20,21 @@ const ChannelNav = (): JSX.Element => {
     <div className="w-2/12 min-h-screen bg-main-darkgrey p-2 text-xs">
       <Header />
       <ul>
-        {channels.map((element, index) => {
+        {channels.map((element: ChannelType, index: number) => {
           const isActive = activeIndex === index;
-          const itemClass = classNames(
-            "items-center cursor-pointer p-4 bg-mainnav mt-5 rounded flex justify-between",
-            {
-              "shadow-pressed text-white": isActive,
-              "shadow-channels text-community-green-light":
-                !isActive && element.vocal,
-              "shadow-channels text-community-blue":
-                !isActive && !element.vocal,
-            }
-          );
           return (
-            <li
+            <div
               key={element.id}
-              className={itemClass}
+              role="button"
+              tabIndex={index}
               onClick={() => handleClick(index)}
             >
-              <div className="flex flex-nowrap truncate items-center">
-                {element.vocal ? (
-                  <Edit2 className="inline-block mr-2 w-4" />
-                ) : (
-                  <Video className="inline-block mr-2 w-4" />
-                )}
-                <span className="truncate">{element.name}</span>
-              </div>
-              {isActive && (
-                <span className="ml-2 rounded-full bg-community-green-light w-4 h-4" />
-              )}
-            </li>
+              <Channel
+                name={element.name}
+                isVocal={element.isVocal}
+                isActive={isActive}
+              />
+            </div>
           );
         })}
       </ul>
