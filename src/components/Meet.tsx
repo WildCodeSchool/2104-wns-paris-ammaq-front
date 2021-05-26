@@ -16,7 +16,7 @@ interface Room {
   displayName: string;
   password?: undefined;
   subject: string;
-  width: number;
+  width?: number;
   height: number;
   // invitees: undefined;
   // devices: Record<string, unknown>;
