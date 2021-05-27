@@ -19,7 +19,7 @@ const ChannelNav = ({ channels }: ChannelNavProps): JSX.Element => {
   return (
     <div className="w-2/12 min-h-screen bg-main-darkgrey p-2 text-xs">
       <Header />
-      <ul>
+      <div data-testid="list-channels">
         {channels.map((element: ChannelType, index: number) => {
           const isActive = activeIndex === index;
           return (
@@ -37,7 +37,7 @@ const ChannelNav = ({ channels }: ChannelNavProps): JSX.Element => {
             </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };
