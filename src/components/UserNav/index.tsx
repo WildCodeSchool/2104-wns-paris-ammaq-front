@@ -19,9 +19,6 @@ const UserNav = (): JSX.Element => {
         close ? "p-4" : "w-1/12"
       }`}
     >
-      {
-        // title
-      }
       <div
         className={`${
           close ? "flex text-center flex-col-reverse" : "text-center"
