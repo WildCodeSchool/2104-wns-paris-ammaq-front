@@ -10,7 +10,7 @@ import { useJitsi } from "react-jutsu";
   Useful link: https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe
 */
 interface Room {
-  id: string;
+  id: any;
   parentNode?: string;
   domain?: string;
   roomName: string;
@@ -39,7 +39,7 @@ const Meet: React.FC<Room> = (config: Room) => {
 
     api.getCurrentDevices().then((dataDevices: any) => {
       setDevices(dataDevices);
-      console.log(dataDevices);
+      console.log(devices);
     });
 
     api.getLivestreamUrl().then((data: any) => {
