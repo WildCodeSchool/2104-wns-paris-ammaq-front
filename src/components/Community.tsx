@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import UserNav from "./UserNav/index";
 import ChannelNav from "./ChannelNav";
 import Meet from "./Meet";
@@ -45,7 +45,7 @@ export default function Community(): JSX.Element {
         <Meet
           parentNode="jitsy-container"
           roomName="WORKIT-cours-karim"
-          displayName="Quentin"
+          displayName="test"
           subject="cours-karim"
           height={window.innerHeight}
         />
