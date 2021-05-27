@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import UserNav from "./UserNav/index";
 import ChannelNav from "./ChannelNav";
 import Meet from "./Meet";
-import ChannelType from "../types/Channel";
 import { ChannelsQuery } from "../graphql/queries/channel";
 
 export default function Community(): JSX.Element {
@@ -11,10 +10,7 @@ export default function Community(): JSX.Element {
 
   return (
     <div className="w-screen flex">
-      {
-        // Todo : remplacer le tableau vide par un Loader/Skeleton du composant Channel
-      }
-      <ChannelNav channels={loading ? [] : data.channels} />
+      <ChannelNav loading={loading} error={error} channels={data?.channels} />
       <div className="flex-1">
         <Meet
           parentNode="jitsy-container"
