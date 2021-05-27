@@ -10,19 +10,17 @@ export default function Community(): JSX.Element {
   const { loading, error, data } = useQuery(ChannelsQuery);
 
   return (
-    <div className="w-screen flex">
-      {
-        // Todo : remplacer le tableau vide par un Loader/Skeleton du composant Channel
-      }
-      <ChannelNav channels={loading ? [] : data.channels} />
-      <Meet
-        parentNode="jitsy-container"
-        roomName="WORKIT-cours-karim"
-        displayName="Quentin"
-        subject="cours-karim"
-        width={1400}
-        height={window.innerHeight}
-      />
+    <div className=" flex w-screen">
+      <ChannelNav channels={channels} />
+      <div className="flex-1">
+        <Meet
+          parentNode="jitsy-container"
+          roomName="WORKIT-cours-karim"
+          displayName="Quentin"
+          subject="cours-karim"
+          height={window.innerHeight}
+        />
+      </div>
       <UserNav />
     </div>
   );
