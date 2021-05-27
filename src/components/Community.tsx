@@ -15,14 +15,15 @@ export default function Community(): JSX.Element {
         // Todo : remplacer le tableau vide par un Loader/Skeleton du composant Channel
       }
       <ChannelNav channels={loading ? [] : data.channels} />
-      <Meet
-        parentNode="jitsy-container"
-        roomName="WORKIT-cours-karim"
-        displayName="Quentin"
-        subject="cours-karim"
-        width={1400}
-        height={window.innerHeight}
-      />
+      <div className="flex-1">
+        <Meet
+          parentNode="jitsy-container"
+          roomName="WORKIT-cours-karim"
+          displayName="Quentin"
+          subject="cours-karim"
+          height={window.innerHeight}
+        />
+      </div>
       <UserNav />
     </div>
   );
