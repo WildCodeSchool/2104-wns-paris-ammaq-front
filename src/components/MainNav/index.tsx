@@ -100,56 +100,51 @@ const MainNav = (): JSX.Element => {
 
       <nav className="grid place-items-center mt-6">
         <ul className="text-main-white text-2xl">
-          {/* <li>
-            <NavLink to="/community">
-              <h2>Communautey</h2>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/agenda">
-              <h2>Agenday</h2>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/quizz">
-              <h2>Squeezy</h2>
-            </NavLink>
-          </li> */}
-
           {tabs.map((tab) => (
-            <div
-              className={`${
-                nav
-                  ? "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
-                  : ""
-              }`}
-              key={tab.name}
-            >
-              <div
-                className={`grid place-content-center ${!nav ? "pt-4" : ""}`}
+            <>
+              <NavLink
+                to={`/${tab.color}`}
+                className={`${
+                  nav
+                    ? "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
+                    : ""
+                }`}
+                activeClassName="shadow-pressed bg-pressed"
+                key={tab.name}
               >
                 <div
-                  className={`rounded-full w-14 h-14 ml-1 shadow-circle grid place-items-center self-start ${
-                    nav ? "ml-1" : "my-2"
-                  }`}
+                  className={`grid place-content-center ${!nav ? "pt-4" : ""}`}
                 >
-                  <NavLink to={`/${tab.color}`} exact>
-                    <div
+                  <div
+                    className={`rounded-full w-14 h-14 ml-1 shadow-circle grid place-items-center self-start ${
+                      nav ? "ml-1" : "my-2"
+                    }`}
+                  >
+                    <NavLink
+                      to={`/${tab.color}`}
+                      activeClassName="shadow-buttonsPressed"
                       className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer bg-${tab.color}`}
+                      exact
                     >
                       {tab.icon}
-                    </div>
-                  </NavLink>
+                    </NavLink>
+                  </div>
                 </div>
-              </div>
-              <div className={`${nav ? "grid place-items-center" : "hidden"}`}>
-                <NavLink to={`/${tab.color}`} exact>
+                <div
+                  className={`${nav ? "grid place-items-center" : "hidden"}`}
+                >
+                  {/* <NavLink
+                    to={`/${tab.color}`}
+                    activeClassName="active-name"
+                    exact
+                  > */}
                   <li className="pr-4">
                     <h2>{tab.name}</h2>
                   </li>
-                </NavLink>
-              </div>
-            </div>
+                  {/* </NavLink> */}
+                </div>
+              </NavLink>
+            </>
           ))}
         </ul>
       </nav>
