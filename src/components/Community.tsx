@@ -43,6 +43,7 @@ export default function Community(): JSX.Element {
       <ChannelNav channels={channels} />
       <div className="flex-1">
         <Meet
+          id="test"
           parentNode="jitsy-container"
           roomName="WORKIT-cours-karim"
           displayName="test"

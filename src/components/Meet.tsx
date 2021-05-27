@@ -17,12 +17,12 @@ interface Room {
   displayName: string;
   password?: undefined;
   subject: string;
-  width: number;
+  width?: number;
   height: number;
   // invitees: Record<string, >;
   // userInfo: Record<string, >;
-  devices: any;
-  inviteUrl: string;
+  devices?: any;
+  inviteUrl?: string;
 }
 
 const Meet: React.FC<Room> = (config: Room) => {
@@ -37,9 +37,9 @@ const Meet: React.FC<Room> = (config: Room) => {
   onAPILoad().then((api: any) => {
     console.log(api.getVideoQuality());
 
-    api.getCurrentDevices().then((devices: any) => {
-      setDevices(devices);
-      console.log(devices);
+    api.getCurrentDevices().then((dataDevices: any) => {
+      setDevices(dataDevices);
+      console.log(dataDevices);
     });
 
     api.getLivestreamUrl().then((data: any) => {
@@ -66,10 +66,13 @@ const Meet: React.FC<Room> = (config: Room) => {
     <>
       <div id={config.parentNode} />
       <p>{!streamUrl ? null : streamUrl}</p>
-      <button onClick={() => setRecording(!isRecording)}>
+      <button type="button" onClick={() => setRecording(!isRecording)}>
         toggle recording
       </button>
-      <button onClick={() => setCaptureScreenshot(!captureScreenshot)}>
+      <button
+        type="button"
+        onClick={() => setCaptureScreenshot(!captureScreenshot)}
+      >
         capture screenshot
       </button>
       <p>{!screenshotUrl ? null : screenshotUrl}</p>
