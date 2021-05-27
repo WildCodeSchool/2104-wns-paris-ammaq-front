@@ -109,7 +109,7 @@ const MainNav = (): JSX.Element => {
                     ? "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
                     : ""
                 }`}
-                activeClassName="shadow-pressed bg-pressed"
+                activeClassName="shadow-pressed bg-pressed gradient-border "
                 key={tab.name}
               >
                 <div
@@ -122,7 +122,7 @@ const MainNav = (): JSX.Element => {
                   >
                     <NavLink
                       to={`/${tab.color}`}
-                      activeClassName="shadow-buttonsPressed"
+                      activeClassName="shadow-buttonsPressed gradient-border "
                       className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer bg-${tab.color}`}
                       exact
                     >
