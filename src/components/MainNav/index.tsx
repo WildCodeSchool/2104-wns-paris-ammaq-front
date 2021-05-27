@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+
 import {
   Users,
   Book,
@@ -42,6 +44,7 @@ const MainNav = (): JSX.Element => {
 
   return (
     <div
+      id="mainNav"
       className={`m-1 rounded-md bg-mainnav shadow-mainnav ${
         nav ? "w-72" : "w-24"
       }`}
@@ -99,35 +102,54 @@ const MainNav = (): JSX.Element => {
       <nav className="grid place-items-center mt-6">
         <ul className="text-main-white text-2xl">
           {tabs.map((tab) => (
-            <div
-              className={`${
-                nav
-                  ? "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
-                  : ""
-              }`}
-              key={tab.name}
-            >
-              <div
-                className={`grid place-content-center ${!nav ? "pt-4" : ""}`}
+            <>
+              <NavLink
+                to={`/${tab.color}`}
+                className={`${
+                  nav
+                    ? "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
+                    : ""
+                }`}
+                activeClassName={`${
+                  nav
+                    ? "shadow-pressed bg-pressed gradient-border "
+                    : "shadow-pressed bg-pressed "
+                }`}
+                key={tab.name}
               >
                 <div
-                  className={`rounded-full w-14 h-14 ml-1 shadow-circle grid place-items-center self-start ${
-                    nav ? "ml-1" : "my-2"
-                  }`}
+                  className={`grid place-content-center ${!nav ? "pt-4" : ""}`}
                 >
                   <div
-                    className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer bg-${tab.color}`}
+                    className={`rounded-full w-14 h-14 ml-1 shadow-circle grid place-items-center self-start ${
+                      nav ? "ml-1" : "my-2"
+                    }`}
                   >
-                    {tab.icon}
+                    <NavLink
+                      to={`/${tab.color}`}
+                      activeClassName="shadow-buttonsPressed gradient-border gradient-border-round"
+                      className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer bg-${tab.color}`}
+                      exact
+                    >
+                      {tab.icon}
+                    </NavLink>
                   </div>
                 </div>
-              </div>
-              <div className={`${nav ? "grid place-items-center" : "hidden"}`}>
-                <li className="pr-4">
-                  <h2>{tab.name}</h2>
-                </li>
-              </div>
-            </div>
+                <div
+                  className={`${nav ? "grid place-items-center" : "hidden"}`}
+                >
+                  {/* <NavLink
+                    to={`/${tab.color}`}
+                    activeClassName="active-name"
+                    exact
+                  > */}
+                  <li className="pr-4">
+                    <h2>{tab.name}</h2>
+                  </li>
+                  {/* </NavLink> */}
+                </div>
+              </NavLink>
+            </>
           ))}
         </ul>
       </nav>

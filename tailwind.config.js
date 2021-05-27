@@ -22,6 +22,8 @@ module.exports = {
           " 3px 3px 6px rgba(26, 26, 26, 0.2), -3px -3px 6px rgba(26, 26, 26, 0.2), 3px -3px 6px rgba(64, 64, 64, 0.9), -3px 3px 8px rgba(26, 26, 26, 0.9), inset -1px 1px 2px rgba(64, 64, 64, 0.3), inset 1px -1px 2px rgba(26, 26, 26, 0.5);",
         pictures:
           "-26px 26px 52px rgba(39, 39, 39, 0.2), 26px -26px 52px rgba(39, 39, 39, 0.2), -26px -26px 52px rgba(51, 51, 51, 0.9), 26px 26px 65px rgba(39, 39, 39, 0.9), inset 1px 1px 2px rgba(51, 51, 51, 0.3), inset -1px -1px 2px rgba(39, 39, 39, 0.5);",
+        buttonsPressed:
+          "1px 1px 2px rgba(63, 63, 63, 0.3), -1px -1px 2px rgba(31, 31, 31, 0.5), inset -1px 1px 2px rgba(31, 31, 31, 0.2), inset 1px -1px 2px rgba(31, 31, 31, 0.2), inset -1px -1px 2px rgba(63, 63, 63, 0.9), inset 1px 1px 3px rgba(31, 31, 31, 0.9);"
       },
       backgroundImage: {
         mainnav: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",
@@ -32,6 +34,7 @@ module.exports = {
         library: "linear-gradient(125.5deg, #6BD2FF 7.91%, #5356E1 67.04%);",
         agenda: "linear-gradient(125.5deg, #FACC15 -5.2%, #F97316 74.78%);",
         quizz: "linear-gradient(125.5deg, #FB77B8 9.42%, #EF2A4C 105.75%);",
+        pressed: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",
       },
 
       // Colors
