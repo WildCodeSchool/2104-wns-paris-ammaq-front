@@ -7,7 +7,6 @@ const Header = (): JSX.Element => {
   const { data } = useQuery(SchoolQuery, {
     variables: { id: "60b0bace23608717c5d1d3ea" },
   });
-  console.log(data?.school);
   return (
     <div className="h-52 flex flex-col ">
       <div className="rounded-full bg-white school-logo mx-auto shadow-profile bg-circle p-3">
