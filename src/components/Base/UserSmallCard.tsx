@@ -20,7 +20,8 @@ const UserSmallCard = ({
   return (
     <div
       data-testid="userSmallCard"
-      className={`mt-5 ml-3 grid grid-flow-col ${close ? "pt-2 mx-auto" : "p-2"}`}
+      className={`mt-5 ml-3 grid grid-flow-col 
+      ${close ? "pt-2 mx-auto" : "p-2"}`}
     >
       <img
         className="user-nav-img rounded-full object-cover z-10"

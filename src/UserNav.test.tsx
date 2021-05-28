@@ -31,22 +31,6 @@ const GET_USERS_ERROR_MOCK = {
   error: new Error("Unable to reach server"),
 };
 
-describe("UserNav", () => {
-  describe("while fetching users", () => {
-    it("renders loading", () => {
-      render(
-        <MockedProvider mocks={[GET_USERS_SUCCESS_MOCK]} addTypename={false}>
-          <UserNav />
-        </MockedProvider>
-      );
-
-      expect(
-        screen.getByText("Chargement en cours...")
-      ).not.toBeInTheDocument();
-    });
-  });
-});
-
 test("should show userNav with good User", () => {
   render(<UserSmallCard firstname="Mohamed" lastname="Mrabet" close={false} />);
   const divElement = screen.getByTestId("userSmallCard");
