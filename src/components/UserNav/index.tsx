@@ -49,6 +49,7 @@ const UserNav = (): JSX.Element => {
               firstname={user.firstname}
               lastname={user.lastname}
               key={user.id}
+              avatar={user.avatar}
             />
           ))
         : null}
