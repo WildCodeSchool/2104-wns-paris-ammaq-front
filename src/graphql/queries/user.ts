@@ -7,6 +7,7 @@ export const UserQuery = gql`
       firstname
       lastname
       email
+      avatar
     }
   }
 `;
@@ -18,6 +19,7 @@ export const UsersQuery = gql`
       firstname
       lastname
       email
+      avatar
     }
   }
 `;
