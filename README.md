@@ -1,6 +1,17 @@
-# Getting Started with Create React App
+# Workit project front-end
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Workit is a virtual campus offering a complete tool for online courses. No need to have multiple apps to attend courses, read documentation or check your agenda : everything is gathered in one simple app ! 
+
+## Main tools & packages 
+
+### Tailwind CSS
+
+### react-feather
+
+### react-router / react-router-dom
+
 
 ## Available Scripts
 

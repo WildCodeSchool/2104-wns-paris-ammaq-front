@@ -16,19 +16,18 @@ const UserNav = (): JSX.Element => {
     <div
       id="user-nav"
       data-testid="user-nav"
-      className={`rounded mt-3 mr-3 flex flex-col flex-shrink-0 bg-usersnav absolute inset-y-0 right-0 shadow-usersnav ${
-        close ? "p-4" : "w-1/12"
+      className={`rounded mt-3 mr-3 flex flex-col flex-shrink-0 bg-usersnav relative inset-y-0 right-0 shadow-usersnav ${
+        close ? "p-4" : "w-p10"
       }`}
     >
-      {
-        // title
-      }
       <div
         className={`${
           close ? "flex text-center flex-col-reverse" : "text-center"
         }`}
       >
-        <p className="mx-auto text-sm text-gray-300">5 </p>
+        <p className="mx-auto text-sm text-gray-300">
+          {data ? data.users.length : null}
+        </p>
         <span className="text-sm text-gray-300">
           {close ? <Users className="inline-block" /> : "Participants"}
         </span>
