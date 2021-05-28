@@ -6,7 +6,7 @@ import UserSmallCard, { User } from "../Base/UserSmallCard";
 import { UsersQuery } from "../../graphql/queries/user";
 
 const UserNav = (): JSX.Element => {
-  const { loading, error, data } = useQuery(UsersQuery);
+  const { data } = useQuery(UsersQuery);
   const tooSmall = !(window.innerWidth > 1024);
   const [close, setClose] = useState(true);
   const handleClick = () => {
@@ -15,6 +15,7 @@ const UserNav = (): JSX.Element => {
   return (
     <div
       id="user-nav"
+      data-testid="user-nav"
       className={`rounded mt-3 mr-3 flex flex-col flex-shrink-0 bg-usersnav relative inset-y-0 right-0 shadow-usersnav ${
         close ? "p-4" : "w-p10"
       }`}
