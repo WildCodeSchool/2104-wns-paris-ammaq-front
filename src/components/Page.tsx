@@ -9,7 +9,7 @@ import Dashboard from "./Dashboard";
 
 const Page = (): JSX.Element => {
   return (
-    <div>
+    <>
       <Route path="/" exact>
         <Dashboard />
       </Route>
@@ -25,7 +25,7 @@ const Page = (): JSX.Element => {
       <Route path="/quizz" exact>
         <Quizz />
       </Route>
-    </div>
+    </>
   );
 };
 

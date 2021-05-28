@@ -24,7 +24,9 @@ const UserNav = (): JSX.Element => {
           close ? "flex text-center flex-col-reverse" : "text-center"
         }`}
       >
-        <p className="mx-auto text-sm text-gray-300">5 </p>
+        <p className="mx-auto text-sm text-gray-300">
+          {data ? data.users.length : null}
+        </p>
         <span className="text-sm text-gray-300">
           {close ? <Users className="inline-block" /> : "Participants"}
         </span>
