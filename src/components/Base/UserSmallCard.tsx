@@ -19,7 +19,8 @@ const UserSmallCard = ({
 }: IUserProps): JSX.Element => {
   return (
     <div
-      className={` mt-5 grid grid-flow-col ${close ? "pt-2 mx-auto" : "p-2"}`}
+      data-testid="userSmallCard"
+      className={`mt-5 ml-3 grid grid-flow-col ${close ? "pt-2 mx-auto" : "p-2"}`}
     >
       <img
         className="user-nav-img rounded-full object-cover z-10"
