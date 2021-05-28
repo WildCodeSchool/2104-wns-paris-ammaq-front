@@ -5,17 +5,20 @@ export type User = {
   firstname: string;
   lastname: string;
   email: string;
+  avatar: string;
 };
 
 interface IUserProps {
   close: boolean;
   firstname: string;
   lastname: string;
+  avatar: string;
 }
 const UserSmallCard = ({
   close,
   firstname,
   lastname,
+  avatar,
 }: IUserProps): JSX.Element => {
   return (
     <div
@@ -25,7 +28,7 @@ const UserSmallCard = ({
     >
       <img
         className="user-nav-img rounded-full object-cover z-10"
-        src="https://cqfd.univ-lyon1.fr/files/2020/04/3-pieuvre-gif.gif"
+        src={avatar}
         alt=""
       />
       <p
