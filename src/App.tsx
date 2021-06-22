@@ -1,15 +1,14 @@
 import React from "react";
-import UserNav from "./components/UserNav/index";
+
 import MainNav from "./components/MainNav";
+import Page from "./components/Page";
 import "./App.css";
 
-function App(): JSX.Element {
+export default function App(): JSX.Element {
   return (
-    <div className="App">
-      <UserNav />
+    <div className="App bg-main-darkgrey flex">
       <MainNav />
+      <Page />
     </div>
   );
 }
-
-export default App;
