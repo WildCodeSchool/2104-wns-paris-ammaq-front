@@ -1,0 +1,7 @@
+.school-logo{
+    height: 150px;
+    width: 150px;
+}
+.school-logo img{
+    object-fit: contain;
+}

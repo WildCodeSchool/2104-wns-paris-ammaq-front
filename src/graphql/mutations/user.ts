@@ -7,6 +7,7 @@ export const CreateUser = gql`
       firstname
       lastname
       email
+      avatar
     }
   }
 `;
@@ -18,6 +19,7 @@ export const UpdateUser = gql`
       firstname
       lastname
       email
+      avatar
     }
   }
 `;
@@ -29,6 +31,7 @@ export const DeleteUser = gql`
       firstname
       lastname
       email
+      avatar
     }
   }
 `;
