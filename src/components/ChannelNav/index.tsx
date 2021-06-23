@@ -32,6 +32,7 @@ const ChannelNav = ({ channels }: ChannelNavProps): JSX.Element => {
             <ChannelLoading />
           </>
         ) : null}
+        {error ? <p>error: {error}</p> : null}
         {channels.map((element: ChannelType, index: number) => {
           const isActive = activeIndex === index;
           return (

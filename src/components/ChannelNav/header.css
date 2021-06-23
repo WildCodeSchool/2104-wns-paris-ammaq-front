@@ -4,4 +4,24 @@
 }
 .school-logo img{
     object-fit: contain;
+    height: 110px;
+    width: 110px;
+}
+.bg-onload{
+    height: 110px;
+    width: 110px;
+    background-image: linear-gradient(135deg, #2B2B2B 0%, #424242 100%);
+    animation: loading ease-in-out 1s infinite ;
+    background-size: 300% 300%;
+  }
+  @keyframes loading {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
