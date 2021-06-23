@@ -12,7 +12,7 @@ const Header = (): JSX.Element => {
       <div className="rounded-full bg-white school-logo mx-auto shadow-profile bg-circle p-3">
         <div className="p-2 bg-community rounded-full">
           {loading ? (
-            <div className="bg-white rounded-full p-1 bg-onload" />
+            <div className="bg-white rounded-full p-1 bg-onload img110px" />
           ) : (
             <img
               className="bg-white rounded-full p-1"
