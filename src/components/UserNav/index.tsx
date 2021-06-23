@@ -3,10 +3,11 @@ import { useQuery } from "@apollo/client";
 import "./userNav.css";
 import { Users, ChevronLeft, ChevronRight } from "react-feather";
 import UserSmallCard, { User } from "../Base/UserSmallCard";
+import UserSmallCardLoading from "../Base/UserSmallCardLoading";
 import { UsersQuery } from "../../graphql/queries/user";
 
 const UserNav = (): JSX.Element => {
-  const { data } = useQuery(UsersQuery);
+  const { data, loading, error } = useQuery(UsersQuery);
   const tooSmall = !(window.innerWidth > 1024);
   const [close, setClose] = useState(true);
   const handleClick = () => {
@@ -41,7 +42,15 @@ const UserNav = (): JSX.Element => {
       >
         {close ? <ChevronLeft /> : <ChevronRight />}
       </button>
-
+      {loading ? (
+        <>
+          <UserSmallCardLoading />
+          <UserSmallCardLoading />
+          <UserSmallCardLoading />
+          <UserSmallCardLoading />
+        </>
+      ) : null}
+      {error ? <p>error: {error}</p> : null}
       {data
         ? data.users.map((user: User) => (
             <UserSmallCard
