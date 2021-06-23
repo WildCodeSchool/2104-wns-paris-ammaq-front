@@ -31,6 +31,7 @@ module.exports = {
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
     '@typescript-eslint/camelcase': "off",
+    'import/no-duplicates': "off",
     'linebreak-style': 'off',
     'prettier/prettier': [
       'error',
