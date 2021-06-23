@@ -16,6 +16,7 @@ export default function Community(): JSX.Element {
       }
       <ChannelNav channels={loading ? [] : data.channels} />
       <div className="flex-1">
+        {loading ? <div className="bg-onload w-full h-full" /> : null}
         <Meet
           parentNode="jitsy-container"
           roomName="WORKIT-cours-karim"
