@@ -13,6 +13,7 @@ export default function Community(): JSX.Element {
     <div className=" flex w-screen">
       <ChannelNav channels={channels} />
       <div className="flex-1">
+        {loading ? <div className="bg-onload w-full h-full" /> : null}
         <Meet
           parentNode="jitsy-container"
           roomName="WORKIT-cours-karim"
