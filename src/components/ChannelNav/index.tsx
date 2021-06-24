@@ -1,55 +1,58 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
+import React from "react";
+import { ApolloError } from "@apollo/client";
 import Header from "./Header";
 import Channel from "./Channel";
 import ChannelLoading from "./ChannelLoading";
 import ChannelType from "../../types/Channel";
-import { ChannelsQuery } from "../../graphql/queries/channel";
 
 type ChannelNavProps = {
-  channels: ChannelType[];
+  channels: ChannelType[] | undefined;
+  loading: boolean;
+  error: ApolloError | undefined;
+  active: number;
+  handleSwitch: (index: number) => void;
 };
 
-const ChannelNav = ({ channels }: ChannelNavProps): JSX.Element => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const { data, loading, error } = useQuery(ChannelsQuery);
-
-  const handleClick = (index: number) => {
-    setActiveIndex(index);
-  };
+const ChannelNav = ({
+  channels,
+  loading,
+  error,
+  active,
+  handleSwitch,
+}: ChannelNavProps): JSX.Element => {
+  const channelsList = channels?.map((element: ChannelType, index: number) => {
+    const isActive = active === index;
+    return (
+      <div
+        key={element.id}
+        role="button"
+        tabIndex={index}
+        onClick={() => handleSwitch(index)}
+      >
+        <Channel
+          name={element.name}
+          isVocal={element.isVocal}
+          isActive={isActive}
+        />
+      </div>
+    );
+  });
 
   return (
     <div className="w-2/12 min-h-screen bg-main-darkgrey p-2 text-xs">
       <Header />
       <div data-testid="list-channels">
-        {loading ? (
+        {loading && (
           <>
             <ChannelLoading />
             <ChannelLoading />
             <ChannelLoading />
           </>
-        ) : null}
-        {error ? <p>error: {error}</p> : null}
-        {channels.map((element: ChannelType, index: number) => {
-          const isActive = activeIndex === index;
-          return (
-            <div
-              key={element.id}
-              role="button"
-              tabIndex={index}
-              onClick={() => handleClick(index)}
-            >
-              <Channel
-                name={element.name}
-                isVocal={element.isVocal}
-                isActive={isActive}
-              />
-            </div>
-          );
-        })}
+        )}
+        {error && <p>error: {error}</p>}
+        {channels && channelsList}
       </div>
     </div>
   );
