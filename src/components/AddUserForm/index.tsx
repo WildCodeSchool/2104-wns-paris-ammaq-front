@@ -2,6 +2,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { Path, useForm, SubmitHandler, UseFormRegister } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
 
 type IFormValues = {
   email: string;
@@ -15,6 +17,13 @@ type InputProps = {
   register: UseFormRegister<IFormValues>;
   required: boolean;
 };
+
+const schema = Joi.object({
+  email: Joi.string().email().required(),
+  firstname: Joi.string().required(),
+  lastname: Joi.string().required(),
+  avatar: Joi.string(),
+});
 
 const Input = ({ label, register, required }: InputProps) => (
   <div className="flex flex-col space-y-1">
@@ -33,7 +42,7 @@ const AddUser = (): JSX.Element => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormValues>();
+  } = useForm<IFormValues>({ resolver: joiResolver(schema) });
 
   return (
     <div className="w-1/2 mx-auto mt-5 shadow-mainnav p-4">
