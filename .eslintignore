@@ -1,2 +1,6 @@
 .eslintrc.js
 tailwind.config.js
+<<<<<<< HEAD
+=======
+*.js
+>>>>>>> 206abca... updated Jutsu component to reload on room switch
