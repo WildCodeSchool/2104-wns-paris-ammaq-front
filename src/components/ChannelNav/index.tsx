@@ -1,9 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from "react";
+import { useQuery } from "@apollo/client";
 import Header from "./Header";
 import Channel from "./Channel";
+import ChannelLoading from "./ChannelLoading";
 import ChannelType from "../../types/Channel";
+import { ChannelsQuery } from "../../graphql/queries/channel";
 
 type ChannelNavProps = {
   channels: ChannelType[];
@@ -12,6 +15,8 @@ type ChannelNavProps = {
 const ChannelNav = ({ channels }: ChannelNavProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const { data, loading, error } = useQuery(ChannelsQuery);
+
   const handleClick = (index: number) => {
     setActiveIndex(index);
   };
@@ -19,7 +24,15 @@ const ChannelNav = ({ channels }: ChannelNavProps): JSX.Element => {
   return (
     <div className="w-2/12 min-h-screen bg-main-darkgrey p-2 text-xs">
       <Header />
-      <ul>
+      <div data-testid="list-channels">
+        {loading ? (
+          <>
+            <ChannelLoading />
+            <ChannelLoading />
+            <ChannelLoading />
+          </>
+        ) : null}
+        {error ? <p>error: {error}</p> : null}
         {channels.map((element: ChannelType, index: number) => {
           const isActive = activeIndex === index;
           return (
@@ -37,7 +50,7 @@ const ChannelNav = ({ channels }: ChannelNavProps): JSX.Element => {
             </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };
