@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@apollo/client";
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 import { XCircle } from "react-feather";
 import { CreateChannel } from "../../graphql/mutations/channel";
@@ -17,6 +19,19 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
   const [chanType, setChanType] = useState(true);
   const [createChannel] = useMutation(CreateChannel);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data: any) =>
+    createChannel({
+      variables: {
+        data,
+      },
+    });
+
   const handleChanName = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
@@ -28,18 +43,6 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
   }) => {
     console.log(event.target.value);
     event.target.value === "video" ? setChanType(false) : setChanType(true);
-  };
-
-  const handleSubmit = () => {
-    createChannel({
-      variables: {
-        name: chanName,
-        isVocal: chanType,
-      },
-    });
-    setChanName("");
-    setChanType(true);
-    closeModal();
   };
 
   useEffect(() => {
@@ -59,35 +62,27 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
           type="text"
           placeholder="nom-du-nouveau-channel"
           className="p-2 bg-main-darkgrey focus:outline-none border-solid border border-main-darkgrey focus:border-community-green-light"
-          onChange={handleChanName}
+          {...register("name")}
         />
         <div className="mt-2">
           <p>
-            <span className="text-community-green-light">{chanName}</span> est
-            un channel audio ou vidéo ?
+            <span className="text-community-green-light">{register.name}</span>
+            est un channel audio ou vidéo ?
           </p>
-          <div className="flex justify-evenly">
-            <div>
-              <input
-                type="radio"
-                value="audio"
-                name="type"
-                onChange={handleChanType}
-              />
-              <label htmlFor="audio">Audio</label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                value="video"
-                name="type"
-                onChange={handleChanType}
-              />
-              <label htmlFor="video">Vidéo</label>
-            </div>
+          <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+            <input
+              type="checkbox"
+              id="toggle"
+              className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+              {...register("isVocal")}
+            />
+            <label
+              htmlFor="toggle"
+              className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+            />
           </div>
         </div>
-        <button type="button" onClick={handleSubmit}>
+        <button type="submit" onSubmit={handleSubmit(onSubmit)}>
           Créer
         </button>
       </form>
