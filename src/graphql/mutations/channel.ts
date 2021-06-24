@@ -10,6 +10,16 @@ export const CreateChannel = gql`
   }
 `;
 
+// export const CREATE_CHAN = gql`
+//   mutation CreateChannel($name: String!, $isVocal: Boolean!) {
+//     CreateChannel(name: $name, isVocal: $isVocal) {
+//       id
+//       name
+//       isVocal
+//     }
+//   }
+// `;
+
 export const UpdateChannel = gql`
   mutation UpdateChannel($id: ID!, $input: ChannelInput!) {
     updateChannel(id: $id, input: $input) {

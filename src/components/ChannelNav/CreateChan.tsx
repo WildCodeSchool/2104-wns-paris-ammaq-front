@@ -2,9 +2,11 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useMutation } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 
 import { XCircle } from "react-feather";
+import { CreateChannel } from "../../graphql/mutations/channel";
 
 type CreateChanProps = {
   closeModal: any;
@@ -13,6 +15,7 @@ type CreateChanProps = {
 const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
   const [chanName, setChanName] = useState("");
   const [chanType, setChanType] = useState(true);
+  const [createChannel] = useMutation(CreateChannel);
 
   const handleChanName = (event: {
     target: { value: React.SetStateAction<string> };
@@ -25,6 +28,18 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
   }) => {
     console.log(event.target.value);
     event.target.value === "video" ? setChanType(false) : setChanType(true);
+  };
+
+  const handleSubmit = () => {
+    createChannel({
+      variables: {
+        name: chanName,
+        isVocal: chanType,
+      },
+    });
+    setChanName("");
+    setChanType(true);
+    closeModal();
   };
 
   useEffect(() => {
@@ -72,7 +87,9 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
             </div>
           </div>
         </div>
-        <button type="submit">Créer</button>
+        <button type="button" onClick={handleSubmit}>
+          Créer
+        </button>
       </form>
     </div>
   );
