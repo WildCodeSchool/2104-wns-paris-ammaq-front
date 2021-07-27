@@ -27,7 +27,7 @@ const UserSmallCard = ({
       ${close ? "pt-2 mx-auto" : "p-2"}`}
     >
       <img
-        className="user-nav-img rounded-full object-cover z-10"
+        className="user-nav-img rounded-full object-cover z-10 bg-usersnav shadow-profile"
         src={avatar}
         alt=""
       />
