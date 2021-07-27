@@ -1,28 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
+import { Jutsu } from "../utils/Jutsu";
 import UserNav from "./UserNav/index";
 import ChannelNav from "./ChannelNav";
-import Meet from "./Meet";
-import ChannelType from "../types/Channel";
 import { ChannelsQuery } from "../graphql/queries/channel";
+
+function Loader(): JSX.Element {
+  return <p className="text-white">Loading</p>;
+}
 
 export default function Community(): JSX.Element {
   const { loading, error, data } = useQuery(ChannelsQuery);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <div className="w-screen flex">
-      {
-        // Todo : remplacer le tableau vide par un Loader/Skeleton du composant Channel
-      }
-      <ChannelNav channels={loading ? [] : data.channels} />
+      <ChannelNav
+        channels={data?.channels}
+        loading={loading}
+        error={error}
+        active={activeIndex}
+        handleSwitch={(index) => setActiveIndex(index)}
+      />
       <div className="flex-1">
-        <Meet
-          parentNode="jitsy-container"
-          roomName="WORKIT-cours-karim"
-          displayName="Quentin"
-          subject="cours-karim"
-          height={window.innerHeight}
-        />
+        {data && (
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          <Jutsu
+            roomName={`WORKIT-${data?.channels[activeIndex].name}`}
+            subject={data?.channels[activeIndex].name}
+            displayName="Quentin"
+            height={window.innerHeight}
+            loadingComponent={Loader}
+          />
+        )}
       </div>
       <UserNav />
     </div>
