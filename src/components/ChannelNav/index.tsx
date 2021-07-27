@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Channel from "./Channel";
 import ChannelType from "../../types/Channel";
