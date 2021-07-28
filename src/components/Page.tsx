@@ -6,6 +6,7 @@ import Agenda from "./Agenda";
 import Library from "./Library";
 import Quizz from "./Quizz";
 import Dashboard from "./Dashboard";
+import AddUser from "./AddUserForm";
 
 const Page = (): JSX.Element => {
   return (
@@ -24,6 +25,9 @@ const Page = (): JSX.Element => {
       </Route>
       <Route path="/quizz" exact>
         <Quizz />
+      </Route>
+      <Route path="/add-user" exact>
+        <AddUser />
       </Route>
     </>
   );

@@ -5,6 +5,7 @@ import { Path, useForm, SubmitHandler, UseFormRegister } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { useMutation } from "@apollo/client";
+import { Redirect } from "react-router-dom";
 import { CreateUser } from "../../graphql/mutations/user";
 
 type IFormValues = {
@@ -47,7 +48,7 @@ const AddUser = (): JSX.Element => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
   } = useForm<IFormValues>({ resolver: joiResolver(schema) });
 
   const onSubmit: SubmitHandler<IFormValues> = (input) => {
@@ -55,8 +56,10 @@ const AddUser = (): JSX.Element => {
     addUser({ variables: { input: input } });
     reset();
   };
+
   return (
     <div className="w-1/2 mx-auto mt-5 shadow-mainnav p-4">
+      {isSubmitSuccessful && <Redirect to="/community" />}
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         <Input label="email" register={register} required />
         {errors.email && (
@@ -75,7 +78,7 @@ const AddUser = (): JSX.Element => {
           <span className="text-red-500">{errors.avatar.message}</span>
         )}
         <Input label="password" register={register} required={false} />
-        {errors.avatar && (
+        {errors.password && (
           <span className="text-red-500">{errors.password?.message}</span>
         )}
         <div className="text-center">
