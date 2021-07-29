@@ -32,6 +32,7 @@ module.exports = {
     "react/destructuring-assignment": "off",
     "typescript-eslint/ban-ts-comment": "off",
     '@typescript-eslint/camelcase': "off",
+    'import/no-duplicates': "off",
     'linebreak-style': 'off',
     'prettier/prettier': [
       'error',
