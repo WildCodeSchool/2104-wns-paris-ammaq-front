@@ -11,12 +11,13 @@
 
 /* CREATE CHANNEL MODAL */
 
-.toggle-checkbox:checked {
-    @apply: right-0 border-green-400;
-    right: 0;
-    border-color: #6BA6FF;
-  }
-  .toggle-checkbox:checked + .toggle-label {
-    @apply: bg-green-400;
-    background-color: #6BA6FF;
-  }
+.dot {
+  background-color: #4ADE80;
+  transition: background-color, 0.2s;
+}
+
+.toggle-checkbox:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #6BA6FF;
+  transition: background-color, 0.2s;
+}
