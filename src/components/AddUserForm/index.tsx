@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { Path, useForm, SubmitHandler, UseFormRegister } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { Eye, EyeOff } from "react-feather";
+import "./password.css";
 import { CreateUser } from "../../graphql/mutations/user";
 
 type IFormValues = {
@@ -30,7 +32,12 @@ const schema = Joi.object({
   firstname: Joi.string().required().trim(),
   lastname: Joi.string().required().trim(),
   avatar: Joi.string().trim().optional().allow(""),
-  password: Joi.string().required().min(5),
+  password: Joi.string()
+    .required()
+    .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-!@#$%^&*]).{8,}$/)
+    .message(
+      "Le mot de passe doit contenir au moins 8 caractères, au moins 1 nombre et au moins 1 caractère spécial"
+    ),
 });
 
 const Input = ({ label, register, required, type }: InputProps) => (
@@ -57,11 +64,17 @@ const AddUser = (): JSX.Element => {
     },
   });
 
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordShown(!passwordShown);
+  };
+
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm<IFormValues>({ resolver: joiResolver(schema) });
 
   const onSubmit: SubmitHandler<IFormValues> = (input) => {
@@ -90,12 +103,25 @@ const AddUser = (): JSX.Element => {
         {errors.avatar && (
           <span className="text-red-500">{errors.avatar.message}</span>
         )}
-        <Input
-          type="password"
-          label="password"
-          register={register}
-          required={false}
-        />
+        <div className="relative">
+          <Input
+            type={passwordShown ? "text" : "password"}
+            label="password"
+            register={register}
+            required={false}
+          />
+          {passwordShown && (
+            <EyeOff
+              onClick={togglePasswordVisibility}
+              className="absolute bottom-2 right-6 text-white"
+            />
+          )}
+          <Eye
+            onClick={togglePasswordVisibility}
+            className="absolute bottom-2 right-6 text-white"
+          />
+        </div>
+
         {errors.password && (
           <span className="text-red-500">{errors.password?.message}</span>
         )}
