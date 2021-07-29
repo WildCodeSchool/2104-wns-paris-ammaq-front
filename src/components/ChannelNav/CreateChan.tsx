@@ -71,7 +71,13 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
         )}
         <div className="mt-2">
           <p>
-            <span className={`${checked ? "text-community-green-light" : "text-community-blue"`}>{channelName} </span>
+            <span
+              className={`${
+                checked ? "text-community-green-light" : "text-community-blue"
+              }`}
+            >
+              {channelName}
+            </span>
             est un channel audio ou vidéo ?
           </p>
 
