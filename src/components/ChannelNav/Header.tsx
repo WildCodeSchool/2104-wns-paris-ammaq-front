@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 import "./header.css";
+import { PlusCircle } from "react-feather";
 import { useQuery } from "@apollo/client";
 import { SchoolQuery } from "../../graphql/queries/school";
 
@@ -38,8 +39,12 @@ const Header = (): JSX.Element => {
       </div>
       <div>
         {!openModal && (
-          <button type="button" onClick={() => switchModal()}>
-            Ajouter un canal +
+          <button
+            type="button"
+            className="ml-36 mt-2 rounded-full shadow-mainnav"
+            onClick={() => switchModal()}
+          >
+            <PlusCircle className="text-community-green-light" />
           </button>
         )}
         {openModal && <CreateChan closeModal={switchModal} />}
