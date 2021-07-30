@@ -7,10 +7,14 @@ import Library from "./Library";
 import Quizz from "./Quizz";
 import Dashboard from "./Dashboard";
 import AddUser from "./AddUserForm";
+import Login from "./Login";
 
 const Page = (): JSX.Element => {
   return (
     <>
+      <Route path="/login" exact>
+        <Login />
+      </Route>
       <Route path="/" exact>
         <Dashboard />
       </Route>
