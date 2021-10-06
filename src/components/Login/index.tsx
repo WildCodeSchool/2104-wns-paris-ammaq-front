@@ -1,10 +1,13 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { useLazyQuery } from "@apollo/client";
-import { UserQuery } from "../../graphql/queries/user";
+import LoginQuery from "../../graphql/queries/login";
 
 type FormValues = {
   email: string;
@@ -18,21 +21,36 @@ const schema = Joi.object({
   password: Joi.string().required().min(5),
 });
 
-const Login = (): JSX.Element => {
-  const [getToken, { data }] = useLazyQuery(UserQuery);
-  if (data) {
-    localStorage.setItem("token", data.user);
-  }
+const Login = ({ setLogged }: any): JSX.Element => {
+  const history = useHistory();
+
+  const [getToken, { data }] = useLazyQuery(LoginQuery, {
+    onCompleted: (data) => {
+      if (data.login.token) {
+        localStorage.setItem("token", data.login.token);
+        setLogged(true);
+        history.push("/");
+      }
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormValues>({ resolver: joiResolver(schema) });
+  } = useForm<FormValues>({
+    resolver: joiResolver(schema),
+    defaultValues: { email: "alicia@gmail.com", password: "Azerty123" },
+  });
 
   const onSubmit: SubmitHandler<FormValues> = (input) => {
-    getToken({ variables: { input } });
+    getToken({
+      variables: { input },
+    });
     reset();
   };
 

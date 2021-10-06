@@ -36,10 +36,10 @@ const tabs = [
 ];
 
 const MainNav = (): JSX.Element => {
-  const [nav, setNav] = useState(true);
+  const [nav, openNav] = useState(true);
 
   const handleNav = () => {
-    setNav(!nav);
+    openNav(!nav);
   };
 
   return (
