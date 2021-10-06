@@ -1,6 +1,5 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { Redirect } from "react-router";
 
 import Community from "./Community";
 import Agenda from "./Agenda";
