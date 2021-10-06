@@ -8,6 +8,7 @@ import {
   HelpCircle,
   ChevronLeft,
   ChevronRight,
+  Power,
 } from "react-feather";
 
 import "./mainNav.css";
@@ -93,6 +94,16 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
         </h3>
       </div>
 
+      <div className="mt-4 grid place-items-center">
+        <button
+          type="button"
+          className="bg-quizz-red text-main-white rounded-full p-1 w-10 h-10 grid place-items-center"
+          onClick={handleLogout}
+        >
+          <Power />
+        </button>
+      </div>
+
       <button
         type="button"
         onClick={handleNav}
@@ -160,9 +171,6 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
             </>
           ))}
         </ul>
-        <button type="button" onClick={handleLogout}>
-          LOGOUT
-        </button>
       </nav>
     </div>
   );

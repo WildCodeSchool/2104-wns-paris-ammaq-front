@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
@@ -8,6 +9,8 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { useLazyQuery } from "@apollo/client";
 import LoginQuery from "../../graphql/queries/login";
+
+import { ReactComponent as WorkitLogo } from "../../assets/IT.svg";
 
 type FormValues = {
   email: string;
@@ -54,21 +57,42 @@ const Login = ({ setLogged }: any): JSX.Element => {
     reset();
   };
 
+  const inputStyle = "rounded-md p-2 mb-8";
+  const labelStyle = "mb-2 text-main-white";
+
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="h-screen m-auto">
+      <div className="pt-4">
+        <div className="rounded-full grid place-items-center bg-circle m-auto shadow-profile w-64 h-64">
+          <div className="m-auto grid place-items-center rounded-full bg-workit w-60 h-60">
+            <div className="m-auto grid place-items-center rounded-full bg-main-darkgrey w-52 h-52">
+              <WorkitLogo className="m-auto w-44 h-44" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+        <label htmlFor="mail" className={labelStyle}>
+          e-mail
+        </label>
         <input
+          className={inputStyle}
           type="email"
           placeholder="votre adresse email"
           {...register("email")}
         />
+        <label htmlFor="password" className={labelStyle}>
+          password
+        </label>
         <input
+          className={inputStyle}
           type="password"
           placeholder="votre mot de passe"
           {...register("password")}
         />
-        <button type="submit">Se connecter</button>
+        <button type="submit" className="text-main-white">
+          Se connecter
+        </button>
       </form>
     </div>
   );

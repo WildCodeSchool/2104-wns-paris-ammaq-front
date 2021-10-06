@@ -9,7 +9,7 @@ export default function App(): JSX.Element {
   const [logged, setLogged] = useState(false);
 
   return (
-    <div className="App bg-main-darkgrey flex">
+    <div className="App bg-main-darkgrey flex h-screen">
       {logged ? (
         <>
           <MainNav setLogged={setLogged} logged={logged} />
