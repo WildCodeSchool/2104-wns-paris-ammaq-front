@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 import {
   Users,
@@ -35,11 +35,19 @@ const tabs = [
   },
 ];
 
-const MainNav = (): JSX.Element => {
+const MainNav = ({ setLogged }: any): JSX.Element => {
   const [nav, openNav] = useState(true);
+
+  const history = useHistory();
 
   const handleNav = () => {
     openNav(!nav);
+  };
+
+  const handleLogout = () => {
+    setLogged(false);
+    localStorage.clear();
+    history.push("/login");
   };
 
   return (
@@ -152,6 +160,9 @@ const MainNav = (): JSX.Element => {
             </>
           ))}
         </ul>
+        <button type="button" onClick={handleLogout}>
+          LOGOUT
+        </button>
       </nav>
     </div>
   );

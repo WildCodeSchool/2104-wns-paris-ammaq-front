@@ -12,7 +12,8 @@ export default function App(): JSX.Element {
     <div className="App bg-main-darkgrey flex">
       {logged ? (
         <>
-          <MainNav /> <Page setLogged={setLogged} logged={logged} />
+          <MainNav setLogged={setLogged} logged={logged} />
+          <Page setLogged={setLogged} logged={logged} />
         </>
       ) : (
         <Page setLogged={setLogged} />
