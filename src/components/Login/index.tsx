@@ -54,6 +54,7 @@ const Login = ({ setLogged }: any): JSX.Element => {
     getToken({
       variables: { input },
     });
+    localStorage.setItem("email", input.email);
     reset();
   };
 

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-shadow */
+import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-
 import {
   Users,
   Book,
@@ -10,6 +11,9 @@ import {
   ChevronRight,
   Power,
 } from "react-feather";
+import { useLazyQuery } from "@apollo/client";
+import { UserByMail } from "../../graphql/queries/user";
+import { firstLetter, withoutFirst } from "../../utils/functions";
 
 import "./mainNav.css";
 
@@ -38,8 +42,21 @@ const tabs = [
 
 const MainNav = ({ setLogged }: any): JSX.Element => {
   const [nav, openNav] = useState(true);
+  const [firstname, setFirstname] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   const history = useHistory();
+
+  const [getUser, { called, loading, error, data }] = useLazyQuery(UserByMail, {
+    onCompleted: (data) => {
+      console.log(data);
+      setFirstname(data.userByMail.firstname);
+      setAvatar(data.userByMail.avatar);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const handleNav = () => {
     openNav(!nav);
@@ -50,6 +67,12 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
     localStorage.clear();
     history.push("/login");
   };
+
+  useEffect(() => {
+    const userMail = localStorage.getItem("email");
+    console.log(userMail);
+    getUser({ variables: { email: userMail } });
+  }, []);
 
   return (
     <div
@@ -70,7 +93,7 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
             }`}
           >
             <img
-              src="/dumbo.jpeg"
+              src={avatar}
               alt="profile pic"
               className={`m-auto rounded-full ${
                 nav ? "w-28 h-28" : "w-14 h-14"
@@ -88,9 +111,9 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
               nav ? "text-3xl" : "text-xl"
             }`}
           >
-            M
+            {firstLetter(firstname)}
           </span>
-          ohamed
+          {withoutFirst(firstname)}
         </h3>
       </div>
 
