@@ -9,6 +9,10 @@ import { ChannelsQuery } from '../graphql/queries/channel';
 export default function Community(): JSX.Element {
   const { loading, error, data } = useQuery(ChannelsQuery);
 
+  if (loading) {
+    return <p>Loading</p>;
+  }
+
   return (
     <div className='w-screen flex'>
       {
