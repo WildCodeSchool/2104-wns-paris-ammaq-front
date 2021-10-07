@@ -23,3 +23,15 @@ export const UsersQuery = gql`
     }
   }
 `;
+
+export const UserByMail = gql`
+  query User($email: String!) {
+    userByMail(email: $email) {
+      id
+      firstname
+      lastname
+      email
+      avatar
+    }
+  }
+`;
