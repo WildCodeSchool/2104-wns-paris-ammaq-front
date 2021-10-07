@@ -1,0 +1,23 @@
+/* HEADER */
+
+.school-logo{
+    height: 150px;
+    width: 150px;
+}
+
+.school-logo img{
+    object-fit: contain;
+}
+
+/* CREATE CHANNEL MODAL */
+
+.dot {
+  background-color: #4ADE80;
+  transition: background-color, 0.2s;
+}
+
+.toggle-checkbox:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #6BA6FF;
+  transition: background-color, 0.2s;
+}
