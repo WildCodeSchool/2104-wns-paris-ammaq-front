@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-shadow */
+import React, { useState, useEffect } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import {
   Users,
   Book,
@@ -8,7 +9,11 @@ import {
   HelpCircle,
   ChevronLeft,
   ChevronRight,
+  Power,
 } from "react-feather";
+import { useLazyQuery } from "@apollo/client";
+import { UserByMail } from "../../graphql/queries/user";
+import { firstLetter, withoutFirst } from "../../utils/functions";
 
 import "./mainNav.css";
 
@@ -35,12 +40,36 @@ const tabs = [
   },
 ];
 
-const MainNav = (): JSX.Element => {
-  const [nav, setNav] = useState(true);
+const MainNav = ({ setLogged }: any): JSX.Element => {
+  const [nav, openNav] = useState(true);
+  const [firstname, setFirstname] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  const history = useHistory();
+
+  const [getUser, { called, loading, error, data }] = useLazyQuery(UserByMail, {
+    onCompleted: (data) => {
+      setFirstname(data.userByMail.firstname);
+      setAvatar(data.userByMail.avatar);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const handleNav = () => {
-    setNav(!nav);
+    openNav(!nav);
   };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    history.push("/login");
+  };
+
+  useEffect(() => {
+    const userMail = localStorage.getItem("email");
+    getUser({ variables: { email: userMail } });
+  }, []);
 
   return (
     <div
@@ -61,7 +90,7 @@ const MainNav = (): JSX.Element => {
             }`}
           >
             <img
-              src="/dumbo.jpeg"
+              src={avatar}
               alt="profile pic"
               className={`m-auto rounded-full ${
                 nav ? "w-28 h-28" : "w-14 h-14"
@@ -79,10 +108,20 @@ const MainNav = (): JSX.Element => {
               nav ? "text-3xl" : "text-xl"
             }`}
           >
-            M
+            {firstLetter(firstname)}
           </span>
-          ohamed
+          {withoutFirst(firstname)}
         </h3>
+      </div>
+
+      <div className="mt-4 grid place-items-center shadow-profile w-14 h-14 rounded-full m-auto">
+        <button
+          type="button"
+          className="bg-quizz-red text-main-white rounded-full p-1 w-10 h-10 grid place-items-center"
+          onClick={handleLogout}
+        >
+          <Power />
+        </button>
       </div>
 
       <button

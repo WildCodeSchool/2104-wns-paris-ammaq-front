@@ -65,8 +65,7 @@ const AddUser = (): JSX.Element => {
   } = useForm<IFormValues>({ resolver: joiResolver(schema) });
 
   const onSubmit: SubmitHandler<IFormValues> = (input) => {
-    // eslint-disable-next-line object-shorthand
-    addUser({ variables: { input: input } });
+    addUser({ variables: { input } });
     reset();
   };
 
