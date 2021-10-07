@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        p10:"10%",
+        p10: "10%",
       },
       // Neumorphism rules
       boxShadow: {
@@ -23,7 +23,9 @@ module.exports = {
         pictures:
           "-26px 26px 52px rgba(39, 39, 39, 0.2), 26px -26px 52px rgba(39, 39, 39, 0.2), -26px -26px 52px rgba(51, 51, 51, 0.9), 26px 26px 65px rgba(39, 39, 39, 0.9), inset 1px 1px 2px rgba(51, 51, 51, 0.3), inset -1px -1px 2px rgba(39, 39, 39, 0.5);",
         buttonsPressed:
-          "1px 1px 2px rgba(63, 63, 63, 0.3), -1px -1px 2px rgba(31, 31, 31, 0.5), inset -1px 1px 2px rgba(31, 31, 31, 0.2), inset 1px -1px 2px rgba(31, 31, 31, 0.2), inset -1px -1px 2px rgba(63, 63, 63, 0.9), inset 1px 1px 3px rgba(31, 31, 31, 0.9);"
+          "1px 1px 2px rgba(63, 63, 63, 0.3), -1px -1px 2px rgba(31, 31, 31, 0.5), inset -1px 1px 2px rgba(31, 31, 31, 0.2), inset 1px -1px 2px rgba(31, 31, 31, 0.2), inset -1px -1px 2px rgba(63, 63, 63, 0.9), inset 1px 1px 3px rgba(31, 31, 31, 0.9);",
+        input:
+          "1px 1px 2px rgba(48, 48, 48, 0.3), -1px -1px 2px rgba(42, 42, 42, 0.5), inset -18px 18px 36px rgba(42, 42, 42, 0.2), inset 18px -18px 36px rgba(42, 42, 42, 0.2), inset -18px -18px 36px rgba(48, 48, 48, 0.9), inset 18px 18px 45px rgba(42, 42, 42, 0.9)",
       },
       backgroundImage: {
         mainnav: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",

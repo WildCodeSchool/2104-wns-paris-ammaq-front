@@ -183,15 +183,9 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
                 <div
                   className={`${nav ? "grid place-items-center" : "hidden"}`}
                 >
-                  {/* <NavLink
-                    to={`/${tab.color}`}
-                    activeClassName="active-name"
-                    exact
-                  > */}
                   <li className="pr-4">
                     <h2>{tab.name}</h2>
                   </li>
-                  {/* </NavLink> */}
                 </div>
               </NavLink>
             </>

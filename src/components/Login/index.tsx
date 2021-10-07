@@ -8,9 +8,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { useLazyQuery } from "@apollo/client";
+import { ArrowRight } from "react-feather";
 import LoginQuery from "../../graphql/queries/login";
 
 import { ReactComponent as WorkitLogo } from "../../assets/IT.svg";
+
+import "./login.css";
 
 type FormValues = {
   email: string;
@@ -57,8 +60,9 @@ const Login = (): JSX.Element => {
     reset();
   };
 
-  const inputStyle = "rounded-md p-2 mb-8";
-  const labelStyle = "mb-2 text-main-white";
+  const inputStyle =
+    "rounded-md p-2 mb-8 bg-main-darkgrey shadow-pressed focus:outline-none focus:border-main-orange text-main-white";
+  const labelStyle = "mb-2 text-transparent bg-workit bg-clip-text";
 
   return (
     <div className="h-screen m-auto grid place-items-center">
@@ -93,9 +97,12 @@ const Login = (): JSX.Element => {
           />
           <button
             type="submit"
-            className="text-main-white shadow-channels p-2 rounded-md focus:outline-none"
+            className="flex m-auto place-items-center text-main-white shadow-channels p-2 rounded-md font-extrabold focus:outline-none focus:shadow-pressed"
           >
-            Se connecter
+            se connecter
+            <div className="ml-2 w-6 h-6 grid place-items-center rounded-full bg-workit">
+              <ArrowRight className="w-4 text-main-darkgrey" />
+            </div>
           </button>
         </form>
       </div>
