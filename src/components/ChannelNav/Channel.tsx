@@ -1,6 +1,6 @@
-import React from 'react';
-import classNames from 'classnames';
-import { Edit2, Video } from 'react-feather';
+import React from "react";
+import classNames from "classnames";
+import { Edit2, Video } from "react-feather";
 
 type ChannelProps = {
   name: string;
@@ -10,25 +10,25 @@ type ChannelProps = {
 
 const Channel = ({ name, isVocal, isActive }: ChannelProps): JSX.Element => {
   const itemClass = classNames(
-    'items-center cursor-pointer p-4 bg-mainnav mt-5 rounded flex justify-between',
+    "items-center cursor-pointer p-4 bg-mainnav mt-5 rounded flex justify-between",
     {
-      'shadow-pressed text-white': isActive,
-      'shadow-channels text-community-green-light': !isActive && !isVocal,
-      'shadow-channels text-community-blue': !isActive && isVocal,
+      "shadow-pressed text-white": isActive,
+      "shadow-channels text-community-green-light": !isActive && !isVocal,
+      "shadow-channels text-community-blue": !isActive && isVocal,
     }
   );
   return (
-    <li className={itemClass} data-testid='channel'>
-      <div className='flex flex-nowrap truncate items-center'>
+    <li className={itemClass} data-testid="channel">
+      <div className="flex flex-nowrap truncate items-center">
         {isVocal ? (
-          <Video className='inline-block mr-2 w-4' />
+          <Video className="inline-block mr-2 w-4" />
         ) : (
-          <Edit2 className='inline-block mr-2 w-4' />
+          <Edit2 className="inline-block mr-2 w-4" />
         )}
-        <span className='truncate'>{name}</span>
+        <span className="truncate">{name}</span>
       </div>
       {isActive && (
-        <span className='ml-2 rounded-full bg-community-green-light w-4 h-4' />
+        <span className="ml-2 rounded-full bg-community-green-light w-4 h-4" />
       )}
     </li>
   );

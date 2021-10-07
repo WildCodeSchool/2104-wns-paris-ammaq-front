@@ -42,10 +42,10 @@ const ChannelNav = ({
 
   return (
     <div
-      className='w-2/12 min-h-screen bg-main-darkgrey p-2 text-xs'
-      data-testid='channels'>
+      className="w-2/12 min-h-screen bg-main-darkgrey p-2 text-xs"
+      data-testid="channels"
+    >
       <Header />
-         {channels.length === 0 ? 'Loading' : null}
       <div data-testid="list-channels">
         {loading && (
           <>
