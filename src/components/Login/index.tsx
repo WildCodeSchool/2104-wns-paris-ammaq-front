@@ -24,15 +24,14 @@ const schema = Joi.object({
   password: Joi.string().required().min(5),
 });
 
-const Login = ({ setLogged }: any): JSX.Element => {
+const Login = (): JSX.Element => {
   const history = useHistory();
 
   const [getToken, { data }] = useLazyQuery(LoginQuery, {
     onCompleted: (data) => {
       if (data.login.token) {
         localStorage.setItem("token", data.login.token);
-        setLogged(true);
-        history.push("/");
+        history.replace("/");
       }
     },
     onError: (error) => {

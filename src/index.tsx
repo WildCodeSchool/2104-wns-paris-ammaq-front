@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
 const client = new ApolloClient({
-  uri: "/graphql",
+  uri: process.env.REACT_APP_API_URL || "http://localhost:4000/graphql",
   cache: new InMemoryCache({
     addTypename: false,
   }),

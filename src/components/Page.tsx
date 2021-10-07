@@ -1,6 +1,6 @@
 import React from "react";
-import { Route } from "react-router-dom";
-
+import { Route, Redirect, Switch } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 import Community from "./Community";
 import Agenda from "./Agenda";
 import Library from "./Library";
@@ -9,9 +9,9 @@ import Dashboard from "./Dashboard";
 import AddUser from "./AddUserForm";
 import Login from "./Login";
 
-const Page = ({ setLogged }: any, { logged }: any): JSX.Element => {
+const Page = (): JSX.Element => {
   return (
-    <>
+    /* <>
       {logged ? (
         <>
           <Route path="/" exact>
@@ -34,11 +34,23 @@ const Page = ({ setLogged }: any, { logged }: any): JSX.Element => {
           </Route>
         </>
       ) : (
-        <Route path="/login" exact>
-          <Login setLogged={setLogged} />
-        </Route>
+        <>
+          <Redirect to={{ pathname: "/login" }} />
+          <Route path="/login" exact>
+            <Login setLogged={setLogged} />
+          </Route>
+        </>
       )}
     </>
+    */
+    <Switch>
+      <ProtectedRoute path="/" exact component={Dashboard} />
+      <ProtectedRoute path="/community" exact component={Community} />
+      <ProtectedRoute path="/agenda" exact component={Agenda} />
+      <ProtectedRoute path="/library" exact component={Library} />
+      <ProtectedRoute path="/quizz" exact component={Quizz} />
+      <Route path="/login" exact component={Login} />
+    </Switch>
   );
 };
 
