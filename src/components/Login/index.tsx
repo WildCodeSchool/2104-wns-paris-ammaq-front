@@ -93,7 +93,7 @@ const Login = (): JSX.Element => {
           />
           <button
             type="submit"
-            className="text-main-white shadow-channels p-2 rounded-md"
+            className="text-main-white shadow-channels p-2 rounded-md focus:outline-none"
           >
             Se connecter
           </button>
