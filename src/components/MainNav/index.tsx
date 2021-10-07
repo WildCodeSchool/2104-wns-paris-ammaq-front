@@ -49,7 +49,6 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
 
   const [getUser, { called, loading, error, data }] = useLazyQuery(UserByMail, {
     onCompleted: (data) => {
-      console.log(data);
       setFirstname(data.userByMail.firstname);
       setAvatar(data.userByMail.avatar);
     },
@@ -63,14 +62,12 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
   };
 
   const handleLogout = () => {
-    setLogged(false);
     localStorage.clear();
     history.push("/login");
   };
 
   useEffect(() => {
     const userMail = localStorage.getItem("email");
-    console.log(userMail);
     getUser({ variables: { email: userMail } });
   }, []);
 
