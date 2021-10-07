@@ -117,7 +117,7 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
         </h3>
       </div>
 
-      <div className="mt-4 grid place-items-center">
+      <div className="mt-4 grid place-items-center shadow-profile w-14 h-14 rounded-full m-auto">
         <button
           type="button"
           className="bg-quizz-red text-main-white rounded-full p-1 w-10 h-10 grid place-items-center"

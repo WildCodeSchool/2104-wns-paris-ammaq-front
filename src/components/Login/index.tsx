@@ -62,39 +62,44 @@ const Login = ({ setLogged }: any): JSX.Element => {
   const labelStyle = "mb-2 text-main-white";
 
   return (
-    <div className="h-screen m-auto">
-      <div className="pt-4">
-        <div className="rounded-full grid place-items-center bg-circle m-auto shadow-profile w-64 h-64">
-          <div className="m-auto grid place-items-center rounded-full bg-workit w-60 h-60">
-            <div className="m-auto grid place-items-center rounded-full bg-main-darkgrey w-52 h-52">
-              <WorkitLogo className="m-auto w-44 h-44" />
+    <div className="h-screen m-auto grid place-items-center">
+      <div className="shadow-mainnav p-10 rounded-lg">
+        <div className="pt-4">
+          <div className="rounded-full grid place-items-center bg-circle m-auto shadow-profile w-52 h-52">
+            <div className="m-auto grid place-items-center rounded-full bg-workit w-44 h-44">
+              <div className="m-auto grid place-items-center rounded-full bg-main-darkgrey w-40 h-40">
+                <WorkitLogo className="m-auto w-28 h-28" />
+              </div>
             </div>
           </div>
         </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+          <label htmlFor="mail" className={labelStyle}>
+            e-mail
+          </label>
+          <input
+            className={inputStyle}
+            type="email"
+            placeholder="votre adresse email"
+            {...register("email")}
+          />
+          <label htmlFor="password" className={labelStyle}>
+            password
+          </label>
+          <input
+            className={inputStyle}
+            type="password"
+            placeholder="votre mot de passe"
+            {...register("password")}
+          />
+          <button
+            type="submit"
+            className="text-main-white shadow-channels p-2 rounded-md"
+          >
+            Se connecter
+          </button>
+        </form>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-        <label htmlFor="mail" className={labelStyle}>
-          e-mail
-        </label>
-        <input
-          className={inputStyle}
-          type="email"
-          placeholder="votre adresse email"
-          {...register("email")}
-        />
-        <label htmlFor="password" className={labelStyle}>
-          password
-        </label>
-        <input
-          className={inputStyle}
-          type="password"
-          placeholder="votre mot de passe"
-          {...register("password")}
-        />
-        <button type="submit" className="text-main-white">
-          Se connecter
-        </button>
-      </form>
     </div>
   );
 };
