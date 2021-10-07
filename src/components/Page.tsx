@@ -11,38 +11,6 @@ import Login from "./Login";
 
 const Page = (): JSX.Element => {
   return (
-    /* <>
-      {logged ? (
-        <>
-          <Route path="/" exact>
-            <Dashboard />
-          </Route>
-          <Route path="/community" exact>
-            <Community />
-          </Route>
-          <Route path="/agenda" exact>
-            <Agenda />
-          </Route>
-          <Route path="/library" exact>
-            <Library />
-          </Route>
-          <Route path="/quizz" exact>
-            <Quizz />
-          </Route>
-          <Route path="/add-user" exact>
-            <AddUser />
-          </Route>
-        </>
-      ) : (
-        <>
-          <Redirect to={{ pathname: "/login" }} />
-          <Route path="/login" exact>
-            <Login setLogged={setLogged} />
-          </Route>
-        </>
-      )}
-    </>
-    */
     <Switch>
       <ProtectedRoute path="/" exact component={Dashboard} />
       <ProtectedRoute path="/community" exact component={Community} />
