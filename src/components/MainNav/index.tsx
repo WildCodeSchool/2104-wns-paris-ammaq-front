@@ -121,12 +121,12 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
       >
         <button
           type="button"
-          className={`bg-quizz-red text-main-white rounded-full grid place-items-center focus:outline-none ${
+          className={`bg-logout text-main-white rounded-full grid place-items-center focus:outline-none ${
             nav ? "w-10 h-10" : "w-6 h-6"
           }`}
           onClick={handleLogout}
         >
-          <Power className={nav ? "w-8" : "w-4"} />
+          <Power className={`text-shadow ${nav ? "w-8" : "w-4"}`} />
         </button>
       </div>
 

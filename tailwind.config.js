@@ -37,6 +37,7 @@ module.exports = {
         agenda: "linear-gradient(125.5deg, #FACC15 -5.2%, #F97316 74.78%);",
         quizz: "linear-gradient(125.5deg, #FB77B8 9.42%, #EF2A4C 105.75%);",
         pressed: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",
+        logout: "linear-gradient(220.46deg, #FC1C45 26.68%, #FB6A4A 114.66%)",
       },
 
       // Colors
