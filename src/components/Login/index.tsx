@@ -68,13 +68,13 @@ const Login = (): JSX.Element => {
   };
 
   const inputStyle =
-    "rounded-md p-2 mb-8 bg-main-darkgrey shadow-pressed focus:outline-none focus:border-main-orange text-main-white";
+    "rounded-md p-2 mb-8 h-10 bg-main-darkgrey shadow-pressed focus:outline-none focus:border-main-orange text-main-white";
   const labelStyle = "mb-2 text-transparent bg-workit bg-clip-text";
-  const eyeStyle = "w-4 text-main-orange";
+  const eyeStyle = "absolute w-4 right-2 top-2 text-main-orange";
 
   return (
     <>
-      <Workit className="w-28 -mt-16 pl-2" />
+      <Workit className="w-28 absolute right-2 -bottom-16" />
       <div className="h-screen m-auto grid place-items-center">
         <div className="shadow-mainnav p-10 rounded-lg">
           <div className="pt-4">
@@ -99,9 +99,9 @@ const Login = (): JSX.Element => {
             <label htmlFor="password" className={labelStyle}>
               password
             </label>
-            <div className={inputStyle}>
+            <div className={`relative ${inputStyle}`}>
               <input
-                className="bg-main-darkgrey"
+                className="bg-main-darkgrey flex"
                 type={shown ? "text" : "password"}
                 placeholder="votre mot de passe"
                 {...register("password")}
