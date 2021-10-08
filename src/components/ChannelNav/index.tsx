@@ -46,7 +46,7 @@ const ChannelNav = ({
       data-testid="channels"
     >
       <Header />
-      <div data-testid="list-channels">
+      <div data-testid="list-channels" className="list-channels">
         {loading && (
           <>
             <ChannelLoading />
