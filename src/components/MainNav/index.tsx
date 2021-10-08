@@ -114,13 +114,19 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
         </h3>
       </div>
 
-      <div className="mt-4 grid place-items-center shadow-profile w-14 h-14 rounded-full m-auto">
+      <div
+        className={`mt-4 grid place-items-center shadow-profile rounded-full m-auto ${
+          nav ? "w-14 h-14" : "w-8 h-8"
+        }`}
+      >
         <button
           type="button"
-          className="bg-quizz-red text-main-white rounded-full p-1 w-10 h-10 grid place-items-center"
+          className={`bg-logout text-main-white rounded-full grid place-items-center focus:outline-none ${
+            nav ? "w-10 h-10" : "w-6 h-6"
+          }`}
           onClick={handleLogout}
         >
-          <Power />
+          <Power className={`text-shadow ${nav ? "w-8" : "w-4"}`} />
         </button>
       </div>
 
@@ -177,15 +183,9 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
                 <div
                   className={`${nav ? "grid place-items-center" : "hidden"}`}
                 >
-                  {/* <NavLink
-                    to={`/${tab.color}`}
-                    activeClassName="active-name"
-                    exact
-                  > */}
                   <li className="pr-4">
                     <h2>{tab.name}</h2>
                   </li>
-                  {/* </NavLink> */}
                 </div>
               </NavLink>
             </>
