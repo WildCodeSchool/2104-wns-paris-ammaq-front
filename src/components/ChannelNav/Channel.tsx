@@ -18,7 +18,7 @@ const Channel = ({ name, isVocal, isActive }: ChannelProps): JSX.Element => {
     }
   );
   return (
-    <li className={itemClass}>
+    <li className={itemClass} data-testid="channel">
       <div className="flex flex-nowrap truncate items-center">
         {isVocal ? (
           <Video className="inline-block mr-2 w-4" />

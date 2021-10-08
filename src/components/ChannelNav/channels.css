@@ -8,6 +8,10 @@
 .school-logo img{
     object-fit: contain;
 }
+.list-channels{
+  max-height: 65vh;
+  overflow: scroll;
+}
 
 /* CREATE CHANNEL MODAL */
 
