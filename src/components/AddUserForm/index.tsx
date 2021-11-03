@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
+import React, { useState } from "react";
 import { Path, useForm, SubmitHandler, UseFormRegister } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { useMutation } from "@apollo/client";
+import { useHistory } from "react-router-dom";
+import { Eye, EyeOff } from "react-feather";
+import "./password.css";
 import { CreateUser } from "../../graphql/mutations/user";
 
 type IFormValues = {
@@ -19,6 +22,7 @@ type InputProps = {
   label: Path<IFormValues>;
   register: UseFormRegister<IFormValues>;
   required: boolean;
+  type?: string;
 };
 
 const schema = Joi.object({
@@ -28,13 +32,19 @@ const schema = Joi.object({
   firstname: Joi.string().required().trim(),
   lastname: Joi.string().required().trim(),
   avatar: Joi.string().trim().optional().allow(""),
-  password: Joi.string().required().trim(),
+  password: Joi.string()
+    .required()
+    .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-!@#$%^&*]).{8,}$/)
+    .message(
+      "Le mot de passe doit contenir au moins 8 caractères, au moins 1 nombre et au moins 1 caractère spécial"
+    ),
 });
 
-const Input = ({ label, register, required }: InputProps) => (
+const Input = ({ label, register, required, type }: InputProps) => (
   <div className="flex flex-col space-y-1">
     <label className="text-white">{label}</label>
     <input
+      type={type}
       {...register(label, { required })}
       className="text-white border-none rounded px-3 py-2 w-full focus:outline-none focus:ring-main-red focus:ring-2 focus:shadow bg-pressed shadow-channels"
     />
@@ -42,7 +52,24 @@ const Input = ({ label, register, required }: InputProps) => (
 );
 
 const AddUser = (): JSX.Element => {
-  const [addUser] = useMutation(CreateUser);
+  const history = useHistory();
+  const [mutationError, setMutationError] = useState("");
+  const [addUser] = useMutation(CreateUser, {
+    onError: (error) => {
+      setMutationError(error.message);
+    },
+    onCompleted: () => {
+      setMutationError("");
+      history.push("/community");
+    },
+  });
+
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordShown(!passwordShown);
+  };
+
   const {
     register,
     handleSubmit,
@@ -51,12 +78,13 @@ const AddUser = (): JSX.Element => {
   } = useForm<IFormValues>({ resolver: joiResolver(schema) });
 
   const onSubmit: SubmitHandler<IFormValues> = (input) => {
-    // eslint-disable-next-line object-shorthand
-    addUser({ variables: { input: input } });
+    addUser({ variables: { input } });
     reset();
   };
+
   return (
     <div className="w-1/2 mx-auto mt-5 shadow-mainnav p-4">
+      {mutationError !== "" ? mutationError : null}
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         <Input label="email" register={register} required />
         {errors.email && (
@@ -74,8 +102,26 @@ const AddUser = (): JSX.Element => {
         {errors.avatar && (
           <span className="text-red-500">{errors.avatar.message}</span>
         )}
-        <Input label="password" register={register} required={false} />
-        {errors.avatar && (
+        <div className="relative">
+          <Input
+            type={passwordShown ? "text" : "password"}
+            label="password"
+            register={register}
+            required={false}
+          />
+          {passwordShown && (
+            <EyeOff
+              onClick={togglePasswordVisibility}
+              className="absolute bottom-2 right-6 text-white"
+            />
+          )}
+          <Eye
+            onClick={togglePasswordVisibility}
+            className="absolute bottom-2 right-6 text-white"
+          />
+        </div>
+
+        {errors.password && (
           <span className="text-red-500">{errors.password?.message}</span>
         )}
         <div className="text-center">
