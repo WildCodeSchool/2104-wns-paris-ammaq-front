@@ -16,7 +16,7 @@ import { CreateChannel } from "../../graphql/mutations/channel";
 import "./channels.css";
 
 type CreateChanProps = {
-  closeModal: any;
+  closeModal: () => void;
 };
 
 type FormValues = {
@@ -25,7 +25,7 @@ type FormValues = {
 };
 
 const schema = Joi.object({
-  name: Joi.string().required(),
+  name: Joi.string().alphanum().min(3).max(25).required(),
   isVocal: Joi.boolean().required(),
 });
 
@@ -49,7 +49,7 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
 
   return (
     <div
-      className={`absolute z-10 w-80 h-64 left-1/4 bg-main-darkgrey rounded-2xl p-4 text-main-white border-solid border-2 ${
+      className={`absolute z-10 w-80 h-auto left-1/4 bg-main-darkgrey rounded-2xl p-4 text-main-white border-solid border-2 ${
         checked ? "border-community-green-light" : "border-community-blue"
       }`}
     >
@@ -64,6 +64,8 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
           type="text"
           className="shadow-pressed bg-mainnav p-2 rounded outline-none"
           pattern="[a-z0-9/-\]"
+          minLength={3}
+          maxLength={25}
           {...register("name")}
           onChange={(e: any) => setChannelName(e.currentTarget.value)}
           required
@@ -112,7 +114,7 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
         </div>
         <button
           type="submit"
-          className="shadow-channels m-auto mt-4 rounded-xl w-24 text-lg p-2"
+          className="shadow-channels m-auto mt-4 rounded-xl w-24 text-m p-2"
         >
           Créer
         </button>

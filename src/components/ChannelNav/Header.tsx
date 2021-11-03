@@ -20,7 +20,7 @@ const Header = (): JSX.Element => {
   });
 
   return (
-    <div className="h-52 flex flex-col ">
+    <div className="h-60 flex flex-col ">
       <div className="rounded-full bg-white school-logo mx-auto shadow-profile bg-circle p-3">
         <div className="p-2 bg-community rounded-full">
           {loading ? (
@@ -37,14 +37,14 @@ const Header = (): JSX.Element => {
       <div className="text-white font-bold text-center text-lg">
         <h3>{data?.school.name}</h3>
       </div>
-      <div>
+      <div className="text-center mt-4">
         {!openModal && (
           <button
             type="button"
-            className="ml-36 mt-2 rounded-full shadow-mainnav"
+            className="rounded-full shadow-mainnav bg-community"
             onClick={() => switchModal()}
           >
-            <PlusCircle className="text-community-green-light" />
+            <PlusCircle className="text-main-white" />
           </button>
         )}
         {openModal && <CreateChan closeModal={switchModal} />}
