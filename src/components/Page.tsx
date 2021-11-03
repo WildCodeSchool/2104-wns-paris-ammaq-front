@@ -17,6 +17,7 @@ const Page = (): JSX.Element => {
       <ProtectedRoute path="/agenda" exact component={Agenda} />
       <ProtectedRoute path="/library" exact component={Library} />
       <ProtectedRoute path="/quizz" exact component={Quizz} />
+      <ProtectedRoute path="/add-user" exact component={AddUser} />
       <Route path="/login" exact component={Login} />
     </Switch>
   );
