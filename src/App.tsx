@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 
 import MainNav from "./components/MainNav";
-import Page from "./components/Page";
+import Page from "./pages/Page";
 import "./App.css";
 
 export default function App(): JSX.Element {

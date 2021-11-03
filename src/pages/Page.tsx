@@ -1,12 +1,12 @@
 import React from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
-import ProtectedRoute from "./ProtectedRoute";
+import { Route, Switch } from "react-router-dom";
+import ProtectedRoute from "../components/ProtectedRoute";
 import Community from "./Community";
 import Agenda from "./Agenda";
 import Library from "./Library";
 import Quizz from "./Quizz";
 import Dashboard from "./Dashboard";
-import AddUser from "./AddUserForm";
+import AddUser from "../components/AddUserForm";
 import Login from "./Login";
 
 const Page = (): JSX.Element => {

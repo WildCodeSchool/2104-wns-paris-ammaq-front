@@ -1,7 +1,7 @@
 import { render, screen, waitFor, within } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import { ChannelsQuery } from '../src/graphql/queries/channel';
-import Community from './components/Community';
+import Community from './pages/Community';
 
 const mocks = [
   {

@@ -8,7 +8,6 @@ import {
   Calendar,
   HelpCircle,
   ChevronLeft,
-  ChevronRight,
   Power,
 } from "react-feather";
 import { useLazyQuery } from "@apollo/client";
@@ -40,14 +39,14 @@ const tabs = [
   },
 ];
 
-const MainNav = ({ setLogged }: any): JSX.Element => {
+const MainNav = (): JSX.Element => {
   const [nav, openNav] = useState(true);
   const [firstname, setFirstname] = useState("");
   const [avatar, setAvatar] = useState("");
 
   const history = useHistory();
 
-  const [getUser, { called, loading, error, data }] = useLazyQuery(UserByMail, {
+  const [getUser] = useLazyQuery(UserByMail, {
     onCompleted: (data) => {
       setFirstname(data.userByMail.firstname);
       setAvatar(data.userByMail.avatar);
@@ -137,11 +136,11 @@ const MainNav = ({ setLogged }: any): JSX.Element => {
           nav ? "nav-open" : "nav-closed"
         }`}
       >
-        {nav ? (
-          <ChevronLeft className="inline-block text-main-white" />
-        ) : (
-          <ChevronRight className="inline-block text-main-white" />
-        )}
+        <ChevronLeft
+          className={`inline-block text-main-white transtion-all duration-300 ease-in-out transform ${
+            nav && "rotate-180"
+          }`}
+        />
       </button>
 
       <nav className="grid place-items-center mt-6">
