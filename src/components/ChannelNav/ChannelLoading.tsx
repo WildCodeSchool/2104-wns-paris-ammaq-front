@@ -1,6 +1,4 @@
 import React from "react";
-import classNames from "classnames";
-import { Edit2, Video } from "react-feather";
 import "./channel.css";
 
 const ChannelLoading = (): JSX.Element => {

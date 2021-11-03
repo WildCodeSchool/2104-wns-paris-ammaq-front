@@ -28,7 +28,11 @@ const Channel = ({ name, isVocal, isActive }: ChannelProps): JSX.Element => {
         <span className="truncate">{name}</span>
       </div>
       {isActive && (
-        <span className="ml-2 rounded-full bg-community-green-light w-4 h-4" />
+        <span
+          className={`ml-2 rounded-full w-4 h-4 ${
+            isVocal ? "bg-community-blue" : "bg-community-green-light"
+          }`}
+        />
       )}
     </li>
   );

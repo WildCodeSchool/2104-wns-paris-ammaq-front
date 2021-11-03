@@ -8,9 +8,13 @@
 .school-logo img{
     object-fit: contain;
 }
-.list-channels{
-  max-height: 65vh;
-  overflow: scroll;
+.list-channels {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.list-channels:hover {
+  scrollbar-color: #7a7a7b transparent;
 }
 
 /* CREATE CHANNEL MODAL */

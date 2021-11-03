@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Community from "./Community";
 import Agenda from "./Agenda";
