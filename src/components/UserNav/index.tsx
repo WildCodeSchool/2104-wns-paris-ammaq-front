@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import "./userNav.css";
-import { Users, ChevronLeft, Loader } from "react-feather";
+import { Users, ChevronRight, Loader } from "react-feather";
 import UserSmallCard, { User } from "../Base/UserSmallCard";
 import UserSmallCardLoading from "../Base/UserSmallCardLoading";
 import { UsersQuery } from "../../graphql/queries/user";
@@ -41,9 +41,9 @@ const UserNav = (): JSX.Element => {
         }`}
         onClick={handleClick}
       >
-        <ChevronLeft
+        <ChevronRight
           className={`transtion-all duration-300 ease-in-out transform ${
-            close && "rotate-180"
+            close && "-rotate-180"
           }`}
         />
       </button>

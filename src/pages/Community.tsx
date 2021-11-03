@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Jutsu } from "../utils/Jutsu";
-import UserNav from "./UserNav/index";
-import ChannelNav from "./ChannelNav";
+import UserNav from "../components/UserNav/index";
+import ChannelNav from "../components/ChannelNav";
 import { ChannelsQuery } from "../graphql/queries/channel";
 
 function Loader(): JSX.Element {

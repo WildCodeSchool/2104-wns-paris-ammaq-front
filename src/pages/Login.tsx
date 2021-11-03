@@ -1,7 +1,4 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -10,12 +7,10 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { useLazyQuery } from "@apollo/client";
 import { ArrowRight, Eye, EyeOff } from "react-feather";
-import LoginQuery from "../../graphql/queries/login";
+import LoginQuery from "../graphql/queries/login";
 
-import { ReactComponent as ItLogo } from "../../assets/IT.svg";
-import { ReactComponent as Workit } from "../../assets/workitwhite.svg";
-
-import "./login.css";
+import { ReactComponent as ItLogo } from "../assets/IT.svg";
+import { ReactComponent as Workit } from "../assets/workitwhite.svg";
 
 type FormValues = {
   email: string;
@@ -33,7 +28,7 @@ const Login = (): JSX.Element => {
   const [shown, setShown] = useState(false);
   const history = useHistory();
 
-  const [getToken, { data }] = useLazyQuery(LoginQuery, {
+  const [getToken] = useLazyQuery(LoginQuery, {
     onCompleted: (data) => {
       if (data.login.token) {
         localStorage.setItem("token", data.login.token);
@@ -45,12 +40,7 @@ const Login = (): JSX.Element => {
     },
   });
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormValues>({
+  const { register, handleSubmit, reset } = useForm<FormValues>({
     resolver: joiResolver(schema),
     defaultValues: { email: "alicia@gmail.com", password: "Azerty123" },
   });
@@ -68,7 +58,7 @@ const Login = (): JSX.Element => {
   };
 
   const inputStyle =
-    "rounded-md p-2 mb-8 h-10 bg-main-darkgrey shadow-pressed focus:outline-none focus:border-main-orange text-main-white";
+    "rounded-md p-2 mb-8 h-10 bg-main-darkgrey text-main-white shadow-pressed focus:outline-none focus:border-main-orange focus:border-solid focus:border-2";
   const labelStyle = "mb-2 text-transparent bg-workit bg-clip-text";
   const eyeStyle = "absolute w-4 right-2 top-2 text-main-orange";
 
