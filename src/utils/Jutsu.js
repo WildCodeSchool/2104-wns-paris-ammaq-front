@@ -5,7 +5,6 @@ import useJitsi from './useJitsi'
 
 const Jutsu = ({
   loadingComponent,
-  errorComponent,
   containerStyles,
   jitsiContainerStyles,
   onError,
