@@ -16,7 +16,7 @@ import { CreateChannel } from "../../graphql/mutations/channel";
 import "./channels.css";
 
 type CreateChanProps = {
-  closeModal: any;
+  closeModal: () => void;
 };
 
 type FormValues = {
@@ -25,7 +25,7 @@ type FormValues = {
 };
 
 const schema = Joi.object({
-  name: Joi.string().required(),
+  name: Joi.string().alphanum().min(3).max(25).required(),
   isVocal: Joi.boolean().required(),
 });
 
@@ -49,7 +49,7 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
 
   return (
     <div
-      className={`absolute z-10 w-80 h-56 left-1/4 bg-main-darkgrey rounded-2xl p-4 text-main-white border-solid border-2 ${
+      className={`absolute z-10 w-80 h-auto left-1/4 bg-main-darkgrey rounded-2xl p-4 text-main-white border-solid border-2 ${
         checked ? "border-community-green-light" : "border-community-blue"
       }`}
     >
@@ -62,6 +62,10 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
       <form className="p-2 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
+          className="shadow-pressed bg-mainnav p-2 rounded outline-none"
+          pattern="[a-z0-9/-\]"
+          minLength={3}
+          maxLength={25}
           {...register("name")}
           onChange={(e: any) => setChannelName(e.currentTarget.value)}
           required
@@ -70,18 +74,18 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
           <span className="text-red-500">{errors.name.message}</span>
         )}
         <div className="mt-2">
-          <p>
+          <div>
             <span
-              className={`${
+              className={`mr-1.5 ${
                 checked ? "text-community-green-light" : "text-community-blue"
               }`}
             >
-              {channelName}{" "}
+              {channelName}
             </span>
-            est un channel audio ou vidéo ?
-          </p>
+            <span>est un channel texte ou vidéo ?</span>
+          </div>
 
-          <div className="flex items-center justify-center w-full mb-12">
+          <div className="flex items-center justify-center w-full mt-4">
             <label
               htmlFor="toggleB"
               className="flex items-center cursor-pointer"
@@ -94,7 +98,7 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
                   {...register("isVocal")}
                   onChange={() => setChecked(!checked)}
                 />
-                <div className="block bg-gray-700 w-14 h-8 rounded-full" />
+                <div className="block bg-mainnav w-14 h-8 rounded-full shadow-mainnav" />
                 {checked ? (
                   <Edit2 className="absolute right-2 top-1 w-4 text-community-green-light" />
                 ) : (
@@ -108,7 +112,12 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
             </label>
           </div>
         </div>
-        <button type="submit"> Créer </button>
+        <button
+          type="submit"
+          className="shadow-channels m-auto mt-4 rounded-xl w-24 text-m p-2"
+        >
+          Créer
+        </button>
       </form>
     </div>
   );
