@@ -19,21 +19,25 @@ import "./mainNav.css";
 const tabs = [
   {
     name: "Communauté",
+    href: "/community",
     color: "bg-community",
     icon: <Users className="inline-block" size="32" />,
   },
   {
     name: "Bibliothèque",
+    href: "/library",
     color: "bg-library",
     icon: <Book className="inline-block" size="32" />,
   },
   {
     name: "Agenda",
+    href: "/agenda",
     color: "bg-agenda",
     icon: <Calendar className="inline-block" size="32" />,
   },
   {
-    name: "Quizz",
+    name: "Quiz",
+    href: "/quiz",
     color: "bg-quizz",
     icon: <HelpCircle className="inline-block" size="32" />,
   },
@@ -148,16 +152,13 @@ const MainNav = (): JSX.Element => {
           {tabs.map((tab) => (
             <>
               <NavLink
-                to={`/${tab.color}`}
+                to={tab.href}
                 className={`${
-                  nav
-                    ? "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
-                    : ""
+                  nav &&
+                  "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
                 }`}
-                activeClassName={`${
-                  nav
-                    ? "shadow-pressed bg-pressed gradient-border "
-                    : "shadow-pressed bg-pressed "
+                activeClassName={`shadow-pressed bg-pressed ${
+                  nav && "gradient-border"
                 }`}
                 key={tab.name}
               >
@@ -170,7 +171,7 @@ const MainNav = (): JSX.Element => {
                     }`}
                   >
                     <NavLink
-                      to={`/${tab.color}`}
+                      to={tab.href}
                       activeClassName="shadow-buttonsPressed gradient-border gradient-border-round"
                       className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer ${tab.color}`}
                       exact
