@@ -9649,15 +9649,15 @@ react-feather@^2.0.9:
   dependencies:
     prop-types "^15.7.2"
 
-"react-is@^16.12.0 || ^17.0.0", react-is@^17.0.2:
-  version "17.0.2"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
-  integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 react-hook-form@^7.9.0:
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.9.0.tgz#0b5ed2f262a1e3cc64cfcf855f09a6e236d46ac3"
   integrity sha512-1SazsTvsC5A4jLxc8fIf0bB92kEp4MGjP69k8s+2nI1spHPha5UkLwaebOXhO9vY95aGqcyBU67pRiv+6T5KZQ==
 
+"react-is@^16.12.0 || ^17.0.0", react-is@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
+  integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
@@ -10207,6 +10207,18 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+rive-js@0.7.31:
+  version "0.7.31"
+  resolved "https://registry.yarnpkg.com/rive-js/-/rive-js-0.7.31.tgz#4b5d03afe318b7c675758024b946181f16fc543b"
+  integrity sha512-T+Qo/YEl9h1vp3UR1Ekv1JDuQTAx3CZTygInwTusxDB4TH1CvurjzCy+kcT3nzp/IL0uO+E49mwehTTspc2pOQ==
+
+rive-react@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/rive-react/-/rive-react-0.0.22.tgz#872569be53f8db05ce9eb12f3069bf7263d262f0"
+  integrity sha512-/qwMQFnxxiQQCUhb46xRQZW03JkVO85LOee3+Lykp/CRysl7nTchDbNbnYthYSF4TmLGUsgI+F5xJ4E3h1c7DQ==
+  dependencies:
+    rive-js "0.7.31"
 
 rollup-plugin-babel@^4.3.3:
   version "4.4.0"
