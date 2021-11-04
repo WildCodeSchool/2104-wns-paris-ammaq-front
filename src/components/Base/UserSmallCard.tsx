@@ -1,13 +1,5 @@
 import React from "react";
 
-export type User = {
-  id: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  avatar: string;
-};
-
 interface IUserProps {
   close: boolean;
   firstname: string;

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { FC } from "react";
+import React from "react";
 import { ApolloError } from "@apollo/client";
 import Header from "./Header";
 import Channel from "./Channel";
@@ -15,13 +15,13 @@ type ChannelNavProps = {
   handleSwitch: (index: number) => void;
 };
 
-const ChannelNav: FC<ChannelNavProps> = ({
+const ChannelNav = ({
   channels,
   loading,
   error,
   active,
   handleSwitch,
-}) => {
+}: ChannelNavProps): JSX.Element => {
   const channelsList = channels?.map((element: ChannelType, index: number) => {
     const isActive = active === index;
     return (

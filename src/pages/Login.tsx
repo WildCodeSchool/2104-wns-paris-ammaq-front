@@ -1,13 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
+import Joi from "joi";
+import jwt_decode from "jwt-decode";
 import { useHistory } from "react-router-dom";
+import { ArrowRight, Eye, EyeOff } from "react-feather";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
-import Joi from "joi";
 import { useLazyQuery } from "@apollo/client";
 import { ArrowRight, Eye, EyeOff } from "react-feather";
 import Rive from "rive-react";
+import { useAuth } from "../context/auth-provider";
 import LoginQuery from "../graphql/queries/login";
 
 import { ReactComponent as Workit } from "../assets/workitwhite.svg";
@@ -28,11 +31,13 @@ const schema = Joi.object({
 const Login = (): JSX.Element => {
   const [shown, setShown] = useState(false);
   const history = useHistory();
+  const { setToken } = useAuth();
 
   const [getToken] = useLazyQuery(LoginQuery, {
     onCompleted: (data) => {
       if (data.login.token) {
         localStorage.setItem("token", data.login.token);
+        setToken(jwt_decode(data.login.token));
         history.replace("/");
       }
     },
@@ -50,7 +55,6 @@ const Login = (): JSX.Element => {
     getToken({
       variables: { input },
     });
-    localStorage.setItem("email", input.email);
     reset();
   };
 
