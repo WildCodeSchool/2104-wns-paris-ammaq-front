@@ -1,7 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import jwt_decode from "jwt-decode";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
+import AuthProvider from "./context/auth-provider";
+import Token from "./types/Token";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
@@ -13,12 +16,20 @@ const client = new ApolloClient({
   }),
 });
 
+const token = localStorage.getItem("token");
+let initialToken: Token | undefined;
+if (token) {
+  initialToken = jwt_decode(token);
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <AuthProvider initialToken={initialToken}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AuthProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")

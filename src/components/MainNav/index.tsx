@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-shadow */
-import React, { useState, useEffect } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { matchPath, NavLink, useHistory, useLocation } from "react-router-dom";
 import {
   Users,
   Book,
@@ -10,8 +10,7 @@ import {
   ChevronLeft,
   Power,
 } from "react-feather";
-import { useLazyQuery } from "@apollo/client";
-import { UserByMail } from "../../graphql/queries/user";
+import { useAuth } from "../../context/auth-provider";
 import { firstLetter, withoutFirst } from "../../utils/functions";
 
 import "./mainNav.css";
@@ -19,42 +18,35 @@ import "./mainNav.css";
 const tabs = [
   {
     name: "Communauté",
-    color: "community",
+    href: "/community",
+    color: "bg-community",
     icon: <Users className="inline-block" size="32" />,
   },
   {
     name: "Bibliothèque",
-    color: "library",
+    href: "/library",
+    color: "bg-library",
     icon: <Book className="inline-block" size="32" />,
   },
   {
     name: "Agenda",
-    color: "agenda",
+    href: "/agenda",
+    color: "bg-agenda",
     icon: <Calendar className="inline-block" size="32" />,
   },
   {
-    name: "Quizz",
-    color: "quizz",
+    name: "Quiz",
+    href: "/quiz",
+    color: "bg-quizz",
     icon: <HelpCircle className="inline-block" size="32" />,
   },
 ];
 
 const MainNav = (): JSX.Element => {
   const [nav, openNav] = useState(true);
-  const [firstname, setFirstname] = useState("");
-  const [avatar, setAvatar] = useState("");
-
+  const { token, setToken } = useAuth();
   const history = useHistory();
-
-  const [getUser] = useLazyQuery(UserByMail, {
-    onCompleted: (data) => {
-      setFirstname(data.userByMail.firstname);
-      setAvatar(data.userByMail.avatar);
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-  });
+  const location = useLocation();
 
   const handleNav = () => {
     openNav(!nav);
@@ -62,13 +54,9 @@ const MainNav = (): JSX.Element => {
 
   const handleLogout = () => {
     localStorage.clear();
+    setToken(undefined);
     history.push("/login");
   };
-
-  useEffect(() => {
-    const userMail = localStorage.getItem("email");
-    getUser({ variables: { email: userMail } });
-  }, []);
 
   return (
     <div
@@ -89,7 +77,7 @@ const MainNav = (): JSX.Element => {
             }`}
           >
             <img
-              src={avatar}
+              src={token?.avatar || ""}
               alt="profile pic"
               className={`m-auto rounded-full ${
                 nav ? "w-28 h-28" : "w-14 h-14"
@@ -107,9 +95,9 @@ const MainNav = (): JSX.Element => {
               nav ? "text-3xl" : "text-xl"
             }`}
           >
-            {firstLetter(firstname)}
+            {firstLetter(token?.firstname || "")}
           </span>
-          {withoutFirst(firstname)}
+          {withoutFirst(token?.firstname || "")}
         </h3>
       </div>
 
@@ -138,28 +126,30 @@ const MainNav = (): JSX.Element => {
       >
         <ChevronLeft
           className={`inline-block text-main-white transtion-all duration-300 ease-in-out transform ${
-            nav && "rotate-180"
+            nav ? "rotate-180" : ""
           }`}
         />
       </button>
 
       <nav className="grid place-items-center mt-6">
         <ul className="text-main-white text-2xl">
-          {tabs.map((tab) => (
-            <>
+          {tabs.map((tab) => {
+            const isActive = matchPath(tab.href, {
+              path: location.pathname,
+              exact: true,
+            });
+            return (
               <NavLink
-                to={`/${tab.color}`}
+                key={tab.name}
+                to={tab.href}
                 className={`${
                   nav
                     ? "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
                     : ""
                 }`}
-                activeClassName={`${
-                  nav
-                    ? "shadow-pressed bg-pressed gradient-border "
-                    : "shadow-pressed bg-pressed "
+                activeClassName={`shadow-pressed bg-pressed ${
+                  nav ? "gradient-border" : ""
                 }`}
-                key={tab.name}
               >
                 <div
                   className={`grid place-content-center ${!nav ? "pt-4" : ""}`}
@@ -169,14 +159,17 @@ const MainNav = (): JSX.Element => {
                       nav ? "ml-1" : "my-2"
                     }`}
                   >
-                    <NavLink
-                      to={`/${tab.color}`}
-                      activeClassName="shadow-buttonsPressed gradient-border gradient-border-round"
-                      className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer bg-${tab.color}`}
-                      exact
+                    <div
+                      className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer ${
+                        tab.color
+                      } ${
+                        isActive
+                          ? "shadow-buttonsPressed gradient-border gradient-border-round"
+                          : ""
+                      }`}
                     >
                       {tab.icon}
-                    </NavLink>
+                    </div>
                   </div>
                 </div>
                 <div
@@ -187,8 +180,8 @@ const MainNav = (): JSX.Element => {
                   </li>
                 </div>
               </NavLink>
-            </>
-          ))}
+            );
+          })}
         </ul>
       </nav>
     </div>

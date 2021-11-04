@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import "./userNav.css";
 import { Users, ChevronRight, Loader } from "react-feather";
-import UserSmallCard, { User } from "../Base/UserSmallCard";
+import UserSmallCard from "../Base/UserSmallCard";
 import UserSmallCardLoading from "../Base/UserSmallCardLoading";
 import { UsersQuery } from "../../graphql/queries/user";
+import User from "../../types/User";
 
 const UserNav = (): JSX.Element => {
   const { data, loading, error } = useQuery(UsersQuery);
