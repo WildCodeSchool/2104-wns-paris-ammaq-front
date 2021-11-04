@@ -19,22 +19,22 @@ import "./mainNav.css";
 const tabs = [
   {
     name: "Communauté",
-    color: "community",
+    color: "bg-community",
     icon: <Users className="inline-block" size="32" />,
   },
   {
     name: "Bibliothèque",
-    color: "library",
+    color: "bg-library",
     icon: <Book className="inline-block" size="32" />,
   },
   {
     name: "Agenda",
-    color: "agenda",
+    color: "bg-agenda",
     icon: <Calendar className="inline-block" size="32" />,
   },
   {
     name: "Quizz",
-    color: "quizz",
+    color: "bg-quizz",
     icon: <HelpCircle className="inline-block" size="32" />,
   },
 ];
@@ -172,7 +172,7 @@ const MainNav = (): JSX.Element => {
                     <NavLink
                       to={`/${tab.color}`}
                       activeClassName="shadow-buttonsPressed gradient-border gradient-border-round"
-                      className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer bg-${tab.color}`}
+                      className={`rounded-full w-12 h-12 grid place-items-center cursor-pointer ${tab.color}`}
                       exact
                     >
                       {tab.icon}
