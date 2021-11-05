@@ -34,6 +34,7 @@ const ChannelNav: FC<ChannelNavProps> = ({
         <Channel
           name={element.name}
           isVocal={element.isVocal}
+          chanId={element.id}
           isActive={isActive}
         />
       </div>

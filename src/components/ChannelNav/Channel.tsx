@@ -8,9 +8,15 @@ type ChannelProps = {
   name: string;
   isVocal: boolean;
   isActive: boolean;
+  chanId: number;
 };
 
-const Channel = ({ name, isVocal, isActive }: ChannelProps): JSX.Element => {
+const Channel = ({
+  name,
+  isVocal,
+  isActive,
+  chanId,
+}: ChannelProps): JSX.Element => {
   const [open, setOpen] = useState(false);
 
   const switchModal = () => {
@@ -46,7 +52,9 @@ const Channel = ({ name, isVocal, isActive }: ChannelProps): JSX.Element => {
           }`}
         />
       )}
-      {open && <EditChan closeModal={switchModal} />}
+      {open && (
+        <EditChan closeModal={switchModal} id={chanId} chanName={name} />
+      )}
     </li>
   );
 };
