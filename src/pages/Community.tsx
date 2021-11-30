@@ -12,6 +12,42 @@ function Loader(): JSX.Element {
 export default function Community(): JSX.Element {
   const { loading, error, data } = useQuery(ChannelsQuery);
   const [activeIndex, setActiveIndex] = useState(0);
+  const config = {
+    toolbarButtons: [
+      "camera",
+      "closedcaptions",
+      "desktop",
+      "download",
+      "embedmeeting",
+      "etherpad",
+      "feedback",
+      "filmstrip",
+      "fullscreen",
+      "hangup",
+      "help",
+      "invite",
+      "livestreaming",
+      "microphone",
+      "mute-everyone",
+      "mute-video-everyone",
+      "participants-pane",
+      "profile",
+      "raisehand",
+      "recording",
+      "security",
+      "select-background",
+      "settings",
+      "shareaudio",
+      "sharedvideo",
+      "shortcuts",
+      "stats",
+      "tileview",
+      "toggle-camera",
+      "videoquality",
+      "__end",
+    ],
+  };
+  console.log(config);
 
   if (loading) return <Loader />;
   if (error) return <p>Error</p>;
@@ -36,6 +72,7 @@ export default function Community(): JSX.Element {
               displayName="Quentin"
               height={window.innerHeight}
               loadingComponent={Loader}
+              interfaceConfigOverwrite={config}
             />
           ) : (
             <div>Channel {data.channels[activeIndex].name}</div>
