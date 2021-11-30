@@ -2,14 +2,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
 import Joi from "joi";
+import Rive from "rive-react";
 import jwt_decode from "jwt-decode";
 import { useHistory } from "react-router-dom";
 import { ArrowRight, Eye, EyeOff } from "react-feather";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useLazyQuery } from "@apollo/client";
-import { ArrowRight, Eye, EyeOff } from "react-feather";
-import Rive from "rive-react";
 import { useAuth } from "../context/auth-provider";
 import LoginQuery from "../graphql/queries/login";
 
