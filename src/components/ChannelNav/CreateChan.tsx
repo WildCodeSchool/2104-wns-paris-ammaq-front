@@ -3,7 +3,7 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { Edit2, Video } from "react-feather";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -11,6 +11,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 
 import { XCircle } from "react-feather";
+import { ChannelsQuery } from "../../graphql/queries/channel";
 import { CreateChannel } from "../../graphql/mutations/channel";
 
 import "./channels.css";
@@ -30,7 +31,10 @@ const schema = Joi.object({
 });
 
 const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
-  const [createChannel] = useMutation(CreateChannel);
+  const { loading, error, data } = useQuery(ChannelsQuery);
+  const [createChannel] = useMutation(CreateChannel, {
+    refetchQueries: [{ query: ChannelsQuery }],
+  });
   const [channelName, setChannelName] = useState("");
   const [checked, setChecked] = useState(true);
 

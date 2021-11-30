@@ -8,7 +8,7 @@ type ChannelProps = {
   name: string;
   isVocal: boolean;
   isActive: boolean;
-  chanId: number;
+  chanId: string;
 };
 
 const Channel = ({
@@ -53,7 +53,12 @@ const Channel = ({
         />
       )}
       {open && (
-        <EditChan closeModal={switchModal} id={chanId} chanName={name} />
+        <EditChan
+          closeModal={switchModal}
+          id={chanId}
+          chanName={name}
+          isVocal={isVocal}
+        />
       )}
     </li>
   );

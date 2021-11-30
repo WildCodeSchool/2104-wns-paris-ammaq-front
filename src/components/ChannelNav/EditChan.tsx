@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useMutation } from "@apollo/client";
-import { Edit2, Video } from "react-feather";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -8,13 +7,15 @@ import Joi from "joi";
 
 import { XCircle } from "react-feather";
 import { UpdateChannel, DeleteChannel } from "../../graphql/mutations/channel";
+import { ChannelsQuery } from "../../graphql/queries/channel";
 
 import "./channels.css";
 
-type CreateChanProps = {
+type EditChanProps = {
   closeModal: () => void;
-  id: number;
+  id: string;
   chanName: string;
+  isVocal: boolean;
 };
 
 type FormValues = {
@@ -31,29 +32,43 @@ const EditChan = ({
   closeModal,
   id,
   chanName,
-}: CreateChanProps): JSX.Element => {
+  isVocal,
+}: EditChanProps): JSX.Element => {
   const [check, setCheck] = useState(false);
-  const [createChannel] = useMutation(UpdateChannel);
-  const [deleteChannel] = useMutation(DeleteChannel);
+
+  const { loading, error, data } = useQuery(ChannelsQuery);
+  const [updateChannel] = useMutation(UpdateChannel, {
+    refetchQueries: [{ query: ChannelsQuery }],
+  });
+  const [deleteChannel] = useMutation(DeleteChannel, {
+    refetchQueries: [{ query: ChannelsQuery }],
+  });
 
   const {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
-  } = useForm<FormValues>({ resolver: joiResolver(schema) });
+  } = useForm<FormValues>({
+    resolver: joiResolver(schema),
+    defaultValues: { name: chanName, isVocal },
+  });
 
   const onSubmit: SubmitHandler<FormValues> = (input) => {
-    createChannel({ variables: { input } });
+    console.log(input);
+    updateChannel({ variables: { id, input } });
     reset();
     closeModal();
   };
 
-  const deleteChan = (chanId: number) => {
+  const deleteChan = () => {
     deleteChannel({ variables: { id } });
     setCheck(false);
     closeModal();
   };
+
+  console.log(getValues());
 
   return (
     <div
@@ -72,7 +87,6 @@ const EditChan = ({
           <input
             type="text"
             className="shadow-pressed bg-mainnav p-2 rounded outline-none"
-            pattern="[a-z0-9/-\]"
             minLength={3}
             maxLength={25}
             {...register("name")}
@@ -81,49 +95,50 @@ const EditChan = ({
           {errors.name && (
             <span className="text-red-500">{errors.name.message}</span>
           )}
+          <input type="hidden" {...register("isVocal")} required />
           <button
             type="submit"
-            className="shadow-channels text-community-green-light mt-4 rounded-xl text-m p-2"
+            className="shadow-channels text-community-green-light mt-4 rounded-xl text-m p-2 focus:outline-none"
           >
             valider
           </button>
         </div>
-        <div>
-          {check === false && (
-            <button
-              type="button"
-              className="text-main-red"
-              onClick={() => setCheck(true)}
-            >
-              Supprimer le channel
-            </button>
-          )}
-          {check && (
-            <div className="absolute w-80 h-auto bg-main-darkgrey rounded-2xl p-4 text-main-white border-solid border-2 border-main-red">
-              <h2>
-                Êtes-vous sûrs de vouloir supprimer{" "}
-                <span className="text-main-orange">{chanName}</span>?
-              </h2>
-              <div className="flex flex-row justify-around">
-                <button
-                  type="button"
-                  className="text-main-red"
-                  onClick={() => deleteChan(id)}
-                >
-                  Supprimer définitivement
-                </button>
-                <button
-                  type="button"
-                  className="text-community-green-light"
-                  onClick={() => setCheck(false)}
-                >
-                  NAAOOONNN
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
       </form>
+      <div>
+        {check === false && (
+          <button
+            type="button"
+            className="text-main-red"
+            onClick={() => setCheck(true)}
+          >
+            Supprimer le channel
+          </button>
+        )}
+        {check && (
+          <div className="absolute w-80 h-auto bg-main-darkgrey rounded-2xl p-4 text-main-white border-solid border-2 border-main-red">
+            <h2>
+              Êtes-vous sûrs de vouloir supprimer{" "}
+              <span className="text-main-orange">{chanName}</span>?
+            </h2>
+            <div className="flex flex-row justify-around">
+              <button
+                type="button"
+                className="text-main-red"
+                onClick={deleteChan}
+              >
+                Supprimer définitivement
+              </button>
+              <button
+                type="button"
+                className="text-community-green-light"
+                onClick={() => setCheck(false)}
+              >
+                NAAOOONNN
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 type ChannelsType = {
-  id: number;
+  id: string;
   name: string;
   isVocal: boolean;
 };

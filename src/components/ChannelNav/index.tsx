@@ -24,6 +24,7 @@ const ChannelNav: FC<ChannelNavProps> = ({
 }) => {
   const channelsList = channels?.map((element: ChannelType, index: number) => {
     const isActive = active === index;
+
     return (
       <div
         key={element.id}
