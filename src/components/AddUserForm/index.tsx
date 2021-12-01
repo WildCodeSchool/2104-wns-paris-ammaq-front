@@ -7,7 +7,6 @@ import Joi from "joi";
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { Eye, EyeOff } from "react-feather";
-import "./password.css";
 import { CreateUser } from "../../graphql/mutations/user";
 
 type IFormValues = {

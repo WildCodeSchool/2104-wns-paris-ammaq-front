@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { Fragment } from "react";
+import React from "react";
 import { ApolloError } from "@apollo/client";
 import { Tab } from "@headlessui/react";
 import Header from "./Header";

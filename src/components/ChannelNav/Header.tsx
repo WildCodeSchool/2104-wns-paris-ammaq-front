@@ -29,7 +29,7 @@ const Header = (): JSX.Element => {
             <img
               className="bg-white rounded-full p-1"
               src={data?.school.logo}
-              alt="logo de "
+              alt={`Logo ${data?.school.name}`}
             />
           )}
         </div>

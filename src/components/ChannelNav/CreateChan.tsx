@@ -1,18 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable no-console */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMutation } from "@apollo/client";
-import { Edit2, Video } from "react-feather";
 import React, { useState } from "react";
+import { Edit2, Video, XCircle } from "react-feather";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
-
-import { XCircle } from "react-feather";
+import { useMutation } from "@apollo/client";
+import { joiResolver } from "@hookform/resolvers/joi";
 import { CreateChannel } from "../../graphql/mutations/channel";
-
 import "./channels.css";
 
 type CreateChanProps = {
