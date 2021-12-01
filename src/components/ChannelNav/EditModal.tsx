@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useMutation } from "@apollo/client";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { Trash } from "react-feather";
+import { Trash, Check } from "react-feather";
 import ChannelType from "../../types/Channel";
 import { ChannelsQuery } from "../../graphql/queries/channel";
 import { DeleteChannel, UpdateChannel } from "../../graphql/mutations/channel";
@@ -62,11 +62,16 @@ const EditModal = ({
     closeModal();
   };
 
+  const closeAllModals = () => {
+    closeModal();
+    setCheck(false);
+  };
+
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog
         open={open}
-        onClose={closeModal}
+        onClose={closeAllModals}
         className="fixed z-10 inset-0 overflow-y-auto flex justify-center items-center bg-main-darkgrey/50 text-center"
       >
         <div className="flex items-center justify-center min-h-screen">
@@ -79,12 +84,12 @@ const EditModal = ({
             >
               Paramètres du salon
             </Dialog.Title>
-            <Dialog.Description as="h4" className="text-main-white">
+            <Dialog.Description as="h4" className="text-main-white m-4">
               Modifier le nom du channel
             </Dialog.Description>
 
             <form
-              className="flex justify-center"
+              className="flex justify-center items-center"
               onSubmit={handleSubmit(onSubmit)}
             >
               <input
@@ -101,20 +106,18 @@ const EditModal = ({
               <input type="hidden" {...register("isVocal")} required />
               <button
                 type="submit"
-                className="shadow-channels text-community-green-light mt-4 rounded-xl text-m p-2 focus:outline-none"
+                className="shadow-channels text-community-green-light rounded-xl text-m p-2 focus:outline-none"
               >
-                valider
+                <Check />
               </button>
             </form>
-            <div className="mt-4">
-              <button
-                type="button"
-                className="inline-flex justify-center px-4 py-2 text-sm font-medium text-main-white bg-main-darkgrey border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                onClick={closeModal}
-              >
-                Annuler
-              </button>
-            </div>
+            <button
+              type="button"
+              className="shadow-channels m-2 mb-10 inline-flex justify-center px-4 py-2 text-sm font-medium text-main-white bg-main-darkgrey border border-transparent rounded-md focus:outline-none"
+              onClick={closeAllModals}
+            >
+              Annuler
+            </button>
             <div>
               {!check && (
                 <button
@@ -126,22 +129,22 @@ const EditModal = ({
                 </button>
               )}
               {check && (
-                <div className="absolute w-80 h-auto bg-main-darkgrey rounded-2xl p-4 text-main-white border-solid border-2 border-main-red">
-                  <h2>
+                <div className="rounded-2xl p-4 text-main-white border-solid border-2 border-main-red">
+                  <h2 className="mb-4">
                     Êtes-vous sûrs de vouloir supprimer{" "}
-                    <span className="text-main-orange">{channel.name}</span>?
+                    <span className="text-main-red">{channel.name}</span>?
                   </h2>
-                  <div className="flex flex-row justify-around">
+                  <div className="flex justify-evenly">
                     <button
                       type="button"
-                      className="text-main-red"
+                      className="text-main-red shadow-mainnav rounded-md p-2 focus:outline-none border-main-red border-solid border-2"
                       onClick={handleDelete}
                     >
                       Supprimer définitivement
                     </button>
                     <button
                       type="button"
-                      className="text-community-green-light"
+                      className="text-community-green-light shadow-mainnav rounded-md p-2 border-community-green-light border-solid border-2 focus:outline-none"
                       onClick={() => setCheck(false)}
                     >
                       Annuler
