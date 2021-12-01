@@ -29,3 +29,13 @@
   background-color: #6ba6ff;
   transition: background-color, 0.2s;
 }
+
+.chan:hover .settings {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.settings {
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
