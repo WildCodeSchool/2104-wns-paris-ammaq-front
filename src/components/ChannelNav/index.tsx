@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { FC } from "react";
+import React, { Fragment } from "react";
 import { ApolloError } from "@apollo/client";
+import { Tab } from "@headlessui/react";
 import Header from "./Header";
 import Channel from "./Channel";
 import ChannelLoading from "./ChannelLoading";
@@ -11,37 +12,13 @@ type ChannelNavProps = {
   channels: ChannelType[] | undefined;
   loading: boolean;
   error: ApolloError | undefined;
-  active: number;
-  handleSwitch: (index: number) => void;
 };
 
-const ChannelNav: FC<ChannelNavProps> = ({
+const ChannelNav = ({
   channels,
   loading,
   error,
-  active,
-  handleSwitch,
-}) => {
-  const channelsList = channels?.map((element: ChannelType, index: number) => {
-    const isActive = active === index;
-
-    return (
-      <div
-        key={element.id}
-        role="button"
-        tabIndex={index}
-        onClick={() => handleSwitch(index)}
-      >
-        <Channel
-          name={element.name}
-          isVocal={element.isVocal}
-          chanId={element.id}
-          isActive={isActive}
-        />
-      </div>
-    );
-  });
-
+}: ChannelNavProps): JSX.Element => {
   return (
     <div
       className="w-2/12 h-full flex flex-col bg-main-darkgrey p-2 text-xs"
@@ -60,7 +37,21 @@ const ChannelNav: FC<ChannelNavProps> = ({
           </>
         )}
         {error && <p>error: {error}</p>}
-        {channels && channelsList}
+        {channels &&
+          channels?.map((element: ChannelType) => {
+            return (
+              <Tab as="div" key={element.id}>
+                {({ selected }) => (
+                  <Channel
+                    name={element.name}
+                    isVocal={element.isVocal}
+                    chanId={element.id}
+                    isActive={selected}
+                  />
+                )}
+              </Tab>
+            );
+          })}
       </div>
     </div>
   );

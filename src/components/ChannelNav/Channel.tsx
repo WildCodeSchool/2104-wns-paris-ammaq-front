@@ -19,8 +19,12 @@ const Channel = ({
 }: ChannelProps): JSX.Element => {
   const [open, setOpen] = useState(false);
 
-  const switchModal = () => {
-    setOpen(!open);
+  const openModal = () => {
+    setOpen(true);
+  };
+
+  const closeModal = () => {
+    setOpen(false);
   };
 
   const itemClass = classNames(
@@ -42,7 +46,7 @@ const Channel = ({
         <span className="truncate">{name}</span>
       </div>
       <Settings
-        onClick={switchModal}
+        onClick={openModal}
         className="settings w-4 h-4 text-gray-400"
       />
       {isActive && (
@@ -54,7 +58,9 @@ const Channel = ({
       )}
       {open && (
         <EditChan
-          closeModal={switchModal}
+          closeModal={closeModal}
+          openModal={openModal}
+          open={open}
           id={chanId}
           chanName={name}
           isVocal={isVocal}

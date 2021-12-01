@@ -47,6 +47,7 @@ module.exports = {
           orange: "#FF8B03",
           red: "#EF5469",
           darkgrey: "#2D2D2D",
+          lightgrey: "#3c3c3c",
           white: "#E5E5E5",
         },
         community: {

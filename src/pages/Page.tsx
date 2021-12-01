@@ -4,7 +4,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import Community from "./Community";
 import Agenda from "./Agenda";
 import Library from "./Library";
-import Quizz from "./Quizz";
+import Quiz from "./Quiz";
 import Dashboard from "./Dashboard";
 import AddUser from "../components/AddUserForm";
 import Login from "./Login";
@@ -16,7 +16,7 @@ const Page = (): JSX.Element => {
       <ProtectedRoute path="/community" exact component={Community} />
       <ProtectedRoute path="/agenda" exact component={Agenda} />
       <ProtectedRoute path="/library" exact component={Library} />
-      <ProtectedRoute path="/quizz" exact component={Quizz} />
+      <ProtectedRoute path="/quiz" exact component={Quiz} />
       <ProtectedRoute path="/add-user" exact component={AddUser} />
       <Route path="/login" exact component={Login} />
     </Switch>

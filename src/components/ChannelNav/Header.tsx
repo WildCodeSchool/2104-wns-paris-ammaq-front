@@ -15,7 +15,7 @@ const Header = (): JSX.Element => {
     setOpenModal(!openModal);
   };
 
-  const { data, loading, error } = useQuery(SchoolQuery, {
+  const { data, loading } = useQuery(SchoolQuery, {
     variables: { id: "60b0bace23608717c5d1d3ea" },
   });
 

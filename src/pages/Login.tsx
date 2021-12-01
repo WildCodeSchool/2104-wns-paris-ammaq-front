@@ -1,16 +1,19 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
+import Joi from "joi";
+import Rive from "rive-react";
+import jwt_decode from "jwt-decode";
 import { useHistory } from "react-router-dom";
+import { ArrowRight, Eye, EyeOff } from "react-feather";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
-import Joi from "joi";
 import { useLazyQuery } from "@apollo/client";
-import { ArrowRight, Eye, EyeOff } from "react-feather";
+import { useAuth } from "../context/auth-provider";
 import LoginQuery from "../graphql/queries/login";
 
-import { ReactComponent as ItLogo } from "../assets/IT.svg";
 import { ReactComponent as Workit } from "../assets/workitwhite.svg";
+import AnimationLogo from "../assets/logo_workit_animation.riv";
 
 type FormValues = {
   email: string;
@@ -27,11 +30,13 @@ const schema = Joi.object({
 const Login = (): JSX.Element => {
   const [shown, setShown] = useState(false);
   const history = useHistory();
+  const { setToken } = useAuth();
 
   const [getToken] = useLazyQuery(LoginQuery, {
     onCompleted: (data) => {
       if (data.login.token) {
         localStorage.setItem("token", data.login.token);
+        setToken(jwt_decode(data.login.token));
         history.replace("/");
       }
     },
@@ -49,7 +54,6 @@ const Login = (): JSX.Element => {
     getToken({
       variables: { input },
     });
-    localStorage.setItem("email", input.email);
     reset();
   };
 
@@ -68,13 +72,7 @@ const Login = (): JSX.Element => {
       <div className="h-screen m-auto grid place-items-center">
         <div className="shadow-mainnav p-10 rounded-lg">
           <div className="pt-4">
-            <div className="rounded-full grid place-items-center bg-circle m-auto shadow-profile w-52 h-52">
-              <div className="m-auto grid place-items-center rounded-full bg-workit w-44 h-44">
-                <div className="m-auto grid place-items-center rounded-full bg-main-darkgrey w-40 h-40">
-                  <ItLogo className="m-auto w-28 h-28" />
-                </div>
-              </div>
-            </div>
+            <Rive src={AnimationLogo} className="w-52 h-52" />
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
             <label htmlFor="mail" className={labelStyle}>
