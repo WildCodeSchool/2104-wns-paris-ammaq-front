@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-shadow */
 import React, { useState } from "react";
 import { matchPath, NavLink, useHistory, useLocation } from "react-router-dom";
 import {
@@ -10,10 +8,8 @@ import {
   ChevronLeft,
   Power,
 } from "react-feather";
+import classNames from "classnames";
 import { useAuth } from "../../context/auth-provider";
-import { firstLetter, withoutFirst } from "../../utils/functions";
-
-import "./mainNav.css";
 
 const tabs = [
   {
@@ -43,90 +39,78 @@ const tabs = [
 ];
 
 const MainNav = (): JSX.Element => {
-  const [nav, openNav] = useState(true);
+  const [isExtended, toggleExtended] = useState(true);
   const { token, setToken } = useAuth();
   const history = useHistory();
   const location = useLocation();
 
   const handleNav = () => {
-    openNav(!nav);
+    toggleExtended(!isExtended);
   };
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("token");
     setToken(undefined);
     history.push("/login");
   };
 
   return (
     <div
-      id="mainNav"
-      className={`m-1 rounded-md bg-mainnav shadow-mainnav ${
-        nav ? "w-72" : "w-24"
-      }`}
+      className={classNames(
+        "relative flex flex-col m-1 rounded-md bg-mainnav shadow-mainnav transition-all duration-500 ease-in-out",
+        isExtended ? "w-72" : "w-24"
+      )}
     >
-      <div className="pt-4">
-        <div
-          className={`rounded-full grid place-items-center bg-circle m-auto shadow-profile ${
-            nav ? "w-36 h-36" : "w-20 h-20"
-          }`}
-        >
-          <div
-            className={`m-auto grid place-items-center rounded-full bg-workit ${
-              nav ? "w-32 h-32" : "w-16 h-16"
-            }`}
-          >
+      <div className="flex flex-col h-56 transition-all duration-500 ease-in-out">
+        <div className="bg-circle shadow-profile p-2.5 rounded-full mx-auto">
+          <div className="rounded-full bg-workit p-1">
             <img
               src={token?.avatar || ""}
               alt="profile pic"
-              className={`m-auto rounded-full ${
-                nav ? "w-28 h-28" : "w-14 h-14"
-              }`}
+              className={classNames(
+                "m-auto rounded-full transition-all duration-500 ease-in-out",
+                isExtended ? "h-28 w-28" : "h-14 w-14"
+              )}
             />
           </div>
         </div>
         <h3
-          className={`text-main-white text-center ${
-            nav ? "text-xl" : "text-xs"
-          }`}
+          className={classNames(
+            "text-main-white text-center first-letter:text-transparent first-letter:bg-workit first-letter:bg-clip-text first-letter:font-bold transition-all duration-500 ease-in-out",
+            isExtended
+              ? "text-xl first-letter:text-3xl"
+              : "text-xs first-letter:text-xl"
+          )}
         >
-          <span
-            className={`text-transparent bg-workit bg-clip-text font-bold ${
-              nav ? "text-3xl" : "text-xl"
-            }`}
-          >
-            {firstLetter(token?.firstname || "")}
-          </span>
-          {withoutFirst(token?.firstname || "")}
+          {token?.firstname}
         </h3>
-      </div>
-
-      <div
-        className={`mt-4 grid place-items-center shadow-profile rounded-full m-auto ${
-          nav ? "w-14 h-14" : "w-8 h-8"
-        }`}
-      >
-        <button
-          type="button"
-          className={`bg-logout text-main-white rounded-full grid place-items-center focus:outline-none ${
-            nav ? "w-10 h-10" : "w-6 h-6"
-          }`}
-          onClick={handleLogout}
-        >
-          <Power className={`text-shadow ${nav ? "w-8" : "w-4"}`} />
-        </button>
+        <div className="mx-auto mt-4 p-1 shadow-profile rounded-full">
+          <button
+            type="button"
+            onClick={handleLogout}
+            className={classNames(
+              "bg-logout text-main-white rounded-full grid place-items-center focus:outline-none transition-all duration-500 ease-in-out",
+              isExtended ? "w-10 h-10" : "w-6 h-6"
+            )}
+          >
+            <Power
+              className={classNames(
+                "text-shadow transition-all duration-500 ease-in-out",
+                isExtended ? "w-8" : "w-4"
+              )}
+            />
+          </button>
+        </div>
       </div>
 
       <button
         type="button"
         onClick={handleNav}
-        className={`w-10 h-10 bg-main-darkgrey rounded-full focus:outline-none shadow-mainnav absolute ${
-          nav ? "nav-open" : "nav-closed"
-        }`}
+        className="absolute top-32 -right-5 w-10 h-10 bg-main-darkgrey rounded-full focus:outline-none shadow-mainnav"
       >
         <ChevronLeft
           className={`inline-block text-main-white transtion-all duration-300 ease-in-out transform ${
-            nav ? "rotate-180" : ""
+            isExtended ? "rotate-180" : ""
           }`}
         />
       </button>
@@ -143,20 +127,22 @@ const MainNav = (): JSX.Element => {
                 key={tab.name}
                 to={tab.href}
                 className={`${
-                  nav
+                  isExtended
                     ? "rounded-md shadow-channels m-4 w-64 h-16 flex justify-between cursor-pointer"
                     : ""
                 }`}
                 activeClassName={`shadow-pressed bg-pressed ${
-                  nav ? "gradient-border" : ""
+                  isExtended ? "gradient-border" : ""
                 }`}
               >
                 <div
-                  className={`grid place-content-center ${!nav ? "pt-4" : ""}`}
+                  className={`grid place-content-center ${
+                    !isExtended ? "pt-4" : ""
+                  }`}
                 >
                   <div
                     className={`rounded-full w-14 h-14 ml-1 shadow-circle grid place-items-center self-start ${
-                      nav ? "ml-1" : "my-2"
+                      isExtended ? "ml-1" : "my-2"
                     }`}
                   >
                     <div
@@ -173,7 +159,9 @@ const MainNav = (): JSX.Element => {
                   </div>
                 </div>
                 <div
-                  className={`${nav ? "grid place-items-center" : "hidden"}`}
+                  className={`${
+                    isExtended ? "grid place-items-center" : "hidden"
+                  }`}
                 >
                   <li className="pr-4">
                     <h2>{tab.name}</h2>

@@ -1,7 +1,7 @@
-type ChannelsType = {
-  id: number;
+type ChannelType = {
+  id: string;
   name: string;
   isVocal: boolean;
 };
 
-export default ChannelsType;
+export default ChannelType;

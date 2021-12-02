@@ -1,18 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable no-console */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@apollo/client";
-import { Edit2, Video } from "react-feather";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
+import { Edit2, Video, XCircle } from "react-feather";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
-
-import { XCircle } from "react-feather";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { ChannelsQuery } from "../../graphql/queries/channel";
 import { CreateChannel } from "../../graphql/mutations/channel";
-
 import "./channels.css";
 
 type CreateChanProps = {
@@ -30,7 +24,9 @@ const schema = Joi.object({
 });
 
 const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
-  const [createChannel] = useMutation(CreateChannel);
+  const [createChannel] = useMutation(CreateChannel, {
+    refetchQueries: [{ query: ChannelsQuery }],
+  });
   const [channelName, setChannelName] = useState("");
   const [checked, setChecked] = useState(true);
 
@@ -67,7 +63,9 @@ const CreateChan = ({ closeModal }: CreateChanProps): JSX.Element => {
           minLength={3}
           maxLength={25}
           {...register("name")}
-          onChange={(e: any) => setChannelName(e.currentTarget.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setChannelName(e.currentTarget.value)
+          }
           required
         />
         {errors.name && (

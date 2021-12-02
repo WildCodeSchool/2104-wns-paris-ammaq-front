@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { Fragment } from "react";
 import { useQuery } from "@apollo/client";
+import { Tab } from "@headlessui/react";
 import { Jutsu } from "../utils/Jutsu";
-import UserNav from "../components/UserNav/index";
 import ChannelNav from "../components/ChannelNav";
 import { ChannelsQuery } from "../graphql/queries/channel";
 import { useAuth } from "../context/auth-provider";
 import { userConfig, adminConfig } from "../utils/configJisti";
+import ChatBox from "../components/ChatBox/ChatBox";
+import ChannelType from "../types/Channel";
+import UserNav from "../components/UserNav";
+
 
 function Loader(): JSX.Element {
   return <p className="text-white">Loading</p>;
@@ -19,34 +23,35 @@ export default function Community(): JSX.Element {
   if (error) return <p>Error</p>;
 
   return (
-    <div className="w-screen flex">
-      <ChannelNav
-        channels={data?.channels}
-        loading={loading}
-        error={error}
-        active={activeIndex}
-        handleSwitch={(index) => setActiveIndex(index)}
-      />
-      <div className="flex-1">
-        {data?.channels &&
-          (data.channels[activeIndex].isVocal ? (
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            <Jutsu
-              roomName={`WORKIT-${data.channels[activeIndex].name}`}
-              subject={data.channels[activeIndex].name}
-              displayName="Quentin"
-              height={window.innerHeight}
-              loadingComponent={Loader}
-              configOverwrite={
-                token?.role === "admin" ? adminConfig : userConfig
-              }
-            />
-          ) : (
-            <div>Channel {data.channels[activeIndex].name}</div>
+    <Tab.Group as="div" className="w-screen flex">
+      <Tab.List as={Fragment}>
+        <ChannelNav channels={data?.channels} loading={loading} error={error} />
+      </Tab.List>
+      {data?.channels && (
+        <Tab.Panels as={Fragment}>
+          {data?.channels.map((channel: ChannelType) => (
+            <Tab.Panel as="div" className="flex-1" key={channel.id}>
+              {channel.isVocal ? (
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                <Jutsu
+                  roomName={`WORKIT-${channel.name}`}
+                  subject={channel.name}
+                  displayName="Quentin"
+                  height={window.innerHeight}
+                  configOverwrite={
+                    token?.role === "admin" ? adminConfig : userConfig
+                  }
+                />
+              ) : (
+                <ChatBox channel={channel} />
+              )}
+            </Tab.Panel>
+
           ))}
-      </div>
+        </Tab.Panels>
+      )}
       <UserNav />
-    </div>
+    </Tab.Group>
   );
 }
