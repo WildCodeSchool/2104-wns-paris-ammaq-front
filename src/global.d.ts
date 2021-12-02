@@ -1,2 +1,2 @@
 declare module "react-jutsu";
-declare module '*.riv';
+declare module "*.riv";

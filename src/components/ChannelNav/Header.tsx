@@ -6,13 +6,17 @@ import { PlusCircle } from "react-feather";
 import { useQuery } from "@apollo/client";
 import { SchoolQuery } from "../../graphql/queries/school";
 
-import CreateChan from "./CreateChan";
+import CreateModal from "./CreateModal";
 
 const Header = (): JSX.Element => {
-  const [openModal, setOpenModal] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const switchModal = () => {
-    setOpenModal(!openModal);
+  const openModal = () => {
+    setOpen(true);
+  };
+
+  const closeModal = () => {
+    setOpen(false);
   };
 
   const { data, loading } = useQuery(SchoolQuery, {
@@ -29,7 +33,7 @@ const Header = (): JSX.Element => {
             <img
               className="bg-white rounded-full p-1"
               src={data?.school.logo}
-              alt="logo de "
+              alt={`Logo ${data?.school.name}`}
             />
           )}
         </div>
@@ -38,16 +42,22 @@ const Header = (): JSX.Element => {
         <h3>{data?.school.name}</h3>
       </div>
       <div className="text-center mt-4">
-        {!openModal && (
+        {!open && (
           <button
             type="button"
             className="rounded-full shadow-mainnav bg-community"
-            onClick={() => switchModal()}
+            onClick={() => openModal()}
           >
             <PlusCircle className="text-main-white" />
           </button>
         )}
-        {openModal && <CreateChan closeModal={switchModal} />}
+        {open && (
+          <CreateModal
+            closeModal={closeModal}
+            openModal={openModal}
+            open={open}
+          />
+        )}
       </div>
     </div>
   );
