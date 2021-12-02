@@ -4,9 +4,12 @@ import { Tab } from "@headlessui/react";
 import { Jutsu } from "../utils/Jutsu";
 import ChannelNav from "../components/ChannelNav";
 import { ChannelsQuery } from "../graphql/queries/channel";
+import { useAuth } from "../context/auth-provider";
+import { userConfig, adminConfig } from "../utils/configJisti";
 import ChatBox from "../components/ChatBox/ChatBox";
 import ChannelType from "../types/Channel";
 import UserNav from "../components/UserNav";
+
 
 function Loader(): JSX.Element {
   return <p className="text-white">Loading</p>;
@@ -14,7 +17,8 @@ function Loader(): JSX.Element {
 
 export default function Community(): JSX.Element {
   const { loading, error, data } = useQuery(ChannelsQuery);
-
+  const { token, setToken } = useAuth();
+  const [activeIndex, setActiveIndex] = useState(0);
   if (loading) return <Loader />;
   if (error) return <p>Error</p>;
 
@@ -35,12 +39,15 @@ export default function Community(): JSX.Element {
                   subject={channel.name}
                   displayName="Quentin"
                   height={window.innerHeight}
-                  configOverwrite={{ prejoinPageEnabled: false }}
+                  configOverwrite={
+                    token?.role === "admin" ? adminConfig : userConfig
+                  }
                 />
               ) : (
                 <ChatBox channel={channel} />
               )}
             </Tab.Panel>
+
           ))}
         </Tab.Panels>
       )}
