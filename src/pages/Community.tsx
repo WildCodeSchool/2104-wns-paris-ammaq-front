@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Tab } from "@headlessui/react";
 import { Jutsu } from "../utils/Jutsu";
@@ -9,7 +9,6 @@ import { userConfig, adminConfig } from "../utils/configJisti";
 import ChatBox from "../components/ChatBox/ChatBox";
 import ChannelType from "../types/Channel";
 import UserNav from "../components/UserNav";
-
 
 function Loader(): JSX.Element {
   return <p className="text-white">Loading</p>;
@@ -47,7 +46,6 @@ export default function Community(): JSX.Element {
                 <ChatBox channel={channel} />
               )}
             </Tab.Panel>
-
           ))}
         </Tab.Panels>
       )}
