@@ -1,7 +1,8 @@
 export const getFullMinutes = (date) => {
-  const minutes = date.getMinutes();
+  const minutes = date.getMinutes().toString();
+  console.log(minutes.length);
   if (minutes.length <= 1){
-    return `0`+ minutes
+    return "0" + minutes
   } else {
     return minutes
   }
