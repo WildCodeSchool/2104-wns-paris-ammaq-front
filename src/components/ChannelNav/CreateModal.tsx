@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useMutation } from "@apollo/client";
 import React, { ChangeEvent, Fragment, useState } from "react";
-import { Edit2, Video, XCircle } from "react-feather";
+import { Edit2, Video } from "react-feather";
 import { Dialog, Transition } from "@headlessui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Joi from "joi";

@@ -43,7 +43,7 @@ export default function Community(): JSX.Element {
                   }
                 />
               ) : (
-                <ChatBox channel={channel} />
+                <ChatBox channelId={channel.id} />
               )}
             </Tab.Panel>
           ))}
