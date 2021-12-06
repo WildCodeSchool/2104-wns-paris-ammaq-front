@@ -13,7 +13,6 @@ import UserNav from "../components/UserNav";
 function Loader(): JSX.Element {
   return <p className="text-white">Loading</p>;
 }
-
 export default function Community(): JSX.Element {
   const { loading, error, data } = useQuery(ChannelsQuery);
   const { token, setToken } = useAuth();
@@ -36,7 +35,12 @@ export default function Community(): JSX.Element {
                 <Jutsu
                   roomName={`WORKIT-${channel.name}`}
                   subject={channel.name}
-                  displayName="Quentin"
+                  displayName={
+                    token
+                      ? `${token?.firstname} ${token?.lastname}`
+                      : "anonymous"
+                  }
+                  avatarURL={token ? token.avatar : "https://ibb.co/8PGqDyy"}
                   height={window.innerHeight}
                   configOverwrite={
                     token?.role === "admin" ? adminConfig : userConfig
