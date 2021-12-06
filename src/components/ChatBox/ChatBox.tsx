@@ -4,10 +4,11 @@ import React from "react";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Trash } from "react-feather";
 import { MessagesByChannelQuery } from "../../graphql/queries/message";
 import MessageType from "../../types/Message";
 import Message from "./Message";
-import { CreateMessage } from "../../graphql/mutations/message";
+import { CreateMessage, DeleteMessage } from "../../graphql/mutations/message";
 import { useAuth } from "../../context/auth-provider";
 
 type ChatBoxProps = {
@@ -28,6 +29,12 @@ const schema = Joi.object({
 
 const ChatBox = ({ channelId }: ChatBoxProps): JSX.Element => {
   const [createMessage] = useMutation(CreateMessage, {
+    refetchQueries: [
+      { query: MessagesByChannelQuery, variables: { channelId } },
+    ],
+  });
+
+  const [deleteMessage] = useMutation(DeleteMessage, {
     refetchQueries: [
       { query: MessagesByChannelQuery, variables: { channelId } },
     ],
@@ -54,6 +61,10 @@ const ChatBox = ({ channelId }: ChatBoxProps): JSX.Element => {
     reset();
   };
 
+  const handleDelete = (id: string) => {
+    deleteMessage({ variables: { id } });
+  };
+
   return (
     <div className="h-full p-5 pl-0">
       <div>
@@ -63,11 +74,16 @@ const ChatBox = ({ channelId }: ChatBoxProps): JSX.Element => {
         {data &&
           data?.messagesByChannelId.map((message: MessageType) => {
             return (
-              <Message
-                key={message.id}
-                message={message.content}
-                user={message.userId}
-              />
+              <div>
+                <Message
+                  key={message.id}
+                  message={message.content}
+                  user={message.userId}
+                />
+                {message.userId === token?.email && (
+                  <Trash onClick={() => handleDelete(message.id)} />
+                )}
+              </div>
             );
           })}
       </div>

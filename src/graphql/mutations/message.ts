@@ -9,3 +9,22 @@ export const CreateMessage = gql`
     }
   }
 `;
+
+export const DeleteMessage = gql`
+  mutation deleteMessage($id: ID!) {
+    deleteMessage(id: $id) {
+      id
+      content
+      channelId
+      userId
+    }
+  }
+`;
+
+export const MESSAGES_SUBSCRIPTION = gql`
+  subscription OnMessageAdded {
+    newMessage {
+      content
+    }
+  }
+`;
