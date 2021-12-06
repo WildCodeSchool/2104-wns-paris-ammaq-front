@@ -13,7 +13,6 @@ import UserNav from "../components/UserNav";
 function Loader(): JSX.Element {
   return <p className="text-white">Loading</p>;
 }
-
 export default function Community(): JSX.Element {
   const { loading, error, data } = useQuery(ChannelsQuery);
   const { token, setToken } = useAuth();
