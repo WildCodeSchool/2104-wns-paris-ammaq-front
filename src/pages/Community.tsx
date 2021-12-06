@@ -36,7 +36,12 @@ export default function Community(): JSX.Element {
                 <Jutsu
                   roomName={`WORKIT-${channel.name}`}
                   subject={channel.name}
-                  displayName="Quentin"
+                  displayName={
+                    token
+                      ? `${token?.firstname} ${token?.lastname}`
+                      : "anonymous"
+                  }
+                  avatarURL={token ? token.avatar : "https://ibb.co/8PGqDyy"}
                   height={window.innerHeight}
                   configOverwrite={
                     token?.role === "admin" ? adminConfig : userConfig

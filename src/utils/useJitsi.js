@@ -60,6 +60,7 @@ useJitsi.propTypes = {
     subject: PropTypes.string,
     password: PropTypes.string,
     displayName: PropTypes.string,
+    avatarURL: PropTypes.string,
     onMeetingEnd: PropTypes.func,
     width: PropTypes.string,
     height: PropTypes.string,
@@ -71,8 +72,8 @@ useJitsi.propTypes = {
     onload: PropTypes.func,
     invitees: PropTypes.array,
     devices: PropTypes.object,
-    userInfo: PropTypes.object
-  })
-}
+    userInfo: PropTypes.object,
+  }),
+};
 
 export default useJitsi

@@ -50,6 +50,7 @@ Jutsu.propTypes = {
   password: PropTypes.string,
   roomName: PropTypes.string.isRequired,
   displayName: PropTypes.string,
+  avatarURL:PropTypes.string,
   onMeetingEnd: PropTypes.func,
   loadingComponent: PropTypes.object,
   errorComponent: PropTypes.object,
