@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
 import Joi from "joi";
 import Rive from "rive-react";

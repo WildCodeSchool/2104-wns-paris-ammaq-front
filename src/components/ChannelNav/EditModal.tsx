@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { Fragment, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
