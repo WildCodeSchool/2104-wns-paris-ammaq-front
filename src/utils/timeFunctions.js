@@ -1,13 +1,3 @@
-export const getFullMinutes = (date) => {
-  const minutes = date.getMinutes().toString();
-  console.log(minutes.length);
-  if (minutes.length <= 1){
-    return "0" + minutes
-  } else {
-    return minutes
-  }
-};
-
 export const getMonthName = (date) => {
   let month = date.getMonth() + 1;
 

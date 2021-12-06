@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 
-import { getFullMinutes, getMonthName } from "../utils/timeFunctions";
+import { getMonthName } from "../utils/timeFunctions";
 
 const Dashboard = (): JSX.Element => {
   const today = new Date();
-  const currentTime = `${today.getHours()}:${getFullMinutes(today)}`;
+  const currentTime = () => {
+    return today.toLocaleTimeString();
+  };
+  const timePlaying = setInterval(currentTime, 1000);
   const currentDate = `${today.getDate()} ${getMonthName(
     today
   )} ${today.getFullYear()}`;
@@ -20,7 +23,7 @@ const Dashboard = (): JSX.Element => {
         </p>
         <div>
           <h3>{currentDate}</h3>
-          <h3>{currentTime}</h3>
+          <h3>{timePlaying}</h3>
         </div>
       </div>
     </div>

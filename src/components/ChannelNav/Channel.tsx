@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { Edit2, Settings, Video } from "react-feather";
 import ChannelType from "../../types/Channel";
+import { useAuth } from "../../context/auth-provider";
 
 type ChannelProps = {
   channel: ChannelType;
@@ -23,6 +24,7 @@ const Channel = ({
       "shadow-channels text-community-blue": !isActive && channel.isVocal,
     }
   );
+  const { token, setToken } = useAuth();
   return (
     <li className={itemClass} data-testid="channel">
       <div className="flex flex-nowrap truncate items-center">
@@ -33,10 +35,13 @@ const Channel = ({
         )}
         <span className="truncate">{channel.name}</span>
       </div>
-      <Settings
-        onClick={openModal}
-        className="settings w-4 h-4 text-gray-400"
-      />
+      {token?.role === "admin" ? (
+        <Settings
+          onClick={openModal}
+          className="settings w-4 h-4 text-gray-400"
+        />
+      ) : null}
+
       {isActive && (
         <span
           className={`ml-2 rounded-full w-4 h-4 ${
