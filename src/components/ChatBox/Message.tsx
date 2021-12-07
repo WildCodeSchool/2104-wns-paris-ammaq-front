@@ -1,24 +1,16 @@
-import { useMutation, useQuery, useSubscription } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React from "react";
-
 import { UserByMail } from "../../graphql/queries/user";
 import { useAuth } from "../../context/auth-provider";
-import { MESSAGES_SUBSCRIPTION } from "../../graphql/mutations/message";
 
 type MessageBoxProps = {
-  message: string;
-  user?: string;
+  message?: string;
+  userId?: string;
 };
 
-const Message = ({ message, user }: MessageBoxProps): JSX.Element => {
-  const { loading, error, data } = useQuery(UserByMail, {
-    variables: { email: user },
-  });
-
-  useSubscription(MESSAGES_SUBSCRIPTION, {
-    onSubscriptionData: ({ subscriptionData: result }) => {
-      console.log({ result });
-    },
+const Message = ({ message, userId }: MessageBoxProps): JSX.Element => {
+  const { loading, data } = useQuery(UserByMail, {
+    variables: { email: userId },
   });
 
   const { token } = useAuth();

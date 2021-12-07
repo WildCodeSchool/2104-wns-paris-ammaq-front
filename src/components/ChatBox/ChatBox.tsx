@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useMutation, useQuery } from "@apollo/client";
-import React from "react";
+import { useMutation, useQuery, useSubscription } from "@apollo/client";
+import React, { useState } from "react";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -8,7 +8,11 @@ import { Trash } from "react-feather";
 import { MessagesByChannelQuery } from "../../graphql/queries/message";
 import MessageType from "../../types/Message";
 import Message from "./Message";
-import { CreateMessage, DeleteMessage } from "../../graphql/mutations/message";
+import {
+  CreateMessage,
+  DeleteMessage,
+  MESSAGES_SUBSCRIPTION,
+} from "../../graphql/mutations/message";
 import { useAuth } from "../../context/auth-provider";
 
 type ChatBoxProps = {
@@ -27,12 +31,24 @@ const schema = Joi.object({
   userId: Joi.string().required(),
 });
 
+type Message = {
+  content?: string;
+  channelId: string;
+  id: string;
+  userId: string;
+};
+
 const ChatBox = ({ channelId }: ChatBoxProps): JSX.Element => {
-  const [createMessage] = useMutation(CreateMessage, {
-    refetchQueries: [
-      { query: MessagesByChannelQuery, variables: { channelId } },
-    ],
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  useSubscription(MESSAGES_SUBSCRIPTION, {
+    onSubscriptionData: ({ subscriptionData: result }) => {
+      console.log(result);
+      setMessages([...messages, result.data.newMessage]);
+    },
   });
+
+  const [createMessage] = useMutation(CreateMessage);
 
   const [deleteMessage] = useMutation(DeleteMessage, {
     refetchQueries: [
@@ -42,8 +58,11 @@ const ChatBox = ({ channelId }: ChatBoxProps): JSX.Element => {
 
   const { token } = useAuth();
 
-  const { loading, error, data } = useQuery(MessagesByChannelQuery, {
+  useQuery(MessagesByChannelQuery, {
     variables: { channelId },
+    onCompleted({ messagesByChannelId }) {
+      setMessages([...messages, ...messagesByChannelId]);
+    },
   });
 
   const {
@@ -68,18 +87,12 @@ const ChatBox = ({ channelId }: ChatBoxProps): JSX.Element => {
   return (
     <div className="h-full p-5 pl-0">
       <div>
-        {data?.messagesByChannelId.length < 1 && (
-          <div>Pas encore de messages</div>
-        )}
-        {data &&
-          data?.messagesByChannelId.map((message: MessageType) => {
+        {messages.length < 1 && <div>Pas encore de messages</div>}
+        {messages.length > 0 &&
+          messages.map((message: Message) => {
             return (
-              <div>
-                <Message
-                  key={message.id}
-                  message={message.content}
-                  user={message.userId}
-                />
+              <div key={message.id}>
+                <Message message={message.content} userId={message.userId} />
                 {message.userId === token?.email && (
                   <Trash onClick={() => handleDelete(message.id)} />
                 )}

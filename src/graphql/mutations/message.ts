@@ -25,6 +25,8 @@ export const MESSAGES_SUBSCRIPTION = gql`
   subscription OnMessageAdded {
     newMessage {
       content
+      userId
+      channelId
     }
   }
 `;
