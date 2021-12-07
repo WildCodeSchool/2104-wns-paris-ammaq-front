@@ -68,7 +68,7 @@ const Login = (): JSX.Element => {
 
   return (
     <>
-      <Workit className="w-28 absolute right-2 -bottom-16" />
+      <Workit className="w-28 absolute right-2 -bottom-px m-h-50" />
       <div className="h-screen m-auto grid place-items-center">
         <div className="shadow-mainnav p-10 rounded-lg">
           <div className="pt-4">
