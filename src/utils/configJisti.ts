@@ -1,4 +1,5 @@
 export const userConfig = {
+  prejoinPageEnabled: false,
   toolbarButtons: [
     "camera",
     "closedcaptions",
@@ -21,6 +22,7 @@ export const userConfig = {
   ],
 };
 export const adminConfig = {
+  prejoinPageEnabled: false,
   toolbarButtons: [
     "camera",
     "closedcaptions",
@@ -31,7 +33,6 @@ export const adminConfig = {
     "feedback",
     "filmstrip",
     "fullscreen",
-    "hangup",
     "help",
     "invite",
     "livestreaming",

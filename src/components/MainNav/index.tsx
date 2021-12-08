@@ -9,7 +9,9 @@ import {
   Power,
 } from "react-feather";
 import classNames from "classnames";
+import useSound from "use-sound";
 import { useAuth } from "../../context/auth-provider";
+import byeSound from "../../assets/bye.mp3";
 
 const tabs = [
   {
@@ -39,6 +41,7 @@ const tabs = [
 ];
 
 const MainNav = (): JSX.Element => {
+  const [playBye] = useSound(byeSound, { volume: 0.25 });
   const [isExtended, toggleExtended] = useState(true);
   const { token, setToken } = useAuth();
   const history = useHistory();
@@ -51,6 +54,7 @@ const MainNav = (): JSX.Element => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setToken(undefined);
+    playBye();
     history.push("/login");
   };
 

@@ -30,7 +30,7 @@
   transition: background-color, 0.2s;
 }
 
-.chan:hover .settings {
+.channels:hover .settings {
   opacity: 1;
   transition: opacity 0.5s ease-out;
 }
@@ -38,4 +38,8 @@
 .settings {
   opacity: 0;
   transition: opacity 0.2s ease-in;
+}
+.channels{
+  margin-right: 0!important;
+  width: 100%;
 }

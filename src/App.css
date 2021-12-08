@@ -59,5 +59,6 @@
         filter: drop-shadow(2px 2px 1px rgb(0 0 0 / 0.4));
       }
      
-     
-     
+.m-h-50{
+      max-height: 50px;
+}
