@@ -24,15 +24,15 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <div className="w-screen">
-      <h1 className="text-main-white text-center text-4xl pt-4">
-        Bonjour
+      <h1 className="text-main-white text-center text-4xl pt-10">
+        Hello
         <span className="bg-workit font-extrabold text-transparent bg-clip-text">
           {" "}
           {token?.firstname}
         </span>{" "}
         !
       </h1>
-      <div className="text-right p-12 text-3xl flex flex-col items-center justify-center">
+      <div className="text-center p-10 text-2xl flex flex-col items-center justify-center">
         <div className="shadow-circle p-10 w-80 rounded-md text-main-white">
           <h3>{currentDate}</h3>
           <h3 className="text-6xl text-bold bg-workit text-transparent bg-clip-text">
