@@ -24,9 +24,18 @@ export const DeleteMessage = gql`
 export const MESSAGES_SUBSCRIPTION = gql`
   subscription OnMessageAdded {
     newMessage {
+      id
       content
       userId
       channelId
+    }
+  }
+`;
+
+export const DELETE_SUBSCRIPTION = gql`
+  subscription OnMessageDeleted {
+    deletedMessage {
+      id
     }
   }
 `;

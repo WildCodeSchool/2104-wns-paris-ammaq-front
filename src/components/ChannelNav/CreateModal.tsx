@@ -12,7 +12,6 @@ import "./channels.css";
 
 type CreateModalProps = {
   closeModal: () => void;
-  openModal: () => void;
   open: boolean;
 };
 
@@ -26,11 +25,7 @@ const schema = Joi.object({
   isVocal: Joi.boolean().required(),
 });
 
-const CreateModal = ({
-  closeModal,
-  openModal,
-  open,
-}: CreateModalProps): JSX.Element => {
+const CreateModal = ({ closeModal, open }: CreateModalProps): JSX.Element => {
   const [createChannel] = useMutation(CreateChannel, {
     refetchQueries: [{ query: ChannelsQuery }],
   });

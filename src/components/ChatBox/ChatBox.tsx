@@ -4,12 +4,15 @@ import React, { useState } from "react";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Trash } from "react-feather";
 import { MessagesByChannelQuery } from "../../graphql/queries/message";
 import MessageType from "../../types/Message";
 import Message from "./Message";
 import {
   CreateMessage,
+  DeleteMessage,
   MESSAGES_SUBSCRIPTION,
+  DELETE_SUBSCRIPTION,
 } from "../../graphql/mutations/message";
 import { useAuth } from "../../context/auth-provider";
 
@@ -35,8 +38,19 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
 
   useSubscription(MESSAGES_SUBSCRIPTION, {
     onSubscriptionData: ({ subscriptionData: result }) => {
-      console.log(result);
+      console.log("messages from subscription", result);
       setMessages([...messages, result.data.newMessage]);
+    },
+  });
+
+  useSubscription(DELETE_SUBSCRIPTION, {
+    onSubscriptionData: ({ subscriptionData: result }) => {
+      console.log("delete subscription", result.data.deletedMessage);
+      const messageId = result.data.deletedMessage;
+      const messageIndex = messages.indexOf(messageId);
+      const newMessages = [...messages.splice(messageIndex, 1)];
+      console.log("subs deleted new mss", newMessages);
+      setMessages(newMessages);
     },
   });
 
@@ -47,9 +61,12 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
   useQuery(MessagesByChannelQuery, {
     variables: { channelId },
     onCompleted({ messagesByChannelId }) {
+      console.log("messages from query", messagesByChannelId);
       setMessages([...messages, ...messagesByChannelId]);
     },
   });
+
+  const [deleteMessage] = useMutation(DeleteMessage, {});
 
   const {
     register,
@@ -66,6 +83,10 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
     reset();
   };
 
+  const handleDelete = (id: string) => {
+    deleteMessage({ variables: { id } });
+  };
+
   return (
     <div className="h-full p-5 pl-0">
       <div className="overflow-y-scroll h-4/5">
@@ -74,11 +95,10 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
           messages.map((message: MessageType) => {
             return (
               <div key={message.id}>
-                <Message
-                  message={message.content}
-                  userId={message.userId}
-                  channelId={message.channelId}
-                />
+                <Message message={message.content} userId={message.userId} />
+                {message.userId === token?.email && (
+                  <Trash onClick={() => handleDelete(message.id)} />
+                )}
               </div>
             );
           })}

@@ -20,3 +20,13 @@ export const MessagesByChannelQuery = gql`
     }
   }
 `;
+
+export const MessageById = gql`
+  query Message($id: ID!) {
+    messageById(id: $id) {
+      id
+      content
+      userId
+    }
+  }
+`;
