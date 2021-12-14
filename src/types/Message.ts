@@ -1,6 +1,6 @@
 type MessageType = {
   id: string;
-  content: string;
+  content?: string;
   userId: string;
   channelId: string;
 };

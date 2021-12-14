@@ -4,19 +4,18 @@ import React, { useState } from "react";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Trash } from "react-feather";
 import { MessagesByChannelQuery } from "../../graphql/queries/message";
 import MessageType from "../../types/Message";
 import Message from "./Message";
 import {
   CreateMessage,
-  DeleteMessage,
   MESSAGES_SUBSCRIPTION,
 } from "../../graphql/mutations/message";
 import { useAuth } from "../../context/auth-provider";
 
 type ChatBoxProps = {
   channelId: string;
+  channelName: string;
 };
 
 type FormValues = {
@@ -31,15 +30,8 @@ const schema = Joi.object({
   userId: Joi.string().required(),
 });
 
-type Message = {
-  content?: string;
-  channelId: string;
-  id: string;
-  userId: string;
-};
-
-const ChatBox = ({ channelId }: ChatBoxProps): JSX.Element => {
-  const [messages, setMessages] = useState<Message[]>([]);
+const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
+  const [messages, setMessages] = useState<MessageType[]>([]);
 
   useSubscription(MESSAGES_SUBSCRIPTION, {
     onSubscriptionData: ({ subscriptionData: result }) => {
@@ -49,12 +41,6 @@ const ChatBox = ({ channelId }: ChatBoxProps): JSX.Element => {
   });
 
   const [createMessage] = useMutation(CreateMessage);
-
-  const [deleteMessage] = useMutation(DeleteMessage, {
-    refetchQueries: [
-      { query: MessagesByChannelQuery, variables: { channelId } },
-    ],
-  });
 
   const { token } = useAuth();
 
@@ -80,22 +66,19 @@ const ChatBox = ({ channelId }: ChatBoxProps): JSX.Element => {
     reset();
   };
 
-  const handleDelete = (id: string) => {
-    deleteMessage({ variables: { id } });
-  };
-
   return (
     <div className="h-full p-5 pl-0">
-      <div>
+      <div className="overflow-y-scroll h-4/5">
         {messages.length < 1 && <div>Pas encore de messages</div>}
         {messages.length > 0 &&
-          messages.map((message: Message) => {
+          messages.map((message: MessageType) => {
             return (
               <div key={message.id}>
-                <Message message={message.content} userId={message.userId} />
-                {message.userId === token?.email && (
-                  <Trash onClick={() => handleDelete(message.id)} />
-                )}
+                <Message
+                  message={message.content}
+                  userId={message.userId}
+                  channelId={message.channelId}
+                />
               </div>
             );
           })}
@@ -103,8 +86,8 @@ const ChatBox = ({ channelId }: ChatBoxProps): JSX.Element => {
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          placeholder="Envoyer un message dans #"
-          className="shadow-channels px-6 py-3 rounded-xl bg-main-lightgrey text-white placeholder-white placeholder-opacity-20"
+          placeholder={`Envoyer un message dans ${channelName}`}
+          className="shadow-channels px-6 py-3 w-80 rounded-xl bg-main-lightgrey text-white placeholder-white placeholder-opacity-20"
           {...register("content")}
           required
         />
