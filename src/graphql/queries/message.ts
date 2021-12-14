@@ -17,16 +17,18 @@ export const MessagesByChannelQuery = gql`
       channelId
       userId
       id
+      createdAt
     }
   }
 `;
 
 export const MessageById = gql`
-  query Message($id: ID!) {
+  query Message($id: String!) {
     messageById(id: $id) {
       id
       content
       userId
+      createdAt
     }
   }
 `;

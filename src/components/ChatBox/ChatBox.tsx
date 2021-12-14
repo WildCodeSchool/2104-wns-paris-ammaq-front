@@ -95,7 +95,12 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
           messages.map((message: MessageType) => {
             return (
               <div key={message.id}>
-                <Message message={message.content} userId={message.userId} />
+                {console.log("created at", message.createdAt)}
+                <Message
+                  message={message.content}
+                  userId={message.userId}
+                  date={message.createdAt}
+                />
                 {message.userId === token?.email && (
                   <Trash onClick={() => handleDelete(message.id)} />
                 )}

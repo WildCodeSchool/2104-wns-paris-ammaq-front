@@ -3,6 +3,7 @@ type MessageType = {
   content?: string;
   userId: string;
   channelId: string;
+  createdAt: Date;
 };
 
 export default MessageType;
