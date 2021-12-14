@@ -13,7 +13,6 @@ export const CreateMessage = gql`
 export const DeleteMessage = gql`
   mutation deleteMessage($id: ID!) {
     deleteMessage(id: $id) {
-      id
       content
       channelId
       userId
@@ -21,10 +20,9 @@ export const DeleteMessage = gql`
   }
 `;
 
-export const MESSAGES_SUBSCRIPTION = gql`
-  subscription OnMessageAdded {
-    newMessage {
-      id
+export const NEWMESSAGE_SUBSCRIPTION = gql`
+  subscription OnMessageAdded($messageId: ID!) {
+    newMessage(messageId: $messageId) {
       content
       userId
       channelId

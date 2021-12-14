@@ -11,7 +11,7 @@ import Message from "./Message";
 import {
   CreateMessage,
   DeleteMessage,
-  MESSAGES_SUBSCRIPTION,
+  NEWMESSAGE_SUBSCRIPTION,
   DELETE_SUBSCRIPTION,
 } from "../../graphql/mutations/message";
 import { useAuth } from "../../context/auth-provider";
@@ -36,9 +36,21 @@ const schema = Joi.object({
 const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
   const [messages, setMessages] = useState<MessageType[]>([]);
 
-  useSubscription(MESSAGES_SUBSCRIPTION, {
+  useQuery(MessagesByChannelQuery, {
+    variables: { channelId },
+    onCompleted({ messagesByChannelId }) {
+      console.log("messages from query", messagesByChannelId);
+      setMessages([...messages, ...messagesByChannelId]);
+    },
+  });
+
+  const [createMessage] = useMutation(CreateMessage);
+
+  const [deleteMessage] = useMutation(DeleteMessage);
+
+  useSubscription(NEWMESSAGE_SUBSCRIPTION, {
     onSubscriptionData: ({ subscriptionData: result }) => {
-      console.log("messages from subscription", result);
+      console.log("new message", result);
       setMessages([...messages, result.data.newMessage]);
     },
   });
@@ -54,19 +66,7 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
     },
   });
 
-  const [createMessage] = useMutation(CreateMessage);
-
   const { token } = useAuth();
-
-  useQuery(MessagesByChannelQuery, {
-    variables: { channelId },
-    onCompleted({ messagesByChannelId }) {
-      console.log("messages from query", messagesByChannelId);
-      setMessages([...messages, ...messagesByChannelId]);
-    },
-  });
-
-  const [deleteMessage] = useMutation(DeleteMessage, {});
 
   const {
     register,
@@ -94,15 +94,17 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
         {messages.length > 0 &&
           messages.map((message: MessageType) => {
             return (
-              <div key={message.id}>
-                {console.log("created at", message.createdAt)}
+              <div key={message.id} className="flex">
                 <Message
                   message={message.content}
                   userId={message.userId}
                   date={message.createdAt}
                 />
                 {message.userId === token?.email && (
-                  <Trash onClick={() => handleDelete(message.id)} />
+                  <Trash
+                    onClick={() => handleDelete(message.id)}
+                    className="text-main-red ml-4"
+                  />
                 )}
               </div>
             );

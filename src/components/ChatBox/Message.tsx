@@ -45,7 +45,7 @@ const Message = ({ message, userId, date }: MessageBoxProps): JSX.Element => {
           >
             {data?.userByMail.firstname}
           </h3>
-          <h5>
+          <h5 className="ml-4">
             le {completeDate} à {time}
           </h5>
         </div>
