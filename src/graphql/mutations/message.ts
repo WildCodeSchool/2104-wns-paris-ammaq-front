@@ -19,6 +19,15 @@ export const DeleteMessage = gql`
     }
   }
 `;
+export const UpdateMessage = gql`
+  mutation updateMessage($id: ID!) {
+    updateMessage(id: $id) {
+      content
+      channelId
+      userId
+    }
+  }
+`;
 
 export const NEWMESSAGE_SUBSCRIPTION = gql`
   subscription OnMessageAdded {
@@ -35,5 +44,10 @@ export const NEWMESSAGE_SUBSCRIPTION = gql`
 export const DELETE_SUBSCRIPTION = gql`
   subscription OnMessageDeleted {
     deletedMessage
+  }
+`;
+export const UPDATE_SUBSCRIPTION = gql`
+  subscription OnMessageUpdated {
+    updatedMessage
   }
 `;
