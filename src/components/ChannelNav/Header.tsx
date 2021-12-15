@@ -55,13 +55,7 @@ const Header = (): JSX.Element => {
               <PlusCircle className="text-main-white" />
             </button>
           )}
-          {open && (
-            <CreateModal
-              closeModal={closeModal}
-              openModal={openModal}
-              open={open}
-            />
-          )}
+          {open && <CreateModal closeModal={closeModal} open={open} />}
         </div>
       ) : null}
     </div>
