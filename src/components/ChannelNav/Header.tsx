@@ -43,6 +43,7 @@ const Header = (): JSX.Element => {
       <div className="text-white font-bold text-center text-lg">
         <h3>{data?.school.name}</h3>
       </div>
+
       {token?.role === "admin" ? (
         <div className="text-center mt-4">
           {!open && (
