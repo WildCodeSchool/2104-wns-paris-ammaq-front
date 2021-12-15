@@ -33,9 +33,7 @@ export const NEWMESSAGE_SUBSCRIPTION = gql`
 `;
 
 export const DELETE_SUBSCRIPTION = gql`
-  subscription OnMessageDeleted($id: ID!) {
-    deletedMessage(id: $id) {
-      id
-    }
+  subscription OnMessageDeleted {
+    deletedMessage
   }
 `;
