@@ -21,18 +21,20 @@ export const DeleteMessage = gql`
 `;
 
 export const NEWMESSAGE_SUBSCRIPTION = gql`
-  subscription OnMessageAdded($messageId: ID!) {
-    newMessage(messageId: $messageId) {
+  subscription OnMessageAdded {
+    newMessage {
       content
       userId
       channelId
+      createdAt
+      id
     }
   }
 `;
 
 export const DELETE_SUBSCRIPTION = gql`
-  subscription OnMessageDeleted {
-    deletedMessage {
+  subscription OnMessageDeleted($id: ID!) {
+    deletedMessage(id: $id) {
       id
     }
   }

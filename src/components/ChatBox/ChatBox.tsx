@@ -50,7 +50,6 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
 
   useSubscription(NEWMESSAGE_SUBSCRIPTION, {
     onSubscriptionData: ({ subscriptionData: result }) => {
-      console.log("new message", result);
       setMessages([...messages, result.data.newMessage]);
     },
   });
@@ -59,8 +58,9 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
     onSubscriptionData: ({ subscriptionData: result }) => {
       console.log("delete subscription", result.data.deletedMessage);
       const messageId = result.data.deletedMessage;
-      const messageIndex = messages.indexOf(messageId);
-      const newMessages = [...messages.splice(messageIndex, 1)];
+      const newMessages = messages.filter((message) => {
+        return message.id !== messageId;
+      });
       console.log("subs deleted new mss", newMessages);
       setMessages(newMessages);
     },
