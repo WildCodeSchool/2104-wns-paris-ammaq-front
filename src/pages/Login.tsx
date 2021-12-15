@@ -9,11 +9,17 @@ import { ArrowRight, Eye, EyeOff } from "react-feather";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useLazyQuery } from "@apollo/client";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import useSound from "use-sound";
 import { useAuth } from "../context/auth-provider";
 import LoginQuery from "../graphql/queries/login";
 
 import { ReactComponent as Workit } from "../assets/workitwhite.svg";
 import AnimationLogo from "../assets/logo_workit_animation.riv";
+import helloSound from "../assets/hello.mp3";
 
 type FormValues = {
   email: string;
@@ -31,17 +37,23 @@ const Login = (): JSX.Element => {
   const [shown, setShown] = useState(false);
   const history = useHistory();
   const { setToken } = useAuth();
+  const [playHello] = useSound(helloSound, { volume: 0.25 });
 
   const [getToken] = useLazyQuery(LoginQuery, {
     onCompleted: (data) => {
       if (data.login.token) {
         localStorage.setItem("token", data.login.token);
         setToken(jwt_decode(data.login.token));
-        history.replace("/");
+        NotificationManager.success("Connexion avec succès", "success!", 1000);
+        setTimeout(function () {
+          playHello();
+          history.replace("/");
+        }, 2000);
       }
     },
     onError: (error) => {
       console.log(error);
+      NotificationManager.error(error.message, "Une erreur est survenue", 2000);
     },
   });
 
@@ -68,8 +80,9 @@ const Login = (): JSX.Element => {
 
   return (
     <>
-      <Workit className="w-28 absolute right-2 -bottom-16" />
+      <Workit className="w-28 absolute right-2 -bottom-px m-h-50" />
       <div className="h-screen m-auto grid place-items-center">
+        <NotificationContainer />
         <div className="shadow-mainnav p-10 rounded-lg">
           <div className="pt-4">
             <Rive src={AnimationLogo} className="w-52 h-52" />
