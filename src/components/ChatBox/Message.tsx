@@ -69,24 +69,22 @@ const Message = ({
   };
 
   return (
-    <div className="flex text-white">
+    <div className="flex flex-1 text-white">
       {loading && <h1>Loading</h1>}
-      <img
-        className="w-8 h-8 rounded-full"
-        src={data?.userByMail.avatar}
-        alt="avatar"
-      />
+      {data?.userByMail.firstname !== token?.firstname ? (
+        <img
+          className="w-8 h-8 rounded-full"
+          src={data?.userByMail.avatar}
+          alt="avatar"
+        />
+      ) : null}
       <div>
         <div className="flex">
-          <h3
-            className={
-              data?.userByMail.firstname === token?.firstname
-                ? `text-community-blue`
-                : `text-community-green-light`
-            }
-          >
-            {data?.userByMail.firstname}
-          </h3>
+          {data?.userByMail.firstname !== token?.firstname ? (
+            <h3 className="text-community-green-light px-3">
+              {data?.userByMail.firstname}
+            </h3>
+          ) : null}
           <h5 className="ml-4">
             {createdAt && updatedAt === createdAt
               ? getRealDate(updatedAt)
@@ -104,6 +102,21 @@ const Message = ({
           />
         )}
       </div>
+
+      {data?.userByMail.firstname === token?.firstname ? (
+        <div className="flex">
+          <h3 className="text-community-blue px-3">
+            {data?.userByMail.firstname}
+          </h3>
+        </div>
+      ) : null}
+      {data?.userByMail.firstname === token?.firstname ? (
+        <img
+          className="w-8 h-8 rounded-full"
+          src={data?.userByMail.avatar}
+          alt="avatar"
+        />
+      ) : null}
       {userId === token?.email && (
         <>
           {!options && (

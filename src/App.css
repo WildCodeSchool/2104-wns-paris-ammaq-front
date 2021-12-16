@@ -58,6 +58,9 @@
      .text-shadow {
         filter: drop-shadow(2px 2px 1px rgb(0 0 0 / 0.4));
       }
+      .text-shadow0-5 {
+        filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
+      }
      
 .m-h-50{
       max-height: 50px;

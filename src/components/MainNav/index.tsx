@@ -28,12 +28,6 @@ const tabs = [
     icon: <Book className="inline-block" size="32" />,
   },
   {
-    name: "Agenda",
-    href: "/agenda",
-    color: "bg-agenda",
-    icon: <Calendar className="inline-block" size="32" />,
-  },
-  {
     name: "Quiz",
     href: "/quiz",
     color: "bg-quizz",
@@ -109,7 +103,7 @@ const MainNav = (): JSX.Element => {
                   isExtended ? "w-8 h-8" : "w-5 h-5"
                 )}
               >
-                <Home />
+                <Home className="text-main-white text-shadow0-5" />
               </div>
             </div>
           </NavLink>
