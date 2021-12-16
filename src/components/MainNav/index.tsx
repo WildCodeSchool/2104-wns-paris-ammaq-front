@@ -103,7 +103,7 @@ const MainNav = (): JSX.Element => {
                   isExtended ? "w-8 h-8" : "w-5 h-5"
                 )}
               >
-                <Home className="text-main-white" />
+                <Home className="text-main-white text-shadow0-5" />
               </div>
             </div>
           </NavLink>
