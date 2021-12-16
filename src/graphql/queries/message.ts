@@ -18,6 +18,7 @@ export const MessagesByChannelQuery = gql`
       userId
       id
       createdAt
+      updatedAt
     }
   }
 `;
