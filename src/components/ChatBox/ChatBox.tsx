@@ -91,13 +91,18 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
   };
 
   return (
-    <div className="h-full p-5 pl-0">
-      <div className="overflow-y-scroll h-4/5">
+    <div className="h-full p-5 pl-0 w-full">
+      <div className="h-5/6 overflow-x-hidden overflow-y-scroll flex flex-col place-content-end">
         {messages.length < 1 && <div>Pas encore de messages</div>}
         {messages.length > 0 &&
           messages.map((message: MessageType) => {
             return (
-              <div key={message.id} className="flex">
+              <div
+                key={message.id}
+                className={`${
+                  message.userId === token?.email ? "place-self-end" : null
+                }`}
+              >
                 <Message
                   message={message.content}
                   userId={message.userId}

@@ -27,6 +27,10 @@ module.exports = {
           "1px 1px 2px rgba(63, 63, 63, 0.3), -1px -1px 2px rgba(31, 31, 31, 0.5), inset -1px 1px 2px rgba(31, 31, 31, 0.2), inset 1px -1px 2px rgba(31, 31, 31, 0.2), inset -1px -1px 2px rgba(63, 63, 63, 0.9), inset 1px 1px 3px rgba(31, 31, 31, 0.9);",
         input:
           "1px 1px 2px rgba(48, 48, 48, 0.3), -1px -1px 2px rgba(42, 42, 42, 0.5), inset -18px 18px 36px rgba(42, 42, 42, 0.2), inset 18px -18px 36px rgba(42, 42, 42, 0.2), inset -18px -18px 36px rgba(48, 48, 48, 0.9), inset 18px 18px 45px rgba(42, 42, 42, 0.9)",
+        message:
+          "-2px 2px 4px rgba(30, 30, 30, 0.2), 2px -2px 4px rgba(30, 30, 30, 0.2), -2px -2px 4px rgba(60, 60, 60, 0.9), 2px 2px 5px rgba(30, 30, 30, 0.9), inset 1px 1px 2px rgba(60, 60, 60, 0.3), inset -1px -1px 2px rgba(30, 30, 30, 0.5)",
+        editMessage:
+          "1px 1px 2px rgba(60, 60, 60, 0.3), -1px -1px 2px rgba(30, 30, 30, 0.5), inset -2px 2px 4px rgba(30, 30, 30, 0.2), inset 2px -2px 4px rgba(30, 30, 30, 0.2), inset -2px -2px 4px rgba(60, 60, 60, 0.9), inset 2px 2px 5px rgba(30, 30, 30, 0.9)",
       },
       backgroundImage: {
         mainnav: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",
@@ -48,6 +52,7 @@ module.exports = {
           red: "#EF5469",
           darkgrey: "#2D2D2D",
           lightgrey: "#3c3c3c",
+          lighterGrey: "#BAB8B8",
           white: "#E5E5E5",
         },
         community: {
@@ -75,7 +80,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      display: ["group-hover"]
+    },
   },
   plugins: [],
 };

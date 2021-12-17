@@ -25,7 +25,6 @@ const Message = ({
 }: MessageBoxProps): JSX.Element => {
   const [editInput, setEditInput] = useState(false);
   const [options, setOptions] = useState(false);
-  const [edited, setEdited] = useState(false);
 
   const { loading, data } = useQuery(UserByMail, {
     variables: { email: userId },
@@ -69,39 +68,51 @@ const Message = ({
   };
 
   return (
-    <div className="flex flex-1 text-white">
+    <div className="flex text-white">
       {loading && <h1>Loading</h1>}
-      {data?.userByMail.firstname !== token?.firstname ? (
-        <img
-          className="w-8 h-8 rounded-full"
-          src={data?.userByMail.avatar}
-          alt="avatar"
-        />
-      ) : null}
-      <div>
-        <div className="flex">
+      <div className="group flex items-center">
+        {data?.userByMail.firstname !== token?.firstname ? (
+          <img
+            className="w-8 h-8 rounded-full"
+            src={data?.userByMail.avatar}
+            alt="avatar"
+          />
+        ) : null}
+        <div className="">
           {data?.userByMail.firstname !== token?.firstname ? (
-            <h3 className="text-community-green-light px-3">
+            <h3 className="text-community-green-light px-3 font-bold">
               {data?.userByMail.firstname}
             </h3>
           ) : null}
-          <h5 className="ml-4">
-            {createdAt && updatedAt === createdAt
-              ? getRealDate(updatedAt)
-              : `modifié ${getRealDate(updatedAt)}`}
-          </h5>
+          {editInput && (
+            <EditInput
+              content={message}
+              id={messageId}
+              channelId={channelId}
+              userId={userId}
+              close={() => setEditInput(false)}
+            />
+          )}
+          {!editInput && (
+            <p
+              className={`rounded-xl w-auto shadow-message p-2 m-2 ${
+                userId === token?.email ? "text-right" : null
+              }`}
+            >
+              {message}
+            </p>
+          )}
+          <div className="text-xs p-2 h-6">
+            <h5 className="hidden text-main-lighterGrey group-hover:inline">
+              {createdAt && updatedAt === createdAt
+                ? getRealDate(updatedAt)
+                : `modifié ${getRealDate(updatedAt)}`}
+            </h5>
+          </div>
         </div>
-        {!editInput && <p>{message}</p>}
-        {editInput && (
-          <EditInput
-            content={message}
-            id={messageId}
-            channelId={channelId}
-            userId={userId}
-            close={() => setEditInput(false)}
-          />
-        )}
       </div>
+
+      {/* If the message's author is the connected user */}
 
       {data?.userByMail.firstname === token?.firstname ? (
         <div className="flex">

@@ -37,6 +37,7 @@ export const NEWMESSAGE_SUBSCRIPTION = gql`
       userId
       channelId
       createdAt
+      updatedAt
       id
     }
   }

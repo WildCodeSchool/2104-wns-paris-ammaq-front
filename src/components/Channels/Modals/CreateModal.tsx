@@ -6,9 +6,9 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { ChannelsQuery } from "../../graphql/queries/channel";
-import { CreateChannel } from "../../graphql/mutations/channel";
-import "./channels.css";
+import { ChannelsQuery } from "../../../graphql/queries/channel";
+import { CreateChannel } from "../../../graphql/mutations/channel";
+import "../Channels.css";
 
 type CreateModalProps = {
   closeModal: () => void;
