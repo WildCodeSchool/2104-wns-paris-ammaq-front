@@ -1,7 +1,8 @@
 type ChannelType = {
-  id: number;
+  id: string;
   name: string;
   isVocal: boolean;
+  onClick: any;
 };
 
 export default ChannelType;

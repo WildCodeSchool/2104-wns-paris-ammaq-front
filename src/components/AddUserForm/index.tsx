@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
 import { Path, useForm, SubmitHandler, UseFormRegister } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";

@@ -3,7 +3,7 @@ import "./channel.css";
 
 const ChannelLoading = (): JSX.Element => {
   return (
-    <li className="items-center cursor-pointer p-4 mt-5 rounded flex justify-between shadow-channels channelLoading">
+    <li className="items-center p-4 mt-5 rounded flex justify-between shadow-channels channelLoading">
       <div className="flex flex-nowrap truncate items-center">
         <span className="truncate" />
       </div>
