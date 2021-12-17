@@ -44,14 +44,13 @@ const Login = (): JSX.Element => {
         localStorage.setItem("token", data.login.token);
         setToken(jwt_decode(data.login.token));
         NotificationManager.success("Connexion avec succès", "success!", 1000);
-        setTimeout(function () {
+        setTimeout(() => {
           playHello();
           history.replace("/");
         }, 2000);
       }
     },
     onError: (error) => {
-      console.log(error);
       NotificationManager.error(error.message, "Une erreur est survenue", 2000);
     },
   });

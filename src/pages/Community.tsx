@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { useQuery } from "@apollo/client";
 import { Tab } from "@headlessui/react";
 import { NotificationContainer } from "react-notifications";
@@ -16,8 +16,7 @@ function Loader(): JSX.Element {
 }
 export default function Community(): JSX.Element {
   const { loading, error, data } = useQuery(ChannelsQuery);
-  const { token, setToken } = useAuth();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { token } = useAuth();
   if (loading) return <Loader />;
   if (error) return <p>Error</p>;
 

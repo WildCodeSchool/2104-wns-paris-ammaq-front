@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from "react";
+import React from "react";
 import classNames from "classnames";
 import { Edit2, Settings, Video } from "react-feather";
 import ChannelType from "../../types/Channel";
@@ -26,7 +26,7 @@ const Channel = ({
       "shadow-channels text-community-blue": !isActive && channel.isVocal,
     }
   );
-  const { token, setToken } = useAuth();
+  const { token } = useAuth();
   return (
     <button
       className={itemClass}

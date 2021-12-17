@@ -23,7 +23,7 @@ const Header = (): JSX.Element => {
   const { data, loading } = useQuery(SchoolQuery, {
     variables: { id: "60b0bace23608717c5d1d3ea" },
   });
-  const { token, setToken } = useAuth();
+  const { token } = useAuth();
 
   return (
     <div className="h-60 flex flex-col ">
@@ -54,13 +54,7 @@ const Header = (): JSX.Element => {
               <PlusCircle className="text-main-white" />
             </button>
           )}
-          {open && (
-            <CreateModal
-              closeModal={closeModal}
-              openModal={openModal}
-              open={open}
-            />
-          )}
+          {open && <CreateModal closeModal={closeModal} open={open} />}
         </div>
       ) : null}
     </div>
