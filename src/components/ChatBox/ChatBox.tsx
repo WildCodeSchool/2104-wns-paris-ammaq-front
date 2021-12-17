@@ -93,31 +93,38 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
 
   return (
     <div className="p-5 pl-0 w-full h-full">
-      <div className="h-5/6 overscroll-y-auto p-4 flex flex-col place-content-end">
-        {messages.length < 1 && <div>Pas encore de messages</div>}
-        {messages.length > 0 &&
-          messages.map((message: MessageType) => {
-            return (
-              <div
-                key={message.id}
-                className={`${
-                  message.userId === token?.email ? "place-self-end mr-4" : null
-                }`}
-              >
-                <Message
-                  message={message.content}
-                  userId={message.userId}
-                  updatedAt={message.updatedAt}
-                  createdAt={message.createdAt}
-                  messageId={message.id}
-                  channelId={channelId}
-                />
-              </div>
-            );
-          })}
+      <div className="h-5/6">
+        <div className="h-full overflow-y-auto p-4 flex flex-col">
+          {messages.length < 1 && <div>Pas encore de messages</div>}
+          {messages.length > 0 &&
+            messages.map((message: MessageType) => {
+              return (
+                <div
+                  key={message.id}
+                  className={`${
+                    message.userId === token?.email
+                      ? "place-self-end mr-4 mt-auto"
+                      : null
+                  }`}
+                >
+                  <Message
+                    message={message.content}
+                    userId={message.userId}
+                    updatedAt={message.updatedAt}
+                    createdAt={message.createdAt}
+                    messageId={message.id}
+                    channelId={channelId}
+                  />
+                </div>
+              );
+            })}
+        </div>
       </div>
-
-      <form className="w-full p-4" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="w-full p-4"
+        onSubmit={handleSubmit(onSubmit)}
+        autoComplete="off"
+      >
         <input
           type="text"
           placeholder={`Envoyer un message dans #${channelName}`}

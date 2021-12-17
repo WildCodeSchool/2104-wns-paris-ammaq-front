@@ -33,7 +33,7 @@ const Dashboard = (): JSX.Element => {
         !
       </h1>
       <div className="text-center p-10 text-2xl flex flex-col items-center justify-center">
-        <div className="shadow-circle p-10 w-80 rounded-md text-main-white">
+        <div className="shadow-circle p-10 w-96 rounded-md text-main-white">
           <h3>{currentDate}</h3>
           <h3 className="text-6xl text-bold bg-workit text-transparent bg-clip-text">
             {time}
