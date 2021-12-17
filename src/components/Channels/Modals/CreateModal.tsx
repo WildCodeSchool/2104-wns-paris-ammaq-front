@@ -1,18 +1,16 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useMutation } from "@apollo/client";
 import React, { ChangeEvent, Fragment, useState } from "react";
-import { Edit2, Video, XCircle } from "react-feather";
+import { Edit2, Video } from "react-feather";
 import { Dialog, Transition } from "@headlessui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { ChannelsQuery } from "../../graphql/queries/channel";
-import { CreateChannel } from "../../graphql/mutations/channel";
-import "./channels.css";
+import { ChannelsQuery } from "../../../graphql/queries/channel";
+import { CreateChannel } from "../../../graphql/mutations/channel";
+import "../Channels.css";
 
 type CreateModalProps = {
   closeModal: () => void;
-  openModal: () => void;
   open: boolean;
 };
 
@@ -26,11 +24,7 @@ const schema = Joi.object({
   isVocal: Joi.boolean().required(),
 });
 
-const CreateModal = ({
-  closeModal,
-  openModal,
-  open,
-}: CreateModalProps): JSX.Element => {
+const CreateModal = ({ closeModal, open }: CreateModalProps): JSX.Element => {
   const [createChannel] = useMutation(CreateChannel, {
     refetchQueries: [{ query: ChannelsQuery }],
   });

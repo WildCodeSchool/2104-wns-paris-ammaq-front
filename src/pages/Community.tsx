@@ -1,9 +1,9 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { useQuery } from "@apollo/client";
 import { Tab } from "@headlessui/react";
 import { NotificationContainer } from "react-notifications";
 import { Jutsu } from "../utils/Jutsu";
-import ChannelNav from "../components/ChannelNav";
+import Channels from "../components/Channels";
 import { ChannelsQuery } from "../graphql/queries/channel";
 import { useAuth } from "../context/auth-provider";
 import { userConfig, adminConfig } from "../utils/configJisti";
@@ -16,8 +16,7 @@ function Loader(): JSX.Element {
 }
 export default function Community(): JSX.Element {
   const { loading, error, data } = useQuery(ChannelsQuery);
-  const { token, setToken } = useAuth();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { token } = useAuth();
   if (loading) return <Loader />;
   if (error) return <p>Error</p>;
 
@@ -26,11 +25,7 @@ export default function Community(): JSX.Element {
       <NotificationContainer />
       <Tab.Group as="div" className="w-screen flex">
         <Tab.List as={Fragment}>
-          <ChannelNav
-            channels={data?.channels}
-            loading={loading}
-            error={error}
-          />
+          <Channels channels={data?.channels} loading={loading} error={error} />
         </Tab.List>
         {data?.channels && (
           <Tab.Panels as={Fragment}>
@@ -54,7 +49,7 @@ export default function Community(): JSX.Element {
                     }
                   />
                 ) : (
-                  <ChatBox channel={channel} />
+                  <ChatBox channelId={channel.id} channelName={channel.name} />
                 )}
               </Tab.Panel>
             ))}

@@ -1,0 +1,12 @@
+@keyframes slideIn {
+  from {
+    right: 3rem;
+  }
+  to {
+    right: 7rem;
+  }
+};
+
+.appear {
+  animation: 0.5s linear slideIn ease-in normal;
+}

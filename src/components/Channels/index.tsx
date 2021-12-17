@@ -3,11 +3,11 @@ import { ApolloError } from "@apollo/client";
 import { Tab } from "@headlessui/react";
 import { NotificationManager } from "react-notifications";
 import useSound from "use-sound";
-import Header from "./Header";
-import Channel from "./Channel";
+import Header from "./Header/Header";
+import Channel from "./Channel/Channel";
 import ChannelLoading from "./ChannelLoading";
 import ChannelType from "../../types/Channel";
-import EditModal from "./EditModal";
+import EditModal from "./Modals/EditModal";
 import openSound from "../../assets/open.mp3";
 
 type ChannelNavProps = {
@@ -39,7 +39,7 @@ const ChannelTab = ({ channel }: { channel: ChannelType }) => {
   );
 };
 
-const ChannelNav = ({
+const Channels = ({
   channels,
   loading,
   error,
@@ -52,7 +52,7 @@ const ChannelNav = ({
       <Header />
       <div
         data-testid="list-channels"
-        className="list-channels overflow-x-hidden overflow-y-scroll"
+        className="scrollbar overflow-x-hidden overflow-y-scroll"
       >
         {loading && (
           <>
@@ -76,4 +76,4 @@ const ChannelNav = ({
   );
 };
 
-export default ChannelNav;
+export default Channels;

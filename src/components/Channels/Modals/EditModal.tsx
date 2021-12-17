@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { Fragment, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
@@ -6,10 +5,13 @@ import { useMutation } from "@apollo/client";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { Trash, Check } from "react-feather";
-import ChannelType from "../../types/Channel";
-import { ChannelsQuery } from "../../graphql/queries/channel";
-import { DeleteChannel, UpdateChannel } from "../../graphql/mutations/channel";
-import "./channels.css";
+import ChannelType from "../../../types/Channel";
+import { ChannelsQuery } from "../../../graphql/queries/channel";
+import {
+  DeleteChannel,
+  UpdateChannel,
+} from "../../../graphql/mutations/channel";
+import "../Channels.css";
 
 type EditModalProps = {
   channel: ChannelType;

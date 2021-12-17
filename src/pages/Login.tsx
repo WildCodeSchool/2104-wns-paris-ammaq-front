@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
 import Joi from "joi";
 import Rive from "rive-react";
@@ -45,14 +44,13 @@ const Login = (): JSX.Element => {
         localStorage.setItem("token", data.login.token);
         setToken(jwt_decode(data.login.token));
         NotificationManager.success("Connexion avec succès", "success!", 1000);
-        setTimeout(function () {
+        setTimeout(() => {
           playHello();
           history.replace("/");
         }, 2000);
       }
     },
     onError: (error) => {
-      console.log(error);
       NotificationManager.error(error.message, "Une erreur est survenue", 2000);
     },
   });
