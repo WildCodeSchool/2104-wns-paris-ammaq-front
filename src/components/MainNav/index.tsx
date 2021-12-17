@@ -3,7 +3,6 @@ import { matchPath, NavLink, useHistory, useLocation } from "react-router-dom";
 import {
   Users,
   Book,
-  Calendar,
   HelpCircle,
   ChevronRight,
   Power,
@@ -134,7 +133,7 @@ const MainNav = (): JSX.Element => {
         className="absolute top-32 -right-5 w-10 h-10 bg-main-darkgrey rounded-full focus:outline-none shadow-mainnav"
       >
         <ChevronRight
-          className={`inline-block text-main-white transtion-all duration-300 ease-in-out transform ${
+          className={`inline-block text-main-white transition-all duration-300 ease-in-out transform ${
             isExtended ? "rotate-180" : ""
           }`}
         />

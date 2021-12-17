@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import React, { useState } from "react";
+import { Send } from "react-feather";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -91,8 +92,8 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
   };
 
   return (
-    <div className="h-full p-5 pl-0 w-full">
-      <div className="h-5/6 overflow-x-hidden overflow-y-scroll flex flex-col place-content-end">
+    <div className="p-5 pl-0 w-full h-full">
+      <div className="h-5/6 overscroll-y-auto p-4 flex flex-col place-content-end">
         {messages.length < 1 && <div>Pas encore de messages</div>}
         {messages.length > 0 &&
           messages.map((message: MessageType) => {
@@ -100,7 +101,7 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
               <div
                 key={message.id}
                 className={`${
-                  message.userId === token?.email ? "place-self-end" : null
+                  message.userId === token?.email ? "place-self-end mr-4" : null
                 }`}
               >
                 <Message
@@ -115,17 +116,23 @@ const ChatBox = ({ channelId, channelName }: ChatBoxProps): JSX.Element => {
             );
           })}
       </div>
-      <form className="" onSubmit={handleSubmit(onSubmit)}>
+
+      <form className="w-full p-4" onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          placeholder={`Envoyer un message dans ${channelName}`}
-          className="shadow-channels px-6 py-3 w-80 rounded-xl bg-main-lightgrey text-white placeholder-white placeholder-opacity-20"
+          placeholder={`Envoyer un message dans #${channelName}`}
+          className="shadow-pressed w-4/5 p-3 rounded-xl bg-main-darkgrey text-white placeholder-white placeholder-opacity-20 focus:outline-none focus:border-solid focus:border-2 focus:border-community-green-light"
           {...register("content")}
           required
         />
         <input type="hidden" {...register("channelId")} required />
         <input type="hidden" {...register("userId")} required />
-        <button type="submit">Envoyer</button>
+        <button
+          type="submit"
+          className="w-12 h-12 m-2 shadow-profile rounded-full border-solid border-2 border-community-green-light"
+        >
+          <Send className="m-auto text-community-green-light" />
+        </button>
       </form>
     </div>
   );

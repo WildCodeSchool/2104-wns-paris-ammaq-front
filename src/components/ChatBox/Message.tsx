@@ -5,6 +5,7 @@ import { UserByMail } from "../../graphql/queries/user";
 import { useAuth } from "../../context/auth-provider";
 import EditInput from "./EditInput";
 import { DeleteMessage } from "../../graphql/mutations/message";
+import "./message.css";
 
 type MessageBoxProps = {
   message?: string;
@@ -67,6 +68,11 @@ const Message = ({
     deleteMessage({ variables: { id } });
   };
 
+  const closeOptions = () => {
+    setOptions(false);
+    setEditInput(false);
+  };
+
   return (
     <div className="flex text-white">
       {loading && <h1>Loading</h1>}
@@ -81,6 +87,11 @@ const Message = ({
         <div className="">
           {data?.userByMail.firstname !== token?.firstname ? (
             <h3 className="text-community-green-light px-3 font-bold">
+              {data?.userByMail.firstname}
+            </h3>
+          ) : null}
+          {data?.userByMail.firstname === token?.firstname ? (
+            <h3 className="text-community-blue px-3 text-right font-bold">
               {data?.userByMail.firstname}
             </h3>
           ) : null}
@@ -102,56 +113,54 @@ const Message = ({
               {message}
             </p>
           )}
-          <div className="text-xs p-2 h-6">
-            <h5 className="hidden text-main-lighterGrey group-hover:inline">
+          <div
+            className={`text-xs p-2 h-6 ${
+              userId === token?.email ? "flex place-self-end" : null
+            }`}
+          >
+            <h5
+              className={`hidden text-main-lighterGrey group-hover:inline ${
+                userId === token?.email ? "text-right" : null
+              }`}
+            >
               {createdAt && updatedAt === createdAt
                 ? getRealDate(updatedAt)
                 : `modifié ${getRealDate(updatedAt)}`}
             </h5>
           </div>
         </div>
-      </div>
-
-      {/* If the message's author is the connected user */}
-
-      {data?.userByMail.firstname === token?.firstname ? (
-        <div className="flex">
-          <h3 className="text-community-blue px-3">
-            {data?.userByMail.firstname}
-          </h3>
+        <div className="flex flex-col h-18">
+          {data?.userByMail.firstname === token?.firstname ? (
+            <img
+              className={`w-8 h-8 rounded-full ${options ? "pl-2" : null}`}
+              src={data?.userByMail.avatar}
+              alt="avatar"
+            />
+          ) : null}
+          {userId === token?.email && (
+            <div className="flex justify-center place-items-center">
+              {!options && (
+                <button type="button" onClick={() => setOptions(true)}>
+                  <MoreHorizontal />
+                </button>
+              )}
+              {options && (
+                <div className="flex flex-col absolute rounded-lg backdrop-blur-md p-3 border-solid border-2 border-community-blue appear">
+                  <button type="button" onClick={() => handleDelete(messageId)}>
+                    <Trash className="text-main-red mb-2" />
+                  </button>
+                  <button type="button" onClick={() => handleEdit()}>
+                    <Edit className="text-main-white" />
+                  </button>
+                  <button type="button" onClick={() => closeOptions()}>
+                    <X className="w-6 text-main-red m-auto" />
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-      ) : null}
-      {data?.userByMail.firstname === token?.firstname ? (
-        <img
-          className="w-8 h-8 rounded-full"
-          src={data?.userByMail.avatar}
-          alt="avatar"
-        />
-      ) : null}
-      {userId === token?.email && (
-        <>
-          {!options && (
-            <button type="button" onClick={() => setOptions(true)}>
-              <MoreHorizontal />
-            </button>
-          )}
-          {options && (
-            <button type="button" onClick={() => setOptions(false)}>
-              <X />
-            </button>
-          )}
-          {options && (
-            <>
-              <button type="button" onClick={() => handleDelete(messageId)}>
-                <Trash className="text-main-red ml-4" />
-              </button>
-              <button type="button" onClick={() => handleEdit()}>
-                <Edit className="text-main-orange ml-4" />
-              </button>
-            </>
-          )}
-        </>
-      )}
+      </div>
     </div>
   );
 };
