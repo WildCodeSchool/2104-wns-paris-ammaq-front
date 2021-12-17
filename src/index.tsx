@@ -1,26 +1,60 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import jwt_decode from "jwt-decode";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  HttpLink,
+  InMemoryCache,
+  split,
+} from "@apollo/client";
+import { WebSocketLink } from "@apollo/client/link/ws";
 import { BrowserRouter } from "react-router-dom";
+import { getMainDefinition } from "@apollo/client/utilities";
 import AuthProvider from "./context/auth-provider";
 import Token from "./types/Token";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
-const client = new ApolloClient({
-  uri: process.env.REACT_APP_API_URL || "http://localhost:4000/graphql",
-  cache: new InMemoryCache({
-    addTypename: false,
-  }),
-});
-
 const token = localStorage.getItem("token");
 let initialToken: Token | undefined;
 if (token) {
   initialToken = jwt_decode(token);
 }
+
+const httpLink = new HttpLink({
+  uri: process.env.REACT_APP_API_URL || "http://localhost:4000/graphql",
+});
+
+const wsLink = new WebSocketLink({
+  uri: "ws://localhost:4000/subscriptions",
+  options: {
+    reconnect: true,
+    connectionParams: {
+      authToken: token,
+    },
+  },
+});
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
+    );
+  },
+  wsLink,
+  httpLink
+);
+
+const client = new ApolloClient({
+  link: splitLink,
+  cache: new InMemoryCache({
+    addTypename: false,
+  }),
+});
 
 ReactDOM.render(
   <React.StrictMode>

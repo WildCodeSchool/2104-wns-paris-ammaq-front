@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 import { Edit2, Settings, Video } from "react-feather";
-import ChannelType from "../../types/Channel";
-import { useAuth } from "../../context/auth-provider";
+import ChannelType from "../../../types/Channel";
+import { useAuth } from "../../../context/auth-provider";
 
 type ChannelProps = {
   channel: ChannelType;

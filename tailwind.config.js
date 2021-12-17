@@ -27,6 +27,10 @@ module.exports = {
           "1px 1px 2px rgba(63, 63, 63, 0.3), -1px -1px 2px rgba(31, 31, 31, 0.5), inset -1px 1px 2px rgba(31, 31, 31, 0.2), inset 1px -1px 2px rgba(31, 31, 31, 0.2), inset -1px -1px 2px rgba(63, 63, 63, 0.9), inset 1px 1px 3px rgba(31, 31, 31, 0.9);",
         input:
           "1px 1px 2px rgba(48, 48, 48, 0.3), -1px -1px 2px rgba(42, 42, 42, 0.5), inset -18px 18px 36px rgba(42, 42, 42, 0.2), inset 18px -18px 36px rgba(42, 42, 42, 0.2), inset -18px -18px 36px rgba(48, 48, 48, 0.9), inset 18px 18px 45px rgba(42, 42, 42, 0.9)",
+        message:
+          "-2px 2px 4px rgba(30, 30, 30, 0.2), 2px -2px 4px rgba(30, 30, 30, 0.2), -2px -2px 4px rgba(60, 60, 60, 0.9), 2px 2px 5px rgba(30, 30, 30, 0.9), inset 1px 1px 2px rgba(60, 60, 60, 0.3), inset -1px -1px 2px rgba(30, 30, 30, 0.5)",
+        editMessage:
+          "1px 1px 2px rgba(60, 60, 60, 0.3), -1px -1px 2px rgba(30, 30, 30, 0.5), inset -2px 2px 4px rgba(30, 30, 30, 0.2), inset 2px -2px 4px rgba(30, 30, 30, 0.2), inset -2px -2px 4px rgba(60, 60, 60, 0.9), inset 2px 2px 5px rgba(30, 30, 30, 0.9)",
       },
       backgroundImage: {
         mainnav: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",
@@ -35,7 +39,7 @@ module.exports = {
         workit: "linear-gradient(180deg, #FF8B03 0%, #EF5469 100%);",
         community: "linear-gradient(125.2deg, #4ADE80 -4.15%, #097972 85.68%);",
         library: "linear-gradient(125.5deg, #6BD2FF 7.91%, #5356E1 67.04%);",
-        agenda: "linear-gradient(125.5deg, #FACC15 -5.2%, #F97316 74.78%);",
+        home: "linear-gradient(125.5deg, #FACC15 -5.2%, #F97316 74.78%);",
         quizz: "linear-gradient(125.5deg, #FB77B8 9.42%, #EF2A4C 105.75%);",
         pressed: "linear-gradient(135deg, #2F2F2F 0%, #2B2B2B 100%);",
         logout: "linear-gradient(220.46deg, #FC1C45 26.68%, #FB6A4A 114.66%)",
@@ -48,6 +52,7 @@ module.exports = {
           red: "#EF5469",
           darkgrey: "#2D2D2D",
           lightgrey: "#3c3c3c",
+          lighterGrey: "#BAB8B8",
           white: "#E5E5E5",
         },
         community: {
@@ -75,7 +80,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      display: ["group-hover"]
+    },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],
 };

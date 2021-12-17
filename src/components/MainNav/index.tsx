@@ -3,10 +3,10 @@ import { matchPath, NavLink, useHistory, useLocation } from "react-router-dom";
 import {
   Users,
   Book,
-  Calendar,
   HelpCircle,
-  ChevronLeft,
+  ChevronRight,
   Power,
+  Home,
 } from "react-feather";
 import classNames from "classnames";
 import useSound from "use-sound";
@@ -25,12 +25,6 @@ const tabs = [
     href: "/library",
     color: "bg-library",
     icon: <Book className="inline-block" size="32" />,
-  },
-  {
-    name: "Agenda",
-    href: "/agenda",
-    color: "bg-agenda",
-    icon: <Calendar className="inline-block" size="32" />,
   },
   {
     name: "Quiz",
@@ -78,16 +72,42 @@ const MainNav = (): JSX.Element => {
             />
           </div>
         </div>
-        <h3
+        <div
           className={classNames(
-            "text-main-white text-center first-letter:text-transparent first-letter:bg-workit first-letter:bg-clip-text first-letter:font-bold transition-all duration-500 ease-in-out",
             isExtended
-              ? "text-xl first-letter:text-3xl"
-              : "text-xs first-letter:text-xl"
+              ? "flex justify-center items-center"
+              : "flex flex-col jsutify-center items-center"
           )}
         >
-          {token?.firstname}
-        </h3>
+          <h3
+            className={classNames(
+              "text-main-white text-center first-letter:text-transparent first-letter:bg-workit first-letter:bg-clip-text first-letter:font-bold transition-all duration-500 ease-in-out",
+              isExtended
+                ? "text-xl first-letter:text-3xl mr-2"
+                : "text-xs first-letter:text-xl"
+            )}
+          >
+            {token?.firstname}
+          </h3>
+          <NavLink to="/">
+            <div
+              className={classNames(
+                "shadow-circle flex items-center justify-center rounded-full",
+                isExtended ? "w-10 h-10" : "w-7 h-7"
+              )}
+            >
+              <div
+                className={classNames(
+                  "flex items-center justify-center text-main-darkgrey bg-home p-1 rounded-full",
+                  isExtended ? "w-8 h-8" : "w-5 h-5"
+                )}
+              >
+                <Home className="text-main-white text-shadow0-5" />
+              </div>
+            </div>
+          </NavLink>
+        </div>
+
         <div className="mx-auto mt-4 p-1 shadow-profile rounded-full">
           <button
             type="button"
@@ -112,8 +132,8 @@ const MainNav = (): JSX.Element => {
         onClick={handleNav}
         className="absolute top-32 -right-5 w-10 h-10 bg-main-darkgrey rounded-full focus:outline-none shadow-mainnav"
       >
-        <ChevronLeft
-          className={`inline-block text-main-white transtion-all duration-300 ease-in-out transform ${
+        <ChevronRight
+          className={`inline-block text-main-white transition-all duration-300 ease-in-out transform ${
             isExtended ? "rotate-180" : ""
           }`}
         />

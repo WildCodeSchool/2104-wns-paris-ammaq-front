@@ -4,10 +4,10 @@ import { useState } from "react";
 import "./header.css";
 import { PlusCircle } from "react-feather";
 import { useQuery } from "@apollo/client";
-import { SchoolQuery } from "../../graphql/queries/school";
+import { SchoolQuery } from "../../../graphql/queries/school";
 
-import CreateModal from "./CreateModal";
-import { useAuth } from "../../context/auth-provider";
+import CreateModal from "../Modals/CreateModal";
+import { useAuth } from "../../../context/auth-provider";
 
 const Header = (): JSX.Element => {
   const [open, setOpen] = useState(false);
@@ -43,6 +43,7 @@ const Header = (): JSX.Element => {
       <div className="text-white font-bold text-center text-lg">
         <h3>{data?.school.name}</h3>
       </div>
+
       {token?.role === "admin" ? (
         <div className="text-center mt-4">
           {!open && (

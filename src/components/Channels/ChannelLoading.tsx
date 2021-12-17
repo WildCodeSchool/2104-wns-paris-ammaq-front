@@ -1,5 +1,5 @@
 import React from "react";
-import "./channel.css";
+import "./Channel/channel.css";
 
 const ChannelLoading = (): JSX.Element => {
   return (

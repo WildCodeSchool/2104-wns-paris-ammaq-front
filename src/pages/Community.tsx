@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { Tab } from "@headlessui/react";
 import { NotificationContainer } from "react-notifications";
 import { Jutsu } from "../utils/Jutsu";
-import ChannelNav from "../components/ChannelNav";
+import Channels from "../components/Channels";
 import { ChannelsQuery } from "../graphql/queries/channel";
 import { useAuth } from "../context/auth-provider";
 import { userConfig, adminConfig } from "../utils/configJisti";
@@ -25,11 +25,7 @@ export default function Community(): JSX.Element {
       <NotificationContainer />
       <Tab.Group as="div" className="w-screen flex">
         <Tab.List as={Fragment}>
-          <ChannelNav
-            channels={data?.channels}
-            loading={loading}
-            error={error}
-          />
+          <Channels channels={data?.channels} loading={loading} error={error} />
         </Tab.List>
         {data?.channels && (
           <Tab.Panels as={Fragment}>
@@ -53,7 +49,7 @@ export default function Community(): JSX.Element {
                     }
                   />
                 ) : (
-                  <ChatBox channel={channel} />
+                  <ChatBox channelId={channel.id} channelName={channel.name} />
                 )}
               </Tab.Panel>
             ))}
